@@ -1,0 +1,17 @@
+version: "3.8"
+
+volumes:
+  postgres_data:
+    driver: local
+
+services:
+  database:
+    container_name: sns-database
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: developer
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: developer
+      MYSQL_DATABASE: schupfnudelsalat
+    ports:
+      - "3306:3306"

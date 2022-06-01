@@ -10,12 +10,13 @@
     </parent>
     <groupId>com.github.eeriefoods</groupId>
     <artifactId>sns-server</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>sns-server</name>
-    <description>sns-server</description>
+    <version>1.0-SNAPSHOT</version>
+    <name>SchupfnudelSalat Server</name>
+
     <properties>
         <java.version>18</java.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
