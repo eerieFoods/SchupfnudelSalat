@@ -1,6 +1,6 @@
 package com.github.eeriefoods.snsserver.student.api;
 
-import com.github.eeriefoods.snsserver.student.domain.JavaStand;
+import com.github.eeriefoods.snsserver.student.domain.JavaLevel;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -12,7 +12,7 @@ public class StudentData {
 
     @NotNull
     @Positive
-    private Long matrikelNummer;
+    private Long studentId;
 
     @NotBlank
     private String lastName;
@@ -20,10 +20,10 @@ public class StudentData {
     @NotBlank
     private String firstName;
 
-    private JavaStand javaStand;
+    private JavaLevel javaLevel;
 
     @NotBlank
-    private String kursId;
+    private String courseId;
 
     private String company;
 

@@ -1,24 +1,24 @@
 package com.github.eeriefoods.snsserver.student.domain;
 
-import com.github.eeriefoods.snsserver.kurs.service.KursService;
+import com.github.eeriefoods.snsserver.course.service.CourseService;
 import com.github.eeriefoods.snsserver.student.api.StudentData;
 import org.springframework.stereotype.Component;
 
 @Component
 public class StudentFactory {
 
-    private final KursService kursService;
+    private final CourseService courseService;
 
-    public StudentFactory(KursService kursService) {
-        this.kursService = kursService;
+    public StudentFactory(CourseService courseService) {
+        this.courseService = courseService;
     }
 
     public Student from(StudentData studentData) {
         Student student = new Student();
 
-        student.setMatrikelNummer(studentData.getMatrikelNummer());
-        student.setKurs(kursService.getKurs(studentData.getKursId()));
-        student.setJavaStand(studentData.getJavaStand());
+        student.setStudentId(studentData.getStudentId());
+        student.setCourse(courseService.getCourse(studentData.getCourseId()));
+        student.setJavaLevel(studentData.getJavaLevel());
         student.setCompany(studentData.getCompany());
         student.setFirstName(studentData.getFirstName());
         student.setLastName(studentData.getLastName());

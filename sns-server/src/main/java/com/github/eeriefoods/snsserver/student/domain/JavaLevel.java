@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum JavaStand {
+public enum JavaLevel {
 
     SEHR_GUT(1),
     GUT(2),

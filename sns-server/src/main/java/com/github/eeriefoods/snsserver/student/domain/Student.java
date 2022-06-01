@@ -1,6 +1,6 @@
 package com.github.eeriefoods.snsserver.student.domain;
 
-import com.github.eeriefoods.snsserver.kurs.domain.Kurs;
+import com.github.eeriefoods.snsserver.course.domain.Course;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,7 +17,7 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false, unique = true)
-    private Long matrikelNummer;
+    private Long studentId;
 
     @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
@@ -26,13 +26,13 @@ public class Student {
     private String firstName;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "JAVA_STAND")
-    private JavaStand javaStand;
+    @Column(name = "JAVA_LEVEL")
+    private JavaLevel javaLevel;
 
     @OneToOne
-    @JoinColumn(name = "KURS_ID")
+    @JoinColumn(name = "COURSE_ID")
     @ToString.Exclude
-    private Kurs kurs;
+    private Course course;
 
     @Column(name = "COMPANY")
     private String company;

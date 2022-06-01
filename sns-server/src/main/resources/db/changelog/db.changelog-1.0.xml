@@ -4,13 +4,13 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="1.0.INIT.kurs-table" author="Jan-Luca Wolf">
+    <changeSet id="1.0.INIT.course-table" author="Jan-Luca Wolf">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="SNS_KURS"/>
+                <tableExists tableName="SNS_COURSE"/>
             </not>
         </preConditions>
-        <createTable tableName="SNS_KURS">
+        <createTable tableName="SNS_COURSE">
             <column name="ID" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -37,29 +37,29 @@
                 <constraints nullable="false"/>
             </column>
             <column name="COMPANY" type="varchar(255)"/>
-            <column name="JAVA_STAND" type="varchar(255)"/>
-            <column name="KURS_ID" type="varchar(255)">
-                <constraints foreignKeyName="fk_student_kurs_id"
-                             referencedTableName="SNS_KURS" referencedColumnNames="ID"/>
+            <column name="JAVA_LEVEL" type="varchar(255)"/>
+            <column name="COURSE_ID" type="varchar(255)">
+                <constraints foreignKeyName="fk_student_course_id"
+                             referencedTableName="SNS_COURSE" referencedColumnNames="ID"/>
             </column>
         </createTable>
     </changeSet>
 
-    <changeSet id="1.0.INIT.add-kurs-members" author="Jan-Luca Wolf">
+    <changeSet id="1.0.INIT.add-course-members" author="Jan-Luca Wolf">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="SNS_KURS_MEMBERS"/>
+                <tableExists tableName="SNS_COURSE_MEMBERS"/>
             </not>
         </preConditions>
-        <createTable tableName="SNS_KURS_MEMBERS">
-            <column name="KURS_ID" type="varchar(255)">
+        <createTable tableName="SNS_COURSE_MEMBERS">
+            <column name="COURSE_ID" type="varchar(255)">
                 <constraints nullable="false" primaryKey="true"
-                        foreignKeyName="fk_sns_kurs_members_kurs_id_kurs_id"
-                        referencedTableName="SNS_KURS" referencedColumnNames="ID"/>
+                        foreignKeyName="fk_sns_course_members_course_id_course_id"
+                        referencedTableName="SNS_COURSE" referencedColumnNames="ID"/>
             </column>
             <column name="MEMBERS_ID" type="bigint">
                 <constraints nullable="false" primaryKey="true"
-                        foreignKeyName="fk_sns_kurs_members_members_id_members_id"
+                        foreignKeyName="fk_sns_course_members_members_id_members_id"
                         referencedTableName="SNS_STUDENT" referencedColumnNames="ID"/>
             </column>
         </createTable>
