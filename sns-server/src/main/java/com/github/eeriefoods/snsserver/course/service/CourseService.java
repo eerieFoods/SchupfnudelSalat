@@ -8,6 +8,7 @@ import com.github.eeriefoods.snsserver.student.domain.Student;
 import com.github.eeriefoods.snsserver.student.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -81,4 +82,8 @@ public class CourseService implements ICourseService {
         courseRepository.deleteById(courseId);
     }
 
+    @Override
+    public List<String> getAllCourses() {
+        return courseRepository.findAll().stream().map(Course::getId).toList();
+    }
 }

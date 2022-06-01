@@ -1,7 +1,11 @@
 package com.github.eeriefoods.snsserver.course.api;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 import java.util.InputMismatchException;
 
+@ResponseStatus(HttpStatus.BAD_REQUEST)
 public class StudentNotMemberOfCourseException extends InputMismatchException {
 
     public StudentNotMemberOfCourseException(String kursId, long matrikelNummer) {

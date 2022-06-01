@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "course")
@@ -28,6 +29,11 @@ public class CourseController {
     @GetMapping(path = "{courseId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public CourseData getCourse(@PathVariable String courseId) {
         return courseDataFactory.from(courseService.getCourse(courseId));
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<String> getAllCourses() {
+        return courseService.getAllCourses();
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
