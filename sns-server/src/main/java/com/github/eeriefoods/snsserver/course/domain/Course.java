@@ -1,5 +1,6 @@
-package com.github.eeriefoods.snsserver.kurs.domain;
+package com.github.eeriefoods.snsserver.course.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.eeriefoods.snsserver.student.domain.Student;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,11 +10,11 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Table(name = "SNS_KURS")
+@Table(name = "SNS_COURSE")
 @Getter
 @Setter
 @ToString
-public class Kurs {
+public class Course {
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -23,8 +24,9 @@ public class Kurs {
     private String room;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "SNS_KURS_MEMBERS")
+    @CollectionTable(name = "SNS_COURSE_MEMBERS")
     @Column(name = "MEMBERS")
+    @JsonIgnore // Prevents infinite recursion
     private Set<Student> members = new HashSet<>();
 
 }
