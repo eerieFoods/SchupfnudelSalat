@@ -1,5 +1,6 @@
 package com.github.eeriefoods.snsserver.kurs.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.eeriefoods.snsserver.student.domain.Student;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +26,7 @@ public class Kurs {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "SNS_KURS_MEMBERS")
     @Column(name = "MEMBERS")
+    @JsonIgnore // Prevents infinite recursion
     private Set<Student> members = new HashSet<>();
 
 }
