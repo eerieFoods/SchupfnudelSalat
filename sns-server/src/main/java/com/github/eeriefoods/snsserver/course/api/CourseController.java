@@ -52,7 +52,7 @@ public class CourseController {
         return courseDataFactory.from(courseService.addStudent(courseId, studentFactory.from(studentData)));
     }
 
-    @DeleteMapping(path = "{courseId}/remove",
+    @PutMapping(path = "{courseId}/remove",
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public CourseData removeMemberFromCourse(@PathVariable String courseId, @Valid @RequestBody StudentData studentData) {
         return courseDataFactory.from(courseService.removeStudent(courseId, studentFactory.from(studentData)));
