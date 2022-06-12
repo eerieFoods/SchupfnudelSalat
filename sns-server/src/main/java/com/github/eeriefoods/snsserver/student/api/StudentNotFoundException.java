@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 public class StudentNotFoundException extends NoSuchElementException {
 
     public StudentNotFoundException(long matrikelNummer) {
-        super("Studi mit Matrikelnummer %d nicht gefunden".formatted(matrikelNummer));
+        this("Studi mit Matrikelnummer %d nicht gefunden".formatted(matrikelNummer));
     }
 
     public StudentNotFoundException(String message) {

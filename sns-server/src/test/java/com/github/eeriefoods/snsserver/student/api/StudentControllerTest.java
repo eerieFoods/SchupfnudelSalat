@@ -1,19 +1,14 @@
 package com.github.eeriefoods.snsserver.student.api;
 
 import base.BaseMockitoTest;
-import com.github.eeriefoods.snsserver.student.domain.Student;
 import com.github.eeriefoods.snsserver.student.domain.StudentFactory;
 import com.github.eeriefoods.snsserver.student.service.IStudentService;
-import com.github.eeriefoods.snsserver.student.service.StudentService;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
 class StudentControllerTest extends BaseMockitoTest {
@@ -34,6 +29,7 @@ class StudentControllerTest extends BaseMockitoTest {
         studentController.getStudent(anyLong());
 
         verify(studentService).getStudent(anyLong());
+        verify(studentDataFactory).from(any());
     }
 
     @Test
