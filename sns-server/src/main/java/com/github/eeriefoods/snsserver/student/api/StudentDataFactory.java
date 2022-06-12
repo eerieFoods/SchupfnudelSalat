@@ -9,11 +9,12 @@ public class StudentDataFactory {
     public StudentData from(Student student) {
         StudentData studentData = new StudentData();
 
-        studentData.setStudentId(studentData.getStudentId());
+        studentData.setStudentId(student.getStudentId());
         studentData.setCompany(student.getCompany());
         studentData.setFirstName(student.getFirstName());
-        studentData.setLastName(studentData.getLastName());
+        studentData.setLastName(student.getLastName());
         studentData.setCourseId(student.getCourse().getId());
+        studentData.setJavaLevel(student.getJavaLevel());
 
         return studentData;
     }
