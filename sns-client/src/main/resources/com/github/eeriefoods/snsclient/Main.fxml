@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -72,10 +71,20 @@
       </TabPane>
    </center>
    <top>
-      <ImageView fitHeight="150.0" fitWidth="200.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@../../../../../../../../../../Downloads/2560px-DHBW-Logo.svg.png" />
-         </image>
-      </ImageView>
+      <FlowPane prefHeight="79.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../assets/images/DHBWLogo.png" />
+               </image>
+            </ImageView>
+            <Separator prefHeight="0.0" prefWidth="19.0" visible="false" />
+            <Text fill="#464646" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Management Tool" wrappingWidth="386.13671875">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </Text>
+         </children>
+      </FlowPane>
    </top>
 </BorderPane>
