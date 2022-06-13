@@ -2,6 +2,7 @@ package com.github.eeriefoods.snsclient;
 
 import com.github.eeriefoods.snsclient.service.CourseService;
 import com.github.eeriefoods.snsclient.service.StudentService;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 import com.github.eeriefoods.snsclient.model.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 public class MainController {
 
@@ -31,16 +33,46 @@ public class MainController {
         
         TCS_ID.setCellValueFactory(new PropertyValueFactory<>("studentId"));
         TCS_FirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        TCS_FirstName.setCellFactory(TextFieldTableCell.forTableColumn());
         TCS_LastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        TCS_LastName.setCellFactory(TextFieldTableCell.forTableColumn());
         TCS_JavaLevel.setCellValueFactory(new PropertyValueFactory<>("javaLevel"));
+//        TCS_JavaLevel.setCellFactory(TextFieldTableCell.forTableColumn());
         TCS_Company.setCellValueFactory(new PropertyValueFactory<>("company"));
+        TCS_Company.setCellFactory(TextFieldTableCell.forTableColumn());
         TCS_Course.setCellValueFactory(new PropertyValueFactory<>("courseId"));
+        TCS_Course.setCellFactory(TextFieldTableCell.forTableColumn());
         TCS_View.getItems().setAll(parseStudentList());
 
         TCK_ID.setCellValueFactory(new PropertyValueFactory<>("id"));
         TCK_FriendlyName.setCellValueFactory(new PropertyValueFactory<>("friendlyName"));
         TCK_Room.setCellValueFactory(new PropertyValueFactory<>("room"));
         TCK_View.getItems().setAll(parseCourseList());
+
+        TCS_FirstName.setOnEditCommit(event -> {
+            event.getTableView().getItems().get(event.getTablePosition().getRow()).setFirstName(event.getNewValue());
+            updateStudent(event.getRowValue());});
+        TCS_LastName.setOnEditCommit(event -> {
+            event.getTableView().getItems().get(event.getTablePosition().getRow()).setLastName(event.getNewValue());
+            updateStudent(event.getRowValue());});
+        TCS_Company.setOnEditCommit(event -> {
+            event.getTableView().getItems().get(event.getTablePosition().getRow()).setCompany(event.getNewValue());
+            updateStudent(event.getRowValue());});
+        TCS_Course.setOnEditCommit(event -> {
+            event.getTableView().getItems().get(event.getTablePosition().getRow()).setCourse(event.getNewValue());
+            updateStudent(event.getRowValue());});
+
+        TCS_View.setEditable(true);
+    }
+
+    private void updateStudent(Student student){
+            try {
+                StudentService.updateStudent(student);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
     }
 
     private List<Course> parseCourseList() {
@@ -60,5 +92,11 @@ public class MainController {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+    @FXML
+    private void editableClos(){
+        TCS_FirstName.setCellFactory(TextFieldTableCell.forTableColumn());
+
+
     }
 }
