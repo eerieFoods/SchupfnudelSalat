@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -11,21 +12,14 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView prefHeight="372.0" prefWidth="600.0">
+                        <TableView fx:id="TTS_View" prefHeight="372.0" prefWidth="600.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="ID">
-                                 <graphic>
-                                    <Button fx:id="Test" mnemonicParsing="false" onMouseClicked="#onTest" prefHeight="22.0" prefWidth="58.0" text="Button" />
-                                 </graphic>
-                            </TableColumn>
-                            <TableColumn prefWidth="75.0" text="First Name">
-                                 <graphic>
-                                    <Label fx:id="lable_test"/>
-                                 </graphic></TableColumn>
-                              <TableColumn prefWidth="75.0" text="Last Name" />
-                              <TableColumn prefWidth="75.0" text="Java Level" />
-                              <TableColumn prefWidth="75.0" text="Course ID" />
-                              <TableColumn prefWidth="75.0" text="Company" />
+                            <TableColumn fx:id="TTS_ID" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="TTS_FirstName" prefWidth="75.0" text="First Name" />
+                              <TableColumn fx:id="TTS_LastName" prefWidth="75.0" text="Last Name" />
+                              <TableColumn fx:id="TTS_JavaLevel" prefWidth="75.0" text="Java Level" />
+                              <TableColumn fx:id="TTS_Course" prefWidth="75.0" text="Course ID" />
+                              <TableColumn fx:id="TTS_Company" prefWidth="75.0" text="Company" />
                           </columns>
                         </TableView>
                      </children>
@@ -61,6 +55,24 @@
                               <TableColumn prefWidth="75.0" text="Company" />
                            </columns>
                         </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="TEST">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TreeTableView fx:id="TESTBaumTable" prefHeight="375.0" prefWidth="600.0">
+                          <columns>
+                            <TreeTableColumn fx:id="TTCStudentId" prefWidth="75.0" text="studentId" />
+                            <TreeTableColumn fx:id="TTCFirstName" prefWidth="75.0" text="FirstName" />
+                              <TreeTableColumn fx:id="TTCLastName" prefWidth="75.0" text="LastName" />
+                              <TreeTableColumn fx:id="TTCCompany" prefWidth="75.0" text="Company" />
+                              <TreeTableColumn fx:id="TTCCourses" prefWidth="75.0" text="Courses" />
+                              <TreeTableColumn fx:id="TTCJavaLevel" prefWidth="75.0" text="JavaLevel" />
+                          </columns>
+                        </TreeTableView>
                      </children>
                   </AnchorPane>
                </content>
