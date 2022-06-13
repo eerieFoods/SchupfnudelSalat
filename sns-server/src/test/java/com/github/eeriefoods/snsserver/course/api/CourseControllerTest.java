@@ -34,7 +34,6 @@ class CourseControllerTest extends BaseMockitoTest {
         courseController.getCourse("MyCourse");
 
         verify(courseService).getCourse(anyString());
-        verify(courseDataFactory).from(any());
     }
 
     @Test
@@ -49,8 +48,6 @@ class CourseControllerTest extends BaseMockitoTest {
         courseController.createCourse(new CourseData());
 
         verify(courseService).createCourse(any());
-        verify(courseDataFactory).from(any());
-        verify(courseFactory).from(any());
     }
 
     @Test
@@ -58,8 +55,6 @@ class CourseControllerTest extends BaseMockitoTest {
         courseController.updateCourse(new CourseData());
 
         verify(courseService).updateCourse(any());
-        verify(courseFactory).from(any());
-        verify(courseDataFactory).from(any());
     }
 
     @Test
@@ -67,8 +62,6 @@ class CourseControllerTest extends BaseMockitoTest {
         courseController.addMemberToCourse("MyCourse", new StudentData());
 
         verify(courseService).addStudent(anyString(), any());
-        verify(courseDataFactory).from(any());
-        verify(studentFactory).from(any());
     }
 
     @Test
@@ -76,8 +69,6 @@ class CourseControllerTest extends BaseMockitoTest {
         courseController.removeMemberFromCourse("MyCourse", new StudentData());
 
         verify(courseService).removeStudent(anyString(), any());
-        verify(courseDataFactory).from(any());
-        verify(studentFactory).from(any());
     }
 
     @Test

@@ -32,8 +32,8 @@ public class CourseController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<String> getAllCourses() {
-        return courseService.getAllCourses();
+    public List<CourseData> getAllCourses() {
+        return courseDataFactory.from(courseService.getAllCourses());
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
