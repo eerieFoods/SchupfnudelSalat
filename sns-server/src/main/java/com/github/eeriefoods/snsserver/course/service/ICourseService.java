@@ -19,6 +19,6 @@ public interface ICourseService {
 
     void deleteCourse(String courseId);
 
-    List<String> getAllCourses();
+    List<Course> getAllCourses();
 
 }

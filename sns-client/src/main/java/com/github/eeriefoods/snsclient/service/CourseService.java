@@ -7,9 +7,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
-import java.util.Set;
+import java.util.List;
 
 import static com.github.eeriefoods.snsclient.shared.Constants.getServerUri;
 
@@ -24,12 +23,10 @@ public class CourseService {
         gson = new Gson();
     }
 
-    public static Set<String> getCourses() throws IOException, InterruptedException {
+    public static List<Course> getCourses() throws IOException, InterruptedException {
         HttpResponse<String> response = HttpFactory.sendGetRequest(getServerUri(ENDPOINT));
 
-        Type stringSetType = new TypeToken<Set<String>>() {}.getType();
-
-        return gson.fromJson(response.body(), stringSetType);
+        return gson.fromJson(response.body(), new TypeToken<List<Course>>() {}.getType());
     }
 
     public static Course createCourse(Course course) throws IOException, InterruptedException {
