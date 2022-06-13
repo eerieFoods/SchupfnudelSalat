@@ -33,7 +33,7 @@ class CourseDataFactoryTest extends BaseMockitoTest {
         assertEquals(actual.getId(), this.expected.getId());
         assertEquals(actual.getMembers(), this.expected.getMembers());
         assertEquals(actual.getRoom(), this.expected.getRoom());
-        assertEquals(actual.getFriendlyMame(), this.expected.getFriendlyName());
+        assertEquals(actual.getFriendlyName(), this.expected.getFriendlyName());
     }
 
     @Test
@@ -53,7 +53,7 @@ class CourseDataFactoryTest extends BaseMockitoTest {
             assertEquals(expectedList.get(index).getId(), actual.get(index).getId());
             assertEquals(expectedList.get(index).getMembers(), actual.get(index).getMembers());
             assertEquals(expectedList.get(index).getRoom(), actual.get(index).getRoom());
-            assertEquals(expectedList.get(index).getFriendlyName(), actual.get(index).getFriendlyMame());
+            assertEquals(expectedList.get(index).getFriendlyName(), actual.get(index).getFriendlyName());
         });
     }
 }

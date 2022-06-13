@@ -14,7 +14,7 @@ public class CourseFactory {
 
         course.setId(courseData.getId());
         course.setMembers(Optional.ofNullable(courseData.getMembers()).orElse(new HashSet<>()));
-        course.setFriendlyName(courseData.getFriendlyMame());
+        course.setFriendlyName(courseData.getFriendlyName());
         course.setRoom(courseData.getRoom());
 
         return course;
