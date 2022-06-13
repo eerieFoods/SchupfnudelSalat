@@ -15,6 +15,8 @@ public class CourseData {
     @NotBlank
     private String room;
 
+    private String friendlyMame;
+
     private Set<Student> members;
 
 }
