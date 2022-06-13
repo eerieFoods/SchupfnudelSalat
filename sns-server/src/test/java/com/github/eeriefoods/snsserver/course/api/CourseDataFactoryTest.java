@@ -25,6 +25,7 @@ class CourseDataFactoryTest extends BaseMockitoTest {
     void testFrom() {
         when(expected.getId()).thenReturn("CourseId");
         when(expected.getRoom()).thenReturn("123B");
+        when(expected.getFriendlyName()).thenReturn("FN");
         when(expected.getMembers()).thenReturn(Collections.emptySet());
 
         CourseData actual = courseDataFactory.from(this.expected);
@@ -32,12 +33,14 @@ class CourseDataFactoryTest extends BaseMockitoTest {
         assertEquals(actual.getId(), this.expected.getId());
         assertEquals(actual.getMembers(), this.expected.getMembers());
         assertEquals(actual.getRoom(), this.expected.getRoom());
+        assertEquals(actual.getFriendlyMame(), this.expected.getFriendlyName());
     }
 
     @Test
     void from() {
         when(expected.getId()).thenReturn("CourseId");
         when(expected.getRoom()).thenReturn("123B");
+        when(expected.getFriendlyName()).thenReturn("FN");
         when(expected.getMembers()).thenReturn(Collections.emptySet());
 
         List<Course> expectedList = List.of(expected);
@@ -50,6 +53,7 @@ class CourseDataFactoryTest extends BaseMockitoTest {
             assertEquals(expectedList.get(index).getId(), actual.get(index).getId());
             assertEquals(expectedList.get(index).getMembers(), actual.get(index).getMembers());
             assertEquals(expectedList.get(index).getRoom(), actual.get(index).getRoom());
+            assertEquals(expectedList.get(index).getFriendlyName(), actual.get(index).getFriendlyMame());
         });
     }
 }
