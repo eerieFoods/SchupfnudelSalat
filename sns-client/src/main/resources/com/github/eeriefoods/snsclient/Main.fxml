@@ -12,14 +12,14 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="TTS_View" prefHeight="372.0" prefWidth="600.0">
+                        <TableView fx:id="TCS_View" prefHeight="372.0" prefWidth="600.0">
                           <columns>
-                            <TableColumn fx:id="TTS_ID" prefWidth="75.0" text="ID" />
-                            <TableColumn fx:id="TTS_FirstName" prefWidth="75.0" text="First Name" />
-                              <TableColumn fx:id="TTS_LastName" prefWidth="75.0" text="Last Name" />
-                              <TableColumn fx:id="TTS_JavaLevel" prefWidth="75.0" text="Java Level" />
-                              <TableColumn fx:id="TTS_Course" prefWidth="75.0" text="Course ID" />
-                              <TableColumn fx:id="TTS_Company" prefWidth="75.0" text="Company" />
+                            <TableColumn fx:id="TCS_ID" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="TCS_FirstName" prefWidth="75.0" text="First Name" />
+                              <TableColumn fx:id="TCS_LastName" prefWidth="75.0" text="Last Name" />
+                              <TableColumn fx:id="TCS_JavaLevel" prefWidth="75.0" text="Java Level" />
+                              <TableColumn fx:id="TCS_Course" prefWidth="75.0" text="Course ID" />
+                              <TableColumn fx:id="TCS_Company" prefWidth="75.0" text="Company" />
                           </columns>
                         </TableView>
                      </children>
