@@ -18,7 +18,7 @@ import java.util.random.*;
 import java.util.zip.ZipEntry;
 
 import com.github.eeriefoods.snsclient.model.*;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MainController {
 
