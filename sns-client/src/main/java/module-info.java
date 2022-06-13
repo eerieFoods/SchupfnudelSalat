@@ -3,6 +3,7 @@ module com.github.eeriefoods.snsclient {
     requires javafx.fxml;
     requires com.google.gson;
     requires java.net.http;
+    requires java.desktop;
 
     opens com.github.eeriefoods.snsclient to javafx.fxml;
     opens com.github.eeriefoods.snsclient.model to com.google.gson, javafx.base;
