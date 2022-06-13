@@ -75,4 +75,10 @@ class StudentServiceTest extends BaseMockitoTest {
         assertThrows(StudentNotFoundException.class, () -> studentService.exmatriculate(123L));
     }
 
+    @Test
+    void getAllStudents() {
+        studentService.getAllStudents();
+
+        verify(studentRepository).findAll();
+    }
 }

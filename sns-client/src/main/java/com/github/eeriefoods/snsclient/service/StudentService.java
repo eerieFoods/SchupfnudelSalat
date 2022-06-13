@@ -3,9 +3,12 @@ package com.github.eeriefoods.snsclient.service;
 import com.github.eeriefoods.snsclient.model.Student;
 import com.github.eeriefoods.snsclient.shared.HttpFactory;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.github.eeriefoods.snsclient.shared.Constants.getServerUri;
 
@@ -16,6 +19,12 @@ public class StudentService {
 
     static {
         gson = new Gson();
+    }
+
+    public List<Student> getAllStudents() throws IOException, InterruptedException {
+        HttpResponse<String> response = HttpFactory.sendGetRequest(getServerUri(ENDPOINT));
+
+        return gson.fromJson(response.body(), new TypeToken<ArrayList<Student>>(){}.getType());
     }
 
     public Student getStudent(String studentId) throws IOException, InterruptedException {
