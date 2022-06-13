@@ -1,6 +1,7 @@
 package com.github.eeriefoods.snsserver.student.api;
 
 import base.BaseMockitoTest;
+import com.github.eeriefoods.snsserver.student.domain.Student;
 import com.github.eeriefoods.snsserver.student.domain.StudentFactory;
 import com.github.eeriefoods.snsserver.student.service.IStudentService;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,6 @@ class StudentControllerTest extends BaseMockitoTest {
         studentController.getStudent(anyLong());
 
         verify(studentService).getStudent(anyLong());
-        verify(studentDataFactory).from(any());
     }
 
     @Test
@@ -38,7 +38,6 @@ class StudentControllerTest extends BaseMockitoTest {
 
         verify(studentService).createStudent(any());
         verify(studentFactory).from(any());
-        verify(studentDataFactory).from(any());
     }
 
     @Test
@@ -47,7 +46,6 @@ class StudentControllerTest extends BaseMockitoTest {
 
         verify(studentService).updateStudent(any());
         verify(studentFactory).from(any());
-        verify(studentDataFactory).from(any());
     }
 
     @Test

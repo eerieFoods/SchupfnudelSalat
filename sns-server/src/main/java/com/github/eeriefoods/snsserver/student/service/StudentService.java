@@ -5,6 +5,8 @@ import com.github.eeriefoods.snsserver.student.domain.Student;
 import com.github.eeriefoods.snsserver.student.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StudentService implements IStudentService {
 
@@ -45,6 +47,11 @@ public class StudentService implements IStudentService {
             throw new StudentNotFoundException(studentId);
 
         studentRepository.deleteById(studentId);
+    }
+
+    @Override
+    public List<Student> getAllStudents() {
+        return studentRepository.findAll();
     }
 
 

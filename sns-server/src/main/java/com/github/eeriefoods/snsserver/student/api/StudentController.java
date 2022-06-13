@@ -5,7 +5,9 @@ import com.github.eeriefoods.snsserver.student.service.IStudentService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "student")
@@ -19,6 +21,11 @@ public class StudentController {
         this.studentService = studentService;
         this.studentDataFactory = studentDataFactory;
         this.studentFactory = studentFactory;
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<StudentData> getAllStudents() {
+        return studentDataFactory.from(studentService.getAllStudents());
     }
 
     @GetMapping(path = "{studentId}", produces = MediaType.APPLICATION_JSON_VALUE)
