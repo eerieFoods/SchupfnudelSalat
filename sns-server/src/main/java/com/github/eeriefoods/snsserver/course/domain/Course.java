@@ -17,8 +17,11 @@ import java.util.*;
 public class Course {
 
     @Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID", updatable = false, nullable = false, unique = true)
     private String id;
+
+    @Column(name = "FRIENDLY_NAME")
+    private String friendlyName;
 
     @Column(name = "ROOM", nullable = false)
     private String room;
