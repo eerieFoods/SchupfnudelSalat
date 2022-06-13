@@ -1,8 +1,10 @@
 package com.github.eeriefoods.snsclient;
 
+import com.github.eeriefoods.snsclient.service.StudentService;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,17 +28,17 @@ public class MainController {
         TCS_LastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         TCS_JavaLevel.setCellValueFactory(new PropertyValueFactory<>("javaLevel"));
         TCS_Company.setCellValueFactory(new PropertyValueFactory<>("company"));
-        TCS_Course.setCellValueFactory(new PropertyValueFactory<>("course"));
+        TCS_Course.setCellValueFactory(new PropertyValueFactory<>("courseId"));
         TCS_View.getItems().setAll(parseStudentList());
     }
 
     private List<Student> parseStudentList() {
-        Course Test = new Course("TINF21AI2","TINF21AI22", "123B");
-        List<Student> Students = new ArrayList<>();
-        for (int i = 0; i < 200; i++) {
-            Student iStudent = new Student( 0+i, "ASDF", "WASD", JavaLevel.SEHR_GUT, i + " NONAMECOMPANY", Test);
-            Students.add(iStudent);
+        try {
+            return StudentService.getAllStudents();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
-        return Students;
     }
 }
