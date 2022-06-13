@@ -1,9 +1,11 @@
 package com.github.eeriefoods.snsserver.student.domain;
 
 import com.github.eeriefoods.snsserver.course.domain.Course;
+import com.github.eeriefoods.snsserver.shared.api.StudentIdGenerator;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -15,7 +17,9 @@ import javax.persistence.*;
 public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = StudentIdGenerator.GENERATOR_NAME)
+    @GenericGenerator(name = StudentIdGenerator.GENERATOR_NAME,
+            strategy = "com.github.eeriefoods.snsserver.shared.api.StudentIdGenerator")
     @Column(name = "ID", nullable = false, unique = true)
     private Long studentId;
 

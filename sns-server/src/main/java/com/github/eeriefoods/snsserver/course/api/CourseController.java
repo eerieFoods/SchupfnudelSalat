@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "course")
@@ -30,6 +31,11 @@ public class CourseController {
         return courseDataFactory.from(courseService.getCourse(courseId));
     }
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<String> getAllCourses() {
+        return courseService.getAllCourses();
+    }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public CourseData createCourse(@Valid @RequestBody CourseData courseData) {
         return courseDataFactory.from(courseService.createCourse(courseFactory.from(courseData)));
@@ -46,7 +52,7 @@ public class CourseController {
         return courseDataFactory.from(courseService.addStudent(courseId, studentFactory.from(studentData)));
     }
 
-    @DeleteMapping(path = "{courseId}/remove",
+    @PutMapping(path = "{courseId}/remove",
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public CourseData removeMemberFromCourse(@PathVariable String courseId, @Valid @RequestBody StudentData studentData) {
         return courseDataFactory.from(courseService.removeStudent(courseId, studentFactory.from(studentData)));
