@@ -59,24 +59,6 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="TEST">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TreeTableView fx:id="TESTBaumTable" prefHeight="375.0" prefWidth="600.0">
-                          <columns>
-                            <TreeTableColumn fx:id="TTCStudentId" prefWidth="75.0" text="studentId" />
-                            <TreeTableColumn fx:id="TTCFirstName" prefWidth="75.0" text="FirstName" />
-                              <TreeTableColumn fx:id="TTCLastName" prefWidth="75.0" text="LastName" />
-                              <TreeTableColumn fx:id="TTCCompany" prefWidth="75.0" text="Company" />
-                              <TreeTableColumn fx:id="TTCCourses" prefWidth="75.0" text="Courses" />
-                              <TreeTableColumn fx:id="TTCJavaLevel" prefWidth="75.0" text="JavaLevel" />
-                          </columns>
-                        </TreeTableView>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
         </tabs>
       </TabPane>
    </center>
