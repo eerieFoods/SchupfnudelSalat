@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +32,8 @@ public class CourseService implements ICourseService {
 
     @Override
     public Course createCourse(Course course) {
+        course.setId(UUID.randomUUID().toString());
+
         return courseRepository.save(course);
     }
 
