@@ -19,12 +19,14 @@ class CourseFactoryTest extends BaseMockitoTest {
         CourseData actual = new CourseData();
         actual.setId("CourseId");
         actual.setMembers(Collections.emptySet());
+        actual.setFriendlyName("FN");
         actual.setRoom("123B");
 
         Course expected = courseFactory.from(actual);
 
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getMembers(), actual.getMembers());
+        assertEquals(expected.getFriendlyName(), actual.getFriendlyName());
         assertEquals(expected.getRoom(), actual.getRoom());
     }
 }

@@ -3,6 +3,8 @@ package com.github.eeriefoods.snsserver.course.api;
 import com.github.eeriefoods.snsserver.course.domain.Course;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class CourseDataFactory {
 
@@ -11,9 +13,16 @@ public class CourseDataFactory {
 
         data.setId(course.getId());
         data.setMembers(course.getMembers());
+        data.setFriendlyName(course.getFriendlyName());
         data.setRoom(course.getRoom());
 
         return data;
+    }
+
+    public List<CourseData> from(List<Course> courses) {
+        return courses.stream()
+                .map(this::from)
+                .toList();
     }
 
 }

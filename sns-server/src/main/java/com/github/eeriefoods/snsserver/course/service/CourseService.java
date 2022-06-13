@@ -86,7 +86,7 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public List<String> getAllCourses() {
-        return courseRepository.findAll().stream().map(Course::getId).toList();
+    public List<Course> getAllCourses() {
+        return courseRepository.findAll();
     }
 }
