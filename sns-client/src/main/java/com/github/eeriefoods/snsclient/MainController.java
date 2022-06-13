@@ -1,5 +1,6 @@
 package com.github.eeriefoods.snsclient;
 
+import com.github.eeriefoods.snsclient.service.CourseService;
 import com.github.eeriefoods.snsclient.service.StudentService;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -21,6 +22,11 @@ public class MainController {
     @FXML private TableColumn<Student, String> TCS_Company;
     @FXML private TableColumn<Student, JavaLevel> TCS_JavaLevel;
 
+    @FXML private TableView<Course> TCK_View;
+    @FXML private TableColumn<Course, Integer> TCK_ID;
+    @FXML private TableColumn<Course, String> TCK_FriendlyName;
+    @FXML private TableColumn<Course, String> TCK_Room;
+
     @FXML private void initialize() {
         
         TCS_ID.setCellValueFactory(new PropertyValueFactory<>("studentId"));
@@ -30,7 +36,21 @@ public class MainController {
         TCS_Company.setCellValueFactory(new PropertyValueFactory<>("company"));
         TCS_Course.setCellValueFactory(new PropertyValueFactory<>("courseId"));
         TCS_View.getItems().setAll(parseStudentList());
+
+        TCK_ID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TCK_FriendlyName.setCellValueFactory(new PropertyValueFactory<>("friendlyName"));
+        TCK_Room.setCellValueFactory(new PropertyValueFactory<>("room"));
+        TCK_View.getItems().setAll(parseCourseList());
     }
+
+    private List<Course> parseCourseList() {
+        try {
+            return CourseService.getCourses();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }    }
 
     private List<Student> parseStudentList() {
         try {
