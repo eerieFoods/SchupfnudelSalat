@@ -2,8 +2,11 @@ package com.github.eeriefoods.snsclient;
 
 import com.github.eeriefoods.snsclient.service.CourseService;
 import com.github.eeriefoods.snsclient.service.StudentService;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 
 import java.io.IOException;
@@ -11,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.eeriefoods.snsclient.model.*;
+import com.github.eeriefoods.snsclient.model.JavaLevel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
@@ -63,6 +67,20 @@ public class MainController {
             updateStudent(event.getRowValue());});
 
         TCS_View.setEditable(true);
+
+        TCS_JavaLevel.setCellValueFactory(i -> {
+            final JavaLevel javaLevel = i.getValue().getJavaLevel();
+            // binding to constant value
+            return Bindings.createObjectBinding(() -> javaLevel);
+        });
+
+        TCS_JavaLevel.setCellFactory(col -> {
+            TableCell<Student, JavaLevel> c = new TableCell<>();
+            final ComboBox<JavaLevel> comboBox = new ComboBox<>();
+            comboBox.setItems(FXCollections.observableArrayList( JavaLevel.values()));
+            c.graphicProperty().bind(Bindings.when(c.emptyProperty()).then((Node) null).otherwise(comboBox));
+            return c;});
+
     }
 
     private void updateStudent(Student student){
@@ -92,11 +110,5 @@ public class MainController {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-    }
-    @FXML
-    private void editableClos(){
-        TCS_FirstName.setCellFactory(TextFieldTableCell.forTableColumn());
-
-
     }
 }
