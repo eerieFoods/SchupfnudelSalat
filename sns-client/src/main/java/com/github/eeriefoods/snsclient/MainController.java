@@ -31,7 +31,7 @@ public class MainController {
     }
 
     private List<Student> parseStudentList() {
-        Course Test = new Course("TINF21AI2", "123B");
+        Course Test = new Course("TINF21AI2","TINF21AI22", "123B");
         List<Student> Students = new ArrayList<>();
         for (int i = 0; i < 200; i++) {
             Student iStudent = new Student( 0+i, "ASDF", "WASD", JavaLevel.SEHR_GUT, i + " NONAMECOMPANY", Test);
