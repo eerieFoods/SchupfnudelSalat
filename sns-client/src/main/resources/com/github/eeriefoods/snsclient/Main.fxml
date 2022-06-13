@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.eeriefoods.snsclient.MainController">
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Student:innen">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="372.0" prefWidth="600.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="ID">
+                                 <graphic>
+                                    <Button fx:id="Test" mnemonicParsing="false" onMouseClicked="#onTest" prefHeight="22.0" prefWidth="58.0" text="Button" />
+                                 </graphic>
+                            </TableColumn>
+                            <TableColumn prefWidth="75.0" text="First Name">
+                                 <graphic>
+                                    <Label fx:id="lable_test"/>
+                                 </graphic></TableColumn>
+                              <TableColumn prefWidth="75.0" text="Last Name" />
+                              <TableColumn prefWidth="75.0" text="Java Level" />
+                              <TableColumn prefWidth="75.0" text="Course ID" />
+                              <TableColumn prefWidth="75.0" text="Company" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Kurs:innen">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="372.0" prefWidth="600.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="ID" />
+                              <TableColumn prefWidth="75.0" text="Friendly Name" />
+                              <TableColumn prefWidth="75.0" text="Room" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Raum:innen">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="372.0" prefWidth="600.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="ID" />
+                              <TableColumn prefWidth="75.0" text="First Name" />
+                              <TableColumn prefWidth="75.0" text="Last Name" />
+                              <TableColumn prefWidth="75.0" text="Java Level" />
+                              <TableColumn prefWidth="75.0" text="Course ID" />
+                              <TableColumn prefWidth="75.0" text="Company" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>
