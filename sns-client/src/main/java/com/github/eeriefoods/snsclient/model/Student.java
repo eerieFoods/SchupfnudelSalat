@@ -9,20 +9,20 @@ public class Student {
     private String lastName;
     private JavaLevel javaLevel;
     private String company;
-    private Course course;
+    private String courseId;
 
     /*
         Boilerplate Code, weil Lombok nicht i.V.m JavaFX & GSON funktioniert.
         Bekanntes Problem seit JDK9+
      */
 
-    public Student(Integer studentId, String firstName, String lastName, JavaLevel javaLevel, String company, Course course) {
+    public Student(Integer studentId, String firstName, String lastName, JavaLevel javaLevel, String company, String courseId) {
         this.studentId = studentId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.javaLevel = javaLevel;
         this.company = company;
-        this.course = course;
+        this.courseId = courseId;
     }
 
     public Integer getStudentId() {
@@ -65,12 +65,12 @@ public class Student {
         this.company = company;
     }
 
-    public Course getCourse() {
-        return course;
+    public String getCourseId() {
+        return courseId;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourse(String courseId) {
+        this.courseId = courseId;
     }
 
     @Override
@@ -78,12 +78,12 @@ public class Student {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return Objects.equals(studentId, student.studentId) && Objects.equals(firstName, student.firstName) && Objects.equals(lastName, student.lastName) && javaLevel == student.javaLevel && Objects.equals(company, student.company) && Objects.equals(course, student.course);
+        return Objects.equals(studentId, student.studentId) && Objects.equals(firstName, student.firstName) && Objects.equals(lastName, student.lastName) && javaLevel == student.javaLevel && Objects.equals(company, student.company) && Objects.equals(courseId, student.courseId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(studentId, firstName, lastName, javaLevel, company, course);
+        return Objects.hash(studentId, firstName, lastName, javaLevel, company, courseId);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class Student {
                 ", lastName='" + lastName + '\'' +
                 ", javaLevel=" + javaLevel +
                 ", company='" + company + '\'' +
-                ", course=" + course +
+                ", courseId=" + courseId +
                 '}';
     }
 }

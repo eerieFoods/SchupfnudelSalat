@@ -21,7 +21,7 @@ public class StudentService {
         gson = new Gson();
     }
 
-    public List<Student> getAllStudents() throws IOException, InterruptedException {
+    public static List<Student> getAllStudents() throws IOException, InterruptedException {
         HttpResponse<String> response = HttpFactory.sendGetRequest(getServerUri(ENDPOINT));
 
         return gson.fromJson(response.body(), new TypeToken<ArrayList<Student>>(){}.getType());
