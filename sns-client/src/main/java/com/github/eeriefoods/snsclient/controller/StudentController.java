@@ -1,32 +1,30 @@
-package com.github.eeriefoods.snsclient;
+package com.github.eeriefoods.snsclient.controller;
 
+import com.github.eeriefoods.snsclient.model.Course;
+import com.github.eeriefoods.snsclient.model.JavaLevel;
+import com.github.eeriefoods.snsclient.model.Student;
 import com.github.eeriefoods.snsclient.service.CourseService;
 import com.github.eeriefoods.snsclient.service.StudentService;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-
-import java.io.IOException;
-import java.util.List;
-
-import com.github.eeriefoods.snsclient.model.*;
-import com.github.eeriefoods.snsclient.model.JavaLevel;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
-public class MainController {
+import java.io.IOException;
+import java.util.List;
 
-    @FXML private TableView<Student> TCS_View;
+public class StudentController {
+    @FXML
+    private TableView<Student> TCS_View;
     @FXML private TableColumn<Student, Integer> TCS_ID;
     @FXML private TableColumn<Student, String> TCS_FirstName, TCS_LastName, TCS_Company;
     @FXML private TableColumn<Student, JavaLevel> TCS_JavaLevel;
     @FXML private TableColumn<Student, String> TCS_Course;
-    @FXML private TableView<Course> TCK_View;
-    @FXML private TableColumn<Course, Integer> TCK_ID;
-    @FXML private TableColumn<Course, String> TCK_FriendlyName, TCK_Room;
 
     @FXML private void initialize() {
-        
+
         TCS_ID.setCellValueFactory(new PropertyValueFactory<>("studentId"));
         TCS_FirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         TCS_FirstName.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -43,18 +41,12 @@ public class MainController {
                     .stream()
                     .map(Course::getFriendlyName)
                     .toArray(String[]::new);
-            
+
             TCS_Course.setCellFactory(ComboBoxTableCell.forTableColumn(courses));
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
         TCS_View.getItems().setAll(loadStudentList());
-
-        TCK_ID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        TCK_FriendlyName.setCellValueFactory(new PropertyValueFactory<>("friendlyName"));
-        TCK_Room.setCellValueFactory(new PropertyValueFactory<>("room"));
-        TCK_View.getItems().setAll(loadCourseList());
-
         TCS_FirstName.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setFirstName(event.getNewValue());
             updateStudent(event.getRowValue());
@@ -78,23 +70,6 @@ public class MainController {
 
         TCS_View.setEditable(true);
     }
-
-    private void updateStudent(Student student){
-            try {
-                StudentService.updateStudent(student);
-            } catch (IOException | InterruptedException ex) {
-                throw new RuntimeException(ex);
-            }
-    }
-
-    private List<Course> loadCourseList() {
-        try {
-            return CourseService.getCourses();
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private List<Student> loadStudentList() {
         try {
             return StudentService.getAllStudents();
@@ -102,4 +77,12 @@ public class MainController {
             throw new RuntimeException(e);
         }
     }
+    private void updateStudent(Student student){
+        try {
+            StudentService.updateStudent(student);
+        } catch (IOException | InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
 }

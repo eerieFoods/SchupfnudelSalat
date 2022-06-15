@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.cell.TextFieldTableCell?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.github.eeriefoods.snsclient.controller.CourseController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <TableView fx:id="TCK_View" editable="true" prefHeight="372.0" prefWidth="600.0">
+        <columns>
+            <TableColumn fx:id="TCK_ID" prefWidth="75.0" text="ID">
+                <cellValueFactory>
+                    <PropertyValueFactory property="id" />
+                </cellValueFactory>
+                <cellFactory>
+                    <TextFieldTableCell fx:factory="forTableColumn" />
+                </cellFactory>
+            </TableColumn>
+            <TableColumn fx:id="TCK_FriendlyName" prefWidth="75.0" text="Friendly Name">
+                <cellValueFactory>
+                    <PropertyValueFactory property="friendlyName" />
+                </cellValueFactory>
+                <cellFactory>
+                    <TextFieldTableCell fx:factory="forTableColumn" />
+                </cellFactory>
+            </TableColumn>
+            <TableColumn fx:id="TCK_Room" prefWidth="75.0" text="Room">
+                <cellValueFactory>
+                    <PropertyValueFactory property="room" />
+                </cellValueFactory>
+                <cellFactory>
+                    <TextFieldTableCell fx:factory="forTableColumn" />
+                </cellFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+</AnchorPane>
