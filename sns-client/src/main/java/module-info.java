@@ -5,7 +5,11 @@ module com.github.eeriefoods.snsclient {
     requires java.net.http;
     requires java.desktop;
 
-    opens com.github.eeriefoods.snsclient to javafx.fxml;
-    opens com.github.eeriefoods.snsclient.model to com.google.gson, javafx.base;
+    
     exports com.github.eeriefoods.snsclient;
+    exports com.github.eeriefoods.snsclient.controller;
+
+    opens com.github.eeriefoods.snsclient to javafx.fxml;
+    opens com.github.eeriefoods.snsclient.controller to javafx.fxml;
+    opens com.github.eeriefoods.snsclient.model to com.google.gson, javafx.base;
 }

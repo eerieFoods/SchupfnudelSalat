@@ -14,7 +14,7 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Main.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 800);
         stage.setTitle("DHBW Student Management Tool");
-        stage.getIcons().add(new Image("file:src/main/resources/assets/images/DHBWRaute.png"));
+        stage.getIcons().add(new Image("file:src/main/resources/com/github/eeriefoods/snsclient/assets/images/DHBWRaute.png"));
         stage.setMinWidth(1300);
         stage.setMinHeight(800);
         stage.setMaximized(true);
