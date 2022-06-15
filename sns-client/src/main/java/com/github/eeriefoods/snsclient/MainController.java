@@ -3,7 +3,6 @@ package com.github.eeriefoods.snsclient;
 import com.github.eeriefoods.snsclient.service.CourseService;
 import com.github.eeriefoods.snsclient.service.StudentService;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 
 import java.io.IOException;
@@ -54,17 +53,20 @@ public class MainController {
         TCK_ID.setCellValueFactory(new PropertyValueFactory<>("id"));
         TCK_FriendlyName.setCellValueFactory(new PropertyValueFactory<>("friendlyName"));
         TCK_Room.setCellValueFactory(new PropertyValueFactory<>("room"));
-        TCK_View.getItems().setAll(parseCourseList());
+        TCK_View.getItems().setAll(loadCourseList());
 
         TCS_FirstName.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setFirstName(event.getNewValue());
-            updateStudent(event.getRowValue());});
+            updateStudent(event.getRowValue());
+        });
         TCS_LastName.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setLastName(event.getNewValue());
-            updateStudent(event.getRowValue());});
+            updateStudent(event.getRowValue());
+        });
         TCS_Company.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setCompany(event.getNewValue());
-            updateStudent(event.getRowValue());});
+            updateStudent(event.getRowValue());
+        });
         TCS_Course.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setCourse(event.getNewValue());
             updateStudent(event.getRowValue());
@@ -80,28 +82,23 @@ public class MainController {
     private void updateStudent(Student student){
             try {
                 StudentService.updateStudent(student);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (InterruptedException ex) {
+            } catch (IOException | InterruptedException ex) {
                 throw new RuntimeException(ex);
             }
     }
 
-    private List<Course> parseCourseList() {
+    private List<Course> loadCourseList() {
         try {
             return CourseService.getCourses();
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }    }
+        }
+    }
 
-    private List<Student> parseStudentList() {
+    private List<Student> loadStudentList() {
         try {
             return StudentService.getAllStudents();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
