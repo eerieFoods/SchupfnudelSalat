@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.cell.TextFieldTableCell?>
@@ -36,6 +35,12 @@
                                   </cellFactory>
                               </TableColumn>
                               <TableColumn fx:id="TCS_JavaLevel" prefWidth="75.0" text="Java Level" >
+                                  <cellValueFactory>
+                                      <PropertyValueFactory property="javaLevel" />
+                                  </cellValueFactory>
+                                  <cellFactory>
+                                      <TextFieldTableCell fx:factory="forTableColumn" />
+                                  </cellFactory>
                               </TableColumn>
                               <TableColumn fx:id="TCS_Course" prefWidth="75.0" text="Course ID" >
                                   <cellValueFactory>
