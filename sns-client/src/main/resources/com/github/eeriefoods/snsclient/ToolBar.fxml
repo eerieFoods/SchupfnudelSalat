@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<AnchorPane prefHeight="37" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.eeriefoods.snsclient.controller.ToolBarController">
+   <children>
+       <ToolBar maxHeight="-Infinity" minHeight="-Infinity" prefHeight="37.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+           <items>
+               <Button fx:id="BTNCreate" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0" text="Hinzufügen">
+                   <cursor>
+                       <Cursor fx:constant="HAND" />
+                   </cursor>
+            </Button>
+               <Button fx:id="BTNEdit" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Bearbeiten">
+                   <cursor>
+                       <Cursor fx:constant="HAND" />
+                   </cursor>
+            </Button>
+               <Button fx:id="BTNDelete" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Löschen">
+                   <cursor>
+                       <Cursor fx:constant="HAND" />
+                   </cursor>
+            </Button>
+               <Pane visible="false" HBox.hgrow="ALWAYS" />
+               <TextField alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="210.0">
+                   <cursor>
+                       <Cursor fx:constant="TEXT" />
+                   </cursor>
+            </TextField>
+               <Button fx:id="BTNSearch" alignment="CENTER_RIGHT" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Button">
+                   <graphic>
+                       <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                               <Image url="@assets/images/SearchIcon.png" />
+                           </image>
+                           <cursor>
+                               <Cursor fx:constant="HAND" />
+                           </cursor>
+                       </ImageView>
+                   </graphic>
+                   <cursor>
+                       <Cursor fx:constant="HAND" />
+                   </cursor>
+               </Button>
+           </items>
+       </ToolBar>
+   </children>
+
+</AnchorPane>

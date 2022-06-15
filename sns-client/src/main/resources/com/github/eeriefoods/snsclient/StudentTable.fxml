@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.cell.TextFieldTableCell?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.github.eeriefoods.snsclient.controller.StudentController"
-            prefHeight="400.0" prefWidth="600.0" fx:id="studentTable">
+<AnchorPane fx:id="studentTable" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.eeriefoods.snsclient.controller.StudentController">
         <children>
-            <TableView fx:id="TCS_View" editable="true" prefHeight="372.0" prefWidth="600.0">
+            <fx:include source="ToolBar.fxml"/>
+            <TableView fx:id="TCS_View" editable="true" layoutY="36.0" prefHeight="364.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
                 <columns>
                     <TableColumn fx:id="TCS_ID" prefWidth="75.0" text="ID" />
-                    <TableColumn fx:id="TCS_FirstName" prefWidth="75.0" text="First Name" >
+                    <TableColumn fx:id="TCS_FirstName" prefWidth="75.0" text="First Name">
                         <cellValueFactory>
                             <PropertyValueFactory property="firstName" />
                         </cellValueFactory>
@@ -30,7 +26,7 @@
                             <TextFieldTableCell fx:factory="forTableColumn" />
                         </cellFactory>
                     </TableColumn>
-                    <TableColumn fx:id="TCS_JavaLevel" prefWidth="75.0" text="Java Level" >
+                    <TableColumn fx:id="TCS_JavaLevel" prefWidth="75.0" text="Java Level">
                         <cellValueFactory>
                             <PropertyValueFactory property="javaLevel" />
                         </cellValueFactory>
@@ -38,7 +34,7 @@
                             <TextFieldTableCell fx:factory="forTableColumn" />
                         </cellFactory>
                     </TableColumn>
-                    <TableColumn fx:id="TCS_Course" prefWidth="75.0" text="Course ID" >
+                    <TableColumn fx:id="TCS_Course" prefWidth="75.0" text="Course ID">
                         <cellValueFactory>
                             <PropertyValueFactory property="courseId" />
                         </cellValueFactory>
@@ -46,7 +42,7 @@
                             <TextFieldTableCell fx:factory="forTableColumn" />
                         </cellFactory>
                     </TableColumn>
-                    <TableColumn fx:id="TCS_Company" prefWidth="75.0" text="Company" >
+                    <TableColumn fx:id="TCS_Company" prefWidth="75.0" text="Company">
                         <cellValueFactory>
                             <PropertyValueFactory property="company" />
                         </cellValueFactory>
