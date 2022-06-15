@@ -5,20 +5,16 @@ import com.github.eeriefoods.snsclient.model.JavaLevel;
 import com.github.eeriefoods.snsclient.model.Student;
 import com.github.eeriefoods.snsclient.service.CourseService;
 import com.github.eeriefoods.snsclient.service.StudentService;
-import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.util.Callback;
 
 import java.io.IOException;
 import java.util.List;
 
-import static javax.swing.JOptionPane.showMessageDialog;
 
 public class StudentController {
     @FXML private TableView<Student> TCS_View;
