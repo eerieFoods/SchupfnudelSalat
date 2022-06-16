@@ -7,11 +7,11 @@
 
 <AnchorPane fx:id="studentTable" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.eeriefoods.snsclient.controller.StudentController">
         <children>
-            <fx:include source="ToolBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+
             <TableView fx:id="TCS_View" editable="true" layoutY="36.0" prefHeight="364.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
                 <columns>
-                    <TableColumn fx:id="TCS_ID" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="ID" />
-                    <TableColumn fx:id="TCS_FirstName" maxWidth="400.0" minWidth="100.0" prefWidth="100.0" text="First Name">
+                    <TableColumn fx:id="TCS_ID" maxWidth="107.5" minWidth="107.5" prefWidth="107.5" resizable="false" text="Student ID" />
+                    <TableColumn fx:id="TCS_FirstName" maxWidth="402.5" minWidth="0.0" prefWidth="147.5" text="Vorname(n)">
                         <cellValueFactory>
                             <PropertyValueFactory property="firstName" />
                         </cellValueFactory>
@@ -19,7 +19,7 @@
                             <TextFieldTableCell fx:factory="forTableColumn" />
                         </cellFactory>
                     </TableColumn>
-                    <TableColumn fx:id="TCS_LastName" maxWidth="400.0" minWidth="100.0" prefWidth="100.0" text="Last Name">
+                    <TableColumn fx:id="TCS_LastName" maxWidth="402.5" minWidth="0.0" prefWidth="100.0" text="Nachname(n)">
                         <cellValueFactory>
                             <PropertyValueFactory property="lastName" />
                         </cellValueFactory>
@@ -27,7 +27,7 @@
                             <TextFieldTableCell fx:factory="forTableColumn" />
                         </cellFactory>
                     </TableColumn>
-                    <TableColumn fx:id="TCS_JavaLevel" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Java Level">
+                    <TableColumn fx:id="TCS_JavaLevel" maxWidth="145.0" minWidth="140.0" prefWidth="145.0" resizable="false" text="Java Kenntnisse">
                         <cellValueFactory>
                             <PropertyValueFactory property="javaLevel" />
                         </cellValueFactory>
@@ -35,7 +35,7 @@
                             <TextFieldTableCell fx:factory="forTableColumn" />
                         </cellFactory>
                     </TableColumn>
-                    <TableColumn fx:id="TCS_Course" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Course ID">
+                    <TableColumn fx:id="TCS_Course" maxWidth="105.0" minWidth="100.0" prefWidth="105.0" resizable="false" text="Kurs">
                         <cellValueFactory>
                             <PropertyValueFactory property="courseId" />
                         </cellValueFactory>
@@ -43,7 +43,7 @@
                             <TextFieldTableCell fx:factory="forTableColumn" />
                         </cellFactory>
                     </TableColumn>
-                    <TableColumn fx:id="TCS_Company" maxWidth="400.0" minWidth="100.0" prefWidth="100.0" text="Company">
+                    <TableColumn fx:id="TCS_Company" maxWidth="402.5" minWidth="0.0" prefWidth="100.0" text="Unternehmen">
                         <cellValueFactory>
                             <PropertyValueFactory property="company" />
                         </cellValueFactory>

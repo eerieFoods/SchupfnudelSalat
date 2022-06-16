@@ -9,12 +9,14 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
-
+import com.github.eeriefoods.snsclient.controller.ToolBarController;
 import java.io.IOException;
 import java.util.List;
 
@@ -26,8 +28,10 @@ public class StudentController {
     @FXML private TableColumn<Student, String> TCS_FirstName, TCS_LastName, TCS_Company;
     @FXML private TableColumn<Student, JavaLevel> TCS_JavaLevel;
     @FXML private TableColumn<Student, String> TCS_Course;
+    @FXML ToolBarController toolBarController;
+    @FXML private void initialize() throws IOException{
 
-    @FXML private void initialize() {
+        //initializeToolBar();
 
         TCS_ID.setCellValueFactory(new PropertyValueFactory<>("studentId"));
         TCS_FirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -73,7 +77,10 @@ public class StudentController {
         });
 
         TCS_View.setEditable(true);
+
     }
+
+
 
     private void updateStudent(Student student){
         try {
@@ -90,4 +97,33 @@ public class StudentController {
             throw new RuntimeException(ex);
         }
     }
+
+
+
+/*    private void initializeToolBar() throws IOException {
+        FXMLLoader toolBarLoader = new FXMLLoader();
+        toolBarLoader.setLocation(getClass().getResource("/com/github/eeriefoods/snsclient/toolbar.fxml"));
+        Parent root = (Parent) toolBarLoader.load();
+
+        ToolBarController toolBarController = toolBarLoader.getController();
+
+        System.out.println(toolBarLoader);
+        System.out.println(toolBarController);
+        System.out.println(toolBarController.BTNCreate);
+        toolBarController.BTNCreate.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                toolBarController.doShit();
+            }
+
+        });*/
+
+        public void doShit(){
+           System.out.println("something!");
+       }
+
+
+
+
+
 }
