@@ -86,4 +86,13 @@ public class StudentController {
             throw new RuntimeException(ex);
         }
     }
+
+        public void doShit(){
+           System.out.println("something!");
+       }
+
+
+
+
+
 }

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="addBar" maxHeight="37.0" maxWidth="5000.0" minHeight="37.0" minWidth="1280.0" prefWidth="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.eeriefoods.snsclient.controller.AddBarController">
+   <children>
+      <ToolBar prefHeight="37.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+            <TextField fx:id="TFDStudentId" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" promptText="Student ID">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="CLOSED_HAND" />
+               </cursor>
+            </TextField>
+            <TextField fx:id="TFDFirstName" maxWidth="400.0" minWidth="100.0" promptText="Vorname" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="TFDLastName" maxWidth="400.0" minWidth="100.0" promptText="Nachname" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </TextField>
+            <ComboBox fx:id="CBXJavaLevel" maxWidth="140.0" minWidth="100.0" prefWidth="140.0" promptText="Java Kenntnisse">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ComboBox>
+            <ComboBox fx:id="CBXCourse" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" promptText="Kurs">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ComboBox>
+            <TextField fx:id="TFDCompany" maxWidth="400.0" minWidth="100.0" promptText="Unternehmen" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font></TextField>
+            <Button fx:id="BTNSave" alignment="CENTER_RIGHT" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Button">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <image>
+                        <Image url="@assets/images/SaveIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Go Go Suche!" />
+               </tooltip>
+            </Button>
+            <Button fx:id="BTNCancel" alignment="CENTER_RIGHT" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Button">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <image>
+                        <Image url="@assets/images/CancelIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Go Go Suche!" />
+               </tooltip>
+            </Button>
+        </items>
+      </ToolBar>
+   </children>
+</AnchorPane>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
+
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
@@ -13,10 +14,20 @@
            <tabs>
                <Tab text="Student:innen">
                   <content>
-                      <fx:include source="StudentTable.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+
+<!--                      <fx:include source="StudentTable.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />-->
                   </content>
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+<!--                         <fx:include source="StudentTable.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />-->
+                         <fx:include source="AddBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37"  />
+                         <fx:include source="ToolBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
                </Tab>
-               <Tab text="Kurs">
+               <Tab text="Kurse">
                   <content>
                       <fx:include source="CourseTable.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                   </content>
@@ -34,6 +45,9 @@
                <image>
                   <Image url="@assets/images/DHBWLogo.png" />
                </image>
+               <FlowPane.margin>
+                  <Insets bottom="5.0" left="5.0" top="5.0" />
+               </FlowPane.margin>
             </ImageView>
             <Separator prefHeight="0.0" prefWidth="19.0" visible="false" />
             <Text fill="#464646" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Management Tool" wrappingWidth="386.13671875">
