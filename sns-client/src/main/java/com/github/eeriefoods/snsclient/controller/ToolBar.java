@@ -20,7 +20,6 @@ public abstract class ToolBar {
     @FXML Button BTNCreate;
     @FXML Button BTNDelete;
     @FXML TextField TFDSearch;
-    @FXML Button BTNSearch;
 
     MainController mainController;
     CourseTableController courseTableController;
