@@ -13,10 +13,16 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import java.io.IOException;
 import java.util.List;
 
-public class CourseController {
+public class CourseTableController {
     @FXML public TableView<Course> TCK_View;
     @FXML private TableColumn<Course, String> TCK_ID;
     @FXML private TableColumn<Course, String> TCK_FriendlyName, TCK_Room;
+
+    private MainController mainController;
+
+    public void injectMainController(MainController mainController){
+        this.mainController = mainController;
+    }
 
     @FXML private void initialize() {
 
@@ -63,7 +69,14 @@ public class CourseController {
         } catch (IOException | InterruptedException ex) {
             throw new RuntimeException(ex);
         }
+    }
 
+    public void deleteCourse(Course course){
+        try {
+            CourseService.deleteCourse(course.getId());
+        } catch (IOException | InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
 }

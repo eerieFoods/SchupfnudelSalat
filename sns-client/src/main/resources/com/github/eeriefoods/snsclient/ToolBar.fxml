@@ -29,24 +29,6 @@
                   <Tooltip text="Go Go Suche!" />
                </tooltip>
             </Button>
-            <Button fx:id="BTNEdit" alignment="CENTER_RIGHT" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Button">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <image>
-                        <Image url="@assets/images/EditIcon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <tooltip>
-                  <Tooltip text="Go Go Suche!" />
-               </tooltip>
-            </Button>
             <Button fx:id="BTNDelete" alignment="CENTER_RIGHT" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Button">
                <cursor>
                   <Cursor fx:constant="HAND" />

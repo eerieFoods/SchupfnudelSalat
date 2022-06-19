@@ -11,13 +11,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.function.Predicate;
 
 
-public class StudentController{
+public class StudentTableController {
     @FXML public TableView<Student> TCS_View;
     @FXML private TableColumn<Student, Integer> TCS_ID;
     @FXML private TableColumn<Student, String> TCS_FirstName, TCS_LastName, TCS_Company, TCS_Course;
@@ -89,7 +89,32 @@ public class StudentController{
         }
     }
 
+    public void deleteStudent(Student student) {
+        try {
+            StudentService.deleteStudent(student.getStudentId().toString());
+            TCS_View.getItems().remove(student);
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<Student> loadStudentList() throws IOException, InterruptedException {
             return StudentService.getAllStudents();
+    }
+
+    private boolean searchFindsOrder(Student student, String searchText){
+        return (student.getStudentId().toString().contains(searchText.toLowerCase())) ||
+                (student.getFirstName().toLowerCase().contains(searchText.toLowerCase())) ||
+                (student.getLastName().toLowerCase().contains(searchText.toLowerCase())) ||
+                (student.getJavaLevel().toString().toLowerCase().contains(searchText.toLowerCase())) ||
+                (student.getCourseId().toLowerCase().contains(searchText.toLowerCase())) ||
+                (student.getCompany().toLowerCase().contains(searchText.toLowerCase()));
+    }
+
+    public Predicate<Student> createPredicate(String searchText) {
+        return student -> {
+            if (searchText == null || searchText.isEmpty()) return true;
+            return searchFindsOrder(student, searchText);
+        };
     }
 }

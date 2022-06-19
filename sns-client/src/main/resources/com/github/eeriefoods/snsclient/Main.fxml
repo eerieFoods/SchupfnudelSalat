@@ -8,20 +8,31 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.eeriefoods.snsclient.controller.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.eeriefoods.snsclient.controller.MainController">
     <center>
-        <fx:include fx:id="toolBar" source="ToolBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
-        <fx:include fx:id="addBar" source="AddBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" visible="false"/>
-        <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="BOTTOM_CENTER">
+        <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
            <tabs>
-               <Tab text="Student:innen">
-                  <content>
-                      <fx:include fx:id="TCS_StudentTab" source="StudentTable.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                  </content>
+               <Tab id="Student:innen" text="Student:innen">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                         <fx:include fx:id="studentTable" source="StudentTable.fxml" AnchorPane.topAnchor="37" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                         <fx:include fx:id="studentAddBar" source="StudentAddBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                         <fx:include fx:id="studentToolBar" source="ToolBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
                </Tab>
-               <Tab text="Kurse">
+               <Tab id="Kurse" text="Kurse">
                   <content>
-                      <fx:include source="CourseTable.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                          <children>
+                              <fx:include fx:id="courseTable" source="CourseTable.fxml" AnchorPane.topAnchor="37" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+<!--                              <fx:include fx:id="courseAddBar" source="CourseAddBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />-->
+                              <fx:include fx:id="courseToolBar" source="ToolBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                          </children>
+                      </AnchorPane>
                   </content>
                </Tab>
            </tabs>
