@@ -1,5 +1,22 @@
 package com.github.eeriefoods.snsclient.controller;
 
-public class StudentToolBarController extends ToolBarController{
+import com.github.eeriefoods.snsclient.model.Student;
 
+public class StudentToolBarController extends ToolBar {
+    @Override
+    public void initButtonFunctions(){
+
+        TFDSearch.setOnAction(event -> studentSearch());
+
+        BTNSearch.setOnAction(event -> studentSearch());
+
+        BTNCreate.setOnAction(event -> mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem()));
+
+        BTNDelete.setOnAction(event -> {
+            Student student = studentTableView.getSelectionModel().getSelectedItem();
+            studentTableController.deleteStudent(student);
+            studentTableView.getItems().remove(student);
+        });
+
+    }
 }

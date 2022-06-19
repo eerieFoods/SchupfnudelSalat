@@ -17,9 +17,9 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                         <fx:include fx:id="studentTable" source="StudentTable.fxml" AnchorPane.topAnchor="37" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                         <fx:include fx:id="studentTable" source="StudentTable.fxml" AnchorPane.topAnchor="37" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
                          <fx:include fx:id="studentAddBar" source="StudentAddBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                         <fx:include fx:id="studentToolBar" source="ToolBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                         <fx:include fx:id="studentToolBar" source="StudentToolBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -29,8 +29,8 @@
                       <AnchorPane prefHeight="200.0" prefWidth="200.0">
                           <children>
                               <fx:include fx:id="courseTable" source="CourseTable.fxml" AnchorPane.topAnchor="37" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-<!--                              <fx:include fx:id="courseAddBar" source="CourseAddBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />-->
-                              <fx:include fx:id="courseToolBar" source="ToolBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <fx:include fx:id="courseAddBar" source="CourseAddBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <fx:include fx:id="courseToolBar" source="CourseToolBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                           </children>
                       </AnchorPane>
                   </content>

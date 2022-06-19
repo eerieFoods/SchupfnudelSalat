@@ -1,6 +1,7 @@
 package com.github.eeriefoods.snsclient.controller;
 
 import com.github.eeriefoods.snsclient.model.Course;
+import com.github.eeriefoods.snsclient.model.Student;
 import com.github.eeriefoods.snsclient.service.CourseService;
 
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class CourseTableController {
     @FXML public TableView<Course> TCK_View;
@@ -28,6 +30,9 @@ public class CourseTableController {
 
         initTableCellFactories();
         initTableCellEditi();
+
+        TCK_View.getItems().setAll(loadCourseList());
+        TCK_View.setEditable(true);
     }
 
     private void initTableCellEditi() {
@@ -52,10 +57,10 @@ public class CourseTableController {
         TCK_FriendlyName.setCellFactory(TextFieldTableCell.forTableColumn());
         TCK_Room.setCellValueFactory(new PropertyValueFactory<>("room"));
         TCK_Room.setCellFactory(TextFieldTableCell.forTableColumn());
-        TCK_View.getItems().setAll(loadCourseList());
+
     }
 
-    private List<Course> loadCourseList() {
+    public List<Course> loadCourseList() {
         try {
             return CourseService.getCourses();
         } catch (IOException | InterruptedException e) {
@@ -77,6 +82,18 @@ public class CourseTableController {
         } catch (IOException | InterruptedException ex) {
             throw new RuntimeException(ex);
         }
+    }
+    private boolean searchFindsOrder(Course course, String searchText){
+        return (course.getId().contains(searchText.toLowerCase())) ||
+                (course.getFriendlyName().toLowerCase().contains(searchText.toLowerCase())) ||
+                (course.getRoom().toLowerCase().contains(searchText.toLowerCase()));
+    }
+
+    public Predicate<Course> createPredicate(String searchText) {
+        return course -> {
+            if (searchText == null || searchText.isEmpty()) return true;
+            return searchFindsOrder(course, searchText);
+        };
     }
 
 }

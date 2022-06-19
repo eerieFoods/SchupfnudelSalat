@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.control.cell.TextFieldTableCell?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.eeriefoods.snsclient.controller.CourseTableController">
    <children>
-       <fx:include fx:id="toolBar" source="ToolBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-       <TableView fx:id="TCK_View" editable="true" prefHeight="364.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+       <TableView fx:id="TCK_View" editable="true" layoutY="36.0" prefHeight="364.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0">
            <columns>
                <TableColumn fx:id="TCK_ID" maxWidth="400.0" minWidth="100.0" prefWidth="100.0" text="ID">
                    <cellValueFactory>

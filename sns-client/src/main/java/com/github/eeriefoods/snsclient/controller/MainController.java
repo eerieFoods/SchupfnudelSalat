@@ -7,26 +7,30 @@ import javafx.scene.layout.AnchorPane;
 
 public class MainController {
 
-    @FXML public ToolBarController studentToolBarController;
-//    @FXML public ToolBarController courseToolBarController;
+    @FXML public StudentToolBarController studentToolBarController;
     @FXML public StudentAddBarController studentAddBarController;
     @FXML public StudentTableController studentTableController;
+    @FXML public CourseToolBarController courseToolBarController;
+    @FXML public CourseAddBarController courseAddBarController;
     @FXML public CourseTableController courseTableController;
     @FXML public TabPane tabPane;
     @FXML private AnchorPane studentToolBar;
     @FXML private AnchorPane studentAddBar;
+    @FXML private AnchorPane courseToolBar;
+    @FXML private AnchorPane courseAddBar;
 
     @FXML private void initialize(){
-//        courseToolBarController.injectMainController(this);
         studentToolBarController.injectMainController(this);
         studentAddBarController.injectMainController(this);
         courseTableController.injectMainController(this);
+        courseToolBarController.injectMainController(this);
+        courseAddBarController.injectMainController(this);
     }
 
     public void switchBar(Tab tab){
         switch (tab.getId()){
             case "Student:innen":
-                if(studentToolBar.isVisible() == true){
+                if(studentToolBar.isVisible()){
                     studentAddBar.setVisible(true);
                     studentToolBar.setVisible(false);
                 }else {
@@ -34,8 +38,14 @@ public class MainController {
                     studentToolBar.setVisible(true);
                 }
                 break;
-            case "Kurs":
-                System.out.println("k");
+            case "Kurse":
+                if(courseToolBar.isVisible()){
+                    courseAddBar.setVisible(true);
+                    courseToolBar.setVisible(false);
+                }else {
+                    courseAddBar.setVisible(false);
+                    courseToolBar.setVisible(true);
+                }
                 break;
             default:
                 System.out.println("TabPane error");

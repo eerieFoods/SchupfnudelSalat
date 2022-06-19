@@ -1,6 +1,9 @@
 package com.github.eeriefoods.snsclient.controller;
 
+
+import com.github.eeriefoods.snsclient.model.Course;
 import com.github.eeriefoods.snsclient.model.Student;
+import com.github.eeriefoods.snsclient.service.CourseService;
 import com.github.eeriefoods.snsclient.service.StudentService;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
@@ -12,49 +15,36 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class ToolBarController {
-    @FXML public AnchorPane toolBar;
-    @FXML private Button BTNCreate;
-    @FXML private Button BTNDelete;
-    @FXML private TextField TFDSearch;
-    @FXML private Button BTNSearch;
-    private MainController mainController;
-    private StudentTableController studentTableController;
-    private TableView<Student> studentTableView;
+public abstract class ToolBar {
+    @FXML AnchorPane toolBar;
+    @FXML Button BTNCreate;
+    @FXML Button BTNDelete;
+    @FXML TextField TFDSearch;
+    @FXML Button BTNSearch;
 
+    MainController mainController;
+    CourseTableController courseTableController;
+    TableView<Course> courseTableView;
+    StudentTableController studentTableController;
+    TableView<Student> studentTableView;
 
     public void injectMainController(MainController mainController){
         this.mainController = mainController;
         this.studentTableController = mainController.studentTableController;
         this.studentTableView = studentTableController.TCS_View;
+        this.courseTableController = mainController.courseTableController;
+        this.courseTableView = courseTableController.TCK_View;
     }
-    @FXML private void initialize(){
+    @FXML public void initialize(){
 
         initButtonFunctions();
     }
 
-    private void initButtonFunctions(){
-
-        TFDSearch.setOnAction(event -> {
-            studentSearch();
-        });
-
-        BTNSearch.setOnAction(event -> {
-            studentSearch();
-        });
-
-        BTNCreate.setOnAction(event -> {
-            mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem());
-        });
-        BTNDelete.setOnAction(event -> {
-            Student student = studentTableView.getSelectionModel().getSelectedItem();
-            studentTableController.deleteStudent(student);
-            studentTableView.getItems().remove(student);
-        });
+    public void initButtonFunctions(){
 
     }
 
-    private void studentSearch() {
+    void studentSearch() {
         try {
             FilteredList<Student> filteredData = new FilteredList<>(FXCollections.observableList(StudentService.getAllStudents()));
             studentTableView.setItems(filteredData);
@@ -63,6 +53,14 @@ public class ToolBarController {
             throw new RuntimeException(e);
         }
     }
-
+    void courseSearch() {
+        try {
+            FilteredList<Course> filteredData = new FilteredList<>(FXCollections.observableList(CourseService.getCourses()));
+            courseTableView.setItems(filteredData);
+            filteredData.setPredicate(courseTableController.createPredicate(TFDSearch.getText()));
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
