@@ -20,12 +20,22 @@ public class AddBarController {
     @FXML private ComboBox CBXCourse;
     @FXML private TextField TFDCompany;
 
+    private StudentController studentController;
+    private CourseController courseController;
 
     @FXML public void initialize() throws IOException {
 
 
 
 
+
+    }
+
+    public void injectStudentController(StudentController studentController){
+        this.studentController = studentController;
+    }
+    public void injectCourseController(CourseController courseController){
+        this.courseController = courseController;
     }
 
 

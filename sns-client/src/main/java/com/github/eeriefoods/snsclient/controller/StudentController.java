@@ -11,20 +11,34 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.util.List;
 
 
-public class StudentController {
-    @FXML private TableView<Student> TCS_View;
+public class StudentController{
+    @FXML public TableView<Student> TCS_View;
     @FXML private TableColumn<Student, Integer> TCS_ID;
-    @FXML private TableColumn<Student, String> TCS_FirstName, TCS_LastName, TCS_Company;
+    @FXML private TableColumn<Student, String> TCS_FirstName, TCS_LastName, TCS_Company, TCS_Course;
     @FXML private TableColumn<Student, JavaLevel> TCS_JavaLevel;
-    @FXML private TableColumn<Student, String> TCS_Course;
+    @FXML public MainController mainController;
 
-    @FXML private void initialize() {
+    @FXML private void initialize() throws IOException, InterruptedException {
 
+        initTableCellFactorys();
+        initTableCellEdits();
+
+        TCS_View.getItems().setAll(loadStudentList());
+        TCS_View.setEditable(true);
+
+    }
+
+    public void injectMainController(MainController mainController){
+        this.mainController=mainController;
+    }
+
+    private void initTableCellFactorys() throws IOException, InterruptedException {
         TCS_ID.setCellValueFactory(new PropertyValueFactory<>("studentId"));
         TCS_FirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         TCS_FirstName.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -35,18 +49,16 @@ public class StudentController {
         TCS_Company.setCellValueFactory(new PropertyValueFactory<>("company"));
         TCS_Company.setCellFactory(TextFieldTableCell.forTableColumn());
         TCS_Course.setCellValueFactory(new PropertyValueFactory<>("courseId"));
-        try { // TODO Error Handling
-            String[] courses = CourseService
-                    .getCourses()
-                    .stream()
-                    .map(Course::getFriendlyName)
-                    .toArray(String[]::new);
+        String[] courses = CourseService
+                .getCourses()
+                .stream()
+                .map(Course::getFriendlyName)
+                .toArray(String[]::new);
 
-            TCS_Course.setCellFactory(ComboBoxTableCell.forTableColumn(courses));
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        TCS_View.getItems().setAll(loadStudentList());
+        TCS_Course.setCellFactory(ComboBoxTableCell.forTableColumn(courses));
+    }
+
+    private void initTableCellEdits() {
         TCS_FirstName.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setFirstName(event.getNewValue());
             updateStudent(event.getRowValue());
@@ -67,8 +79,6 @@ public class StudentController {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setJavaLevel(event.getNewValue());
             updateStudent(event.getRowValue());
         });
-
-        TCS_View.setEditable(true);
     }
 
     private void updateStudent(Student student){
@@ -79,20 +89,7 @@ public class StudentController {
         }
     }
 
-    private List<Student> loadStudentList(){
-        try {
+    public List<Student> loadStudentList() throws IOException, InterruptedException {
             return StudentService.getAllStudents();
-        } catch (IOException | InterruptedException ex){
-            throw new RuntimeException(ex);
-        }
     }
-
-        public void doShit(){
-           System.out.println("something!");
-       }
-
-
-
-
-
 }

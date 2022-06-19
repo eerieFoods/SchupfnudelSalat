@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="studentTable" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.eeriefoods.snsclient.controller.StudentController">
-        <children>
-
-            <TableView fx:id="TCS_View" editable="true" layoutY="36.0" prefHeight="364.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
+<AnchorPane fx:id="TCS_Anchor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.eeriefoods.snsclient.controller.StudentController">
+    <children>
+        <TableView fx:id="TCS_View" editable="true" layoutY="36.0" prefHeight="364.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37">
                 <columns>
                     <TableColumn fx:id="TCS_ID" maxWidth="107.5" minWidth="107.5" prefWidth="107.5" resizable="false" text="Student ID" />
                     <TableColumn fx:id="TCS_FirstName" maxWidth="402.5" minWidth="0.0" prefWidth="147.5" text="Vorname(n)">
