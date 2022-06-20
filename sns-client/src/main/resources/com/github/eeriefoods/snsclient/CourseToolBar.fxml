@@ -58,24 +58,6 @@
                         <Font name="Arial Bold" size="12.0" />
                     </font>
                 </TextField>
-                <Button fx:id="BTNSearch" alignment="CENTER_RIGHT" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Button">
-                    <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@assets/images/SearchIcon.png" />
-                            </image>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
-                        </ImageView>
-                    </graphic>
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                    <tooltip>
-                        <Tooltip text="Go Go Suche!" />
-                    </tooltip>
-                </Button>
             </items>
         </ToolBar>
     </children>
