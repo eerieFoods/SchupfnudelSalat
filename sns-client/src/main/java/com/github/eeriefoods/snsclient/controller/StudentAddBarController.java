@@ -21,7 +21,7 @@ public class StudentAddBarController {
     @FXML private TextField TFDFirstName;
     @FXML private TextField TFDLastName;
     @FXML private ComboBox<JavaLevel> CBXJavaLevel;
-    @FXML private ComboBox<Course> CBXCourse;
+    @FXML private ComboBox<String> CBXCourse;
     @FXML private TextField TFDCompany;
     private MainController mainController;
     private StudentTableController studentTableController;
@@ -40,7 +40,7 @@ public class StudentAddBarController {
         BTNCancel.setOnAction(event -> mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem()));
 
         BTNSave.setOnAction(event -> {
-            Student student = new Student(null, TFDFirstName.getText(), TFDLastName.getText(), CBXJavaLevel.getValue(), TFDCompany.getText(), CBXCourse.getValue().getId());
+            Student student = new Student(null, TFDFirstName.getText(), TFDLastName.getText(), CBXJavaLevel.getValue(), TFDCompany.getText(), CBXCourse.getValue());
             try {
                 StudentService.createStudent(student);
                 studentTableView.getItems().setAll(studentTableController.loadStudentList());
@@ -53,6 +53,6 @@ public class StudentAddBarController {
 
     private void initComboBoxes() throws IOException, InterruptedException {
         CBXJavaLevel.setItems(FXCollections.observableArrayList(JavaLevel.values()));
-        CBXCourse.setItems(FXCollections.observableArrayList(CourseService.getCourses()));
+        CBXCourse.setItems(FXCollections.observableArrayList(CourseService.getCourses().stream().map(Course::getFriendlyName).toList()));
     }
 }

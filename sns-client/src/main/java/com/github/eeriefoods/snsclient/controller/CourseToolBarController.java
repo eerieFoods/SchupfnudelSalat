@@ -6,9 +6,7 @@ public class CourseToolBarController extends ToolBar{
     @Override
     public void initButtonFunctions(){
 
-        TFDSearch.setOnAction(event -> courseSearch());
-
-        BTNSearch.setOnAction(event ->courseSearch());
+        TFDSearch.setOnKeyTyped(event -> courseSearch());
 
         BTNCreate.setOnAction(event -> mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem()));
         BTNDelete.setOnAction(event -> {

@@ -18,9 +18,9 @@ public class CourseAddBarController {
     @FXML
     private Button BTNSave;
     @FXML private Button BTNCancel;
-    @FXML private TextField TFDFirstName;
-    @FXML private TextField TFDLastName;
-    @FXML private TextField TFDCompany;
+    @FXML private TextField TFDCourseId;
+    @FXML private TextField TFDFriendlyName;
+    @FXML private TextField TFDRoom;
     private MainController mainController;
     private CourseTableController courseTableController;
     private TableView<Course> courseTableView;
