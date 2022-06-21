@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
@@ -22,7 +23,7 @@ public class StudentAddBarController {
     @FXML private TextField TFDFirstName;
     @FXML private TextField TFDLastName;
     @FXML private ComboBox<JavaLevel> CBXJavaLevel;
-    @FXML private ComboBox<String> CBXCourse;
+    @FXML private ComboBox<Course> CBXCourse;
     @FXML private TextField TFDCompany;
     private MainController mainController;
     private StudentTableController studentTableController;
@@ -95,7 +96,8 @@ public class StudentAddBarController {
 
     private void initComboBoxes() throws IOException, InterruptedException {
         CBXJavaLevel.setItems(FXCollections.observableArrayList(JavaLevel.values()));
-        CBXCourse.setItems(FXCollections.observableArrayList(CourseService.getCourses().stream().map(Course::getFriendlyName).toList()));
+        CBXCourse.setItems(FXCollections.observableArrayList(CourseService.getCourses().stream().map(Course::getId).toList()));
+
     }
 
     private void resetCBX() {
