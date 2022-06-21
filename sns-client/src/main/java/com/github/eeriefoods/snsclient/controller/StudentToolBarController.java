@@ -1,6 +1,7 @@
 package com.github.eeriefoods.snsclient.controller;
 
 import com.github.eeriefoods.snsclient.model.Student;
+import com.github.eeriefoods.snsclient.shared.NotificationHandler;
 
 public class StudentToolBarController extends ToolBar {
     @Override
@@ -11,9 +12,14 @@ public class StudentToolBarController extends ToolBar {
         BTNCreate.setOnAction(event -> mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem()));
 
         BTNDelete.setOnAction(event -> {
-            Student student = studentTableView.getSelectionModel().getSelectedItem();
-            studentTableController.deleteStudent(student);
-            studentTableView.getItems().remove(student);
+            NotificationHandler nh = new NotificationHandler();
+
+            if (nh.askForConfirmation("Wirklich löschen?", "Soll der Student/die Studentin " + studentTableView.getSelectionModel().getSelectedItem().getFirstName() + " " + studentTableView.getSelectionModel().getSelectedItem().getLastName() + " wirklich gelöscht werden?") == true) {
+                Student student = studentTableView.getSelectionModel().getSelectedItem();
+                studentTableController.deleteStudent(student);
+                studentTableView.getItems().remove(student);
+            }
+
         });
 
     }
