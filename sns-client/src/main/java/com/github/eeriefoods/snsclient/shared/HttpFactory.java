@@ -23,7 +23,7 @@ public final class HttpFactory {
 
     /**
      * Sends a {@link HttpRequest} to {@code uri} with JSON Header, body and POST-Method.
-     * Automatically calls {@code handleError} from {@link ErrorHandler} when statusCode is not 200
+     * Automatically calls {@code handleError} from {@link NotificationHandler} when statusCode is not 200
      * @param uri Server-URI
      * @param jsonBody Body in JSON-Format
      * @return {@link HttpResponse} of type {@code String}
@@ -40,7 +40,7 @@ public final class HttpFactory {
         HttpResponse<String> response =  httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() != 200) {
-            ErrorHandler.handleError(response);
+            NotificationHandler.handleError(response);
             return response;
         }
 
@@ -49,7 +49,7 @@ public final class HttpFactory {
 
     /**
      * Sends a {@link HttpRequest} to {@code uri} with GET-Method.
-     * Automatically calls {@code handleError} from {@link ErrorHandler} when statusCode is not 200
+     * Automatically calls {@code handleError} from {@link NotificationHandler} when statusCode is not 200
      * @param uri Server-URI
      * @return {@link HttpResponse} of type {@code String}
      * @throws IOException from {@link HttpClient}'s {@code send}
@@ -63,7 +63,7 @@ public final class HttpFactory {
         HttpResponse<String> response =  httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() != 200) {
-            ErrorHandler.handleError(response);
+            NotificationHandler.handleError(response);
             return response;
         }
 
@@ -72,7 +72,7 @@ public final class HttpFactory {
 
     /**
      * Sends a {@link HttpRequest} to {@code uri} with JSON Header, body and PUT-Method.
-     * Automatically calls {@code handleError} from {@link ErrorHandler} when statusCode is not 200
+     * Automatically calls {@code handleError} from {@link NotificationHandler} when statusCode is not 200
      * @param uri Server-URI
      * @param jsonBody Body in JSON-Format
      * @return {@link HttpResponse} of type {@code String}
@@ -89,7 +89,7 @@ public final class HttpFactory {
         HttpResponse<String> response =  httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() != 200) {
-            ErrorHandler.handleError(response);
+            NotificationHandler.handleError(response);
             return response;
         }
 
@@ -98,7 +98,7 @@ public final class HttpFactory {
 
     /**
      * Sends a {@link HttpRequest} to {@code uri} with DELETE-Method.
-     * Automatically calls {@code handleError} from {@link ErrorHandler} when statusCode is not 200
+     * Automatically calls {@code handleError} from {@link NotificationHandler} when statusCode is not 200
      * @param uri Server-URI
      * @return {@link HttpResponse} of type {@code String}
      * @throws IOException from {@link HttpClient}'s {@code send}
@@ -114,7 +114,7 @@ public final class HttpFactory {
         HttpResponse<String> response =  httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() != 200) {
-            ErrorHandler.handleError(response);
+            NotificationHandler.handleError(response);
             return response;
         }
 

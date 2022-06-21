@@ -1,6 +1,7 @@
 package com.github.eeriefoods.snsclient.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
@@ -52,5 +53,7 @@ public class MainController {
                 break;
         }
     }
+
+
 
 }

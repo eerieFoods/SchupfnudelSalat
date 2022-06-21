@@ -14,7 +14,7 @@
     <children>
         <ToolBar prefHeight="37.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
-                <TextField fx:id="TFDSCourseId" editable="true" maxWidth="395.0" minWidth="392.5" promptText="Kurs ID">
+                <TextField fx:id="TFDCourseId" maxWidth="395.0" minWidth="392.5" promptText="Kurs ID" text="" HBox.hgrow="ALWAYS">
                     <font>
                         <Font name="Arial Bold" size="12.0" />
                     </font>
@@ -22,12 +22,12 @@
                         <Cursor fx:constant="CLOSED_HAND" />
                     </cursor>
                 </TextField>
-                <TextField fx:id="TFDFriendlyName" maxWidth="395.0" minWidth="392.5" promptText="Anzeigename" HBox.hgrow="ALWAYS">
+                <TextField fx:id="TFDFriendlyName" maxWidth="395.0" minWidth="392.5" promptText="Anzeigename" text="" HBox.hgrow="ALWAYS">
                     <font>
                         <Font name="Arial Bold" size="12.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="TFDRoom" maxWidth="395.0" minWidth="392.5" promptText="Raum" HBox.hgrow="ALWAYS">
+                <TextField fx:id="TFDRoom" maxWidth="395.0" minWidth="392.5" promptText="Raum" text="" HBox.hgrow="ALWAYS">
                     <font>
                         <Font name="Arial Bold" size="12.0" />
                     </font>
