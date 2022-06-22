@@ -140,7 +140,6 @@ public class StudentAddBarController {
 
     private void resetInput() {
         CBXCourse.getSelectionModel().clearSelection();
-        CBXCourse.getEditor().setPromptText("Test");
         CBXJavaLevel.getSelectionModel().select(null);
         TFDStudentId.clear();
         TFDFirstName.clear();
