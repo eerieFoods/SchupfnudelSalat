@@ -35,7 +35,10 @@ public final class HttpFactory {
 
         HttpResponse<String> response =  httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        if (response.statusCode() != 200) {
+        if (response.statusCode() == 409) {
+            NotificationHandler.logNoNotification(String.valueOf(response));
+        }
+        if (response.statusCode() != 200 && response.statusCode() != 409) {
             NotificationHandler.handleHttpError(response);
             return response;
         }
@@ -84,9 +87,15 @@ public final class HttpFactory {
 
         HttpResponse<String> response =  httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        if (response.statusCode() != 200) {
+        if (response.statusCode() == 400) {
+            NotificationHandler.logNoNotification(String.valueOf(response));
+        }
+
+        if (response.statusCode() != 200  && response.statusCode() != 400) {
+
             NotificationHandler.handleHttpError(response);
             return response;
+
         }
 
         return response;

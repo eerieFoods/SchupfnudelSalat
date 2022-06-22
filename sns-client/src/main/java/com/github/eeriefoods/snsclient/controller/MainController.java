@@ -32,7 +32,6 @@ public class MainController {
 
         tabPane.getSelectionModel().selectedItemProperty().addListener(
                 (ov, t, t1) -> {
-                    System.out.println(tabPane.getSelectionModel().getSelectedItem().getText());
                     if (tabPane.getSelectionModel().getSelectedItem().getText().equals("Kurse")) {
                         courseTableController.reloadTable();
                     }

@@ -12,11 +12,11 @@ public class SnsClientApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(SnsClientApplication.class.getResource("Main.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1280, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 1300, 820);
         stage.setTitle("DHBW Student Management Tool");
         stage.getIcons().add(new Image("file:src/main/resources/com/github/eeriefoods/snsclient/assets/images/DHBWRaute.png"));
         stage.setMinWidth(1300);
-        stage.setMinHeight(800);
+        stage.setMinHeight(820);
         stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();

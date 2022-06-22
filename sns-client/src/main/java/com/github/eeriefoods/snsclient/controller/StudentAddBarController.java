@@ -87,8 +87,6 @@ public class StudentAddBarController {
                     CourseService.addMemberToCourse(CBXCourse.getValue(), student);
                     studentTableView.getItems().setAll(studentTableController.loadStudentList());
                     mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem());
-                    NotificationHandler.showUserNotification("Student:in erfolgreich angelegt!",
-                            "Der Student/die Studentin " + TFDFirstName.getText() + " " + TFDLastName.getText() + " wurde erfolgreich angelegt.");
                     resetInput();
                     studentToolBarController.updateFilteredList();
                 } catch (IOException | InterruptedException e) {
