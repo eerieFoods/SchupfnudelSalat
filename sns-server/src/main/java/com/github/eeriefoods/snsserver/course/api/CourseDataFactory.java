@@ -13,7 +13,7 @@ public class CourseDataFactory {
 
         data.setId(course.getId());
         data.setMembers(course.getMembers());
-        data.setFriendlyName(course.getFriendlyName());
+        data.setMemberCount((short) course.getMembers().size());
         data.setRoom(course.getRoom());
 
         return data;

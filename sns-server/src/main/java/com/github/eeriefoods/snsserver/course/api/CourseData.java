@@ -15,7 +15,7 @@ public class CourseData {
     @NotBlank
     private String room;
 
-    private String friendlyName;
+    private Short memberCount;
 
     private Set<Student> members;
 
