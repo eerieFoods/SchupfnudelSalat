@@ -20,13 +20,11 @@ public class CourseTableController {
     @FXML private TableColumn<Course, String> TCK_ID;
     @FXML private TableColumn<Course, String> TCK_FriendlyName, TCK_Room;
 
-    private MainController mainController;
     private StudentToolBarController studentToolBarController;
     private StudentTableController studentTableController;
     private TableView<Student> studentTableView;
 
     public void injectMainController(MainController mainController){
-        this.mainController = mainController;
         this.studentTableController = mainController.studentTableController;
         this.studentTableView = mainController.studentTableController.TCS_View;
         this.studentToolBarController = mainController.studentToolBarController;
@@ -35,24 +33,37 @@ public class CourseTableController {
     @FXML private void initialize() {
 
         initTableCellFactories();
-        initTableCellEditi();
+        initTableCellEdit();
 
         TCK_View.getItems().setAll(loadCourseList());
         TCK_View.setEditable(true);
     }
 
-    private void initTableCellEditi() {
+    private void initTableCellEdit() {
         TCK_ID.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setId(event.getNewValue());
-            updateCourse(event.getRowValue());
+            try {
+                updateCourse(event.getRowValue());
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+
         });
         TCK_FriendlyName.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setFriendlyName(event.getNewValue());
-            updateCourse(event.getRowValue());
+            try {
+                updateCourse(event.getRowValue());
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
         });
         TCK_Room.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setRoom(event.getNewValue());
-            updateCourse(event.getRowValue());
+            try {
+                updateCourse(event.getRowValue());
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
         });
     }
 
@@ -63,34 +74,23 @@ public class CourseTableController {
         TCK_FriendlyName.setCellFactory(TextFieldTableCell.forTableColumn());
         TCK_Room.setCellValueFactory(new PropertyValueFactory<>("room"));
         TCK_Room.setCellFactory(TextFieldTableCell.forTableColumn());
-
     }
 
     public List<Course> loadCourseList() {
-        try {
             return CourseService.getCourses();
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
-    private void updateCourse(Course course){
-        try {
+    private void updateCourse(Course course) throws IOException, InterruptedException { //REMOVE EXCEPTIONS HERE!
             CourseService.updateCourse(course);
             studentTableView.getItems().setAll(studentTableController.loadStudentList());
             studentToolBarController.updateFilteredList();
-        } catch (IOException | InterruptedException ex) {
-            throw new RuntimeException(ex);
-        }
+
     }
 
     public void deleteCourse(Course course){
-        try {
             CourseService.deleteCourse(course.getId());
-        } catch (IOException | InterruptedException ex) {
-            throw new RuntimeException(ex);
-        }
     }
+
     private boolean searchFindsOrder(Course course, String searchText){
         return (course.getId().contains(searchText.toLowerCase())) ||
                 (course.getFriendlyName().toLowerCase().contains(searchText.toLowerCase())) ||

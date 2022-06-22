@@ -1,7 +1,5 @@
 package com.github.eeriefoods.snsclient.shared;
 
-import com.google.gson.Gson;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -10,13 +8,11 @@ import java.net.http.HttpResponse;
 
 public final class HttpFactory {
 
-    private static Gson gson;
-    private static HttpClient httpClient;
+    private static final HttpClient httpClient;
 
     private static final String[] JSON_HEADER = {"Content-Type", "application/json"};
 
     static {
-        gson = new Gson();
         httpClient = HttpClient.newHttpClient();
     }
     private HttpFactory() {}
@@ -40,7 +36,7 @@ public final class HttpFactory {
         HttpResponse<String> response =  httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() != 200) {
-            NotificationHandler.handleError(response);
+            NotificationHandler.handleHttpError(response);
             return response;
         }
 
@@ -63,7 +59,7 @@ public final class HttpFactory {
         HttpResponse<String> response =  httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() != 200) {
-            NotificationHandler.handleError(response);
+            NotificationHandler.handleHttpError(response);
             return response;
         }
 
@@ -89,7 +85,7 @@ public final class HttpFactory {
         HttpResponse<String> response =  httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() != 200) {
-            NotificationHandler.handleError(response);
+            NotificationHandler.handleHttpError(response);
             return response;
         }
 
@@ -114,7 +110,7 @@ public final class HttpFactory {
         HttpResponse<String> response =  httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() != 200) {
-            NotificationHandler.handleError(response);
+            NotificationHandler.handleHttpError(response);
             return response;
         }
 

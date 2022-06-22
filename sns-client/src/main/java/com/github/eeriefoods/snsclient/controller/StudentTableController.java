@@ -22,15 +22,13 @@ public class StudentTableController {
     @FXML private TableColumn<Student, Integer> TCS_ID;
     @FXML private TableColumn<Student, String> TCS_FirstName, TCS_LastName, TCS_Company, TCS_Course;
     @FXML private TableColumn<Student, JavaLevel> TCS_JavaLevel;
-    private MainController mainController;
     private StudentToolBarController studentToolBarController;
     public void injectMainController(MainController mainController){
-        this.mainController=mainController;
         this.studentToolBarController = mainController.studentToolBarController;
     }
     @FXML private void initialize() throws IOException, InterruptedException {
 
-        initTableCellFactorys();
+        initTableCellFactories();
         initTableCellEdits();
 
         TCS_View.getItems().setAll(loadStudentList());
@@ -40,7 +38,7 @@ public class StudentTableController {
 
 
 
-    private void initTableCellFactorys() throws IOException, InterruptedException {
+    private void initTableCellFactories() {
         TCS_ID.setCellValueFactory(new PropertyValueFactory<>("studentId"));
         TCS_FirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         TCS_FirstName.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -84,21 +82,15 @@ public class StudentTableController {
     }
 
     private void updateStudent(Student student){
-        try {
             StudentService.updateStudent(student); //TODO Friendly Name machen
             studentToolBarController.updateFilteredList();
-        } catch (IOException | InterruptedException ex) {
-            throw new RuntimeException(ex);
-        }
+
     }
 
     public void deleteStudent(Student student) {
-        try {
             StudentService.deleteStudent(student.getStudentId().toString());
             TCS_View.getItems().remove(student);
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     public List<Student> loadStudentList() throws IOException, InterruptedException {

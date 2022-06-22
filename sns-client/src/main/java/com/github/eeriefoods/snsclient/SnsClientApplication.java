@@ -8,10 +8,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class SnsClientApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Main.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SnsClientApplication.class.getResource("Main.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 800);
         stage.setTitle("DHBW Student Management Tool");
         stage.getIcons().add(new Image("file:src/main/resources/com/github/eeriefoods/snsclient/assets/images/DHBWRaute.png"));

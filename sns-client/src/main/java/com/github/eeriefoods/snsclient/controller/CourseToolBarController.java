@@ -19,7 +19,7 @@ public class CourseToolBarController extends ToolBar{
 
         BTNDelete.setOnAction(event -> {
             NotificationHandler nh = new NotificationHandler();
-            if (nh.askForConfirmation("Wirklich löschen?", "Im Kurs " + courseTableView.getSelectionModel().getSelectedItem().getId() + " befinden sich noch " + " Student:innen. Soll der Kurs wirklich gelöscht werden?") == true) {
+            if (nh.askForConfirmation("Wirklich löschen?", "Im Kurs " + courseTableView.getSelectionModel().getSelectedItem().getId() + " befinden sich noch " + " Student:innen. Soll der Kurs wirklich gelöscht werden?")) {
                 Course course = courseTableView.getSelectionModel().getSelectedItem();
                 courseTableController.deleteCourse(course);
                 courseTableView.getItems().remove(course);
@@ -28,10 +28,6 @@ public class CourseToolBarController extends ToolBar{
     }
     @Override
     public void updateFilteredList(){
-        try {
             filteredCourseData = new FilteredList<>(FXCollections.observableList(CourseService.getCourses()));
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
