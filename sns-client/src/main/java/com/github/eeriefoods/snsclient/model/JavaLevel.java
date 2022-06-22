@@ -9,10 +9,7 @@ public enum JavaLevel {
     MANGELHAFT(5),
     UNGENUEGEND(6);
 
-    private final int note;
-
     JavaLevel(int note) {
-        this.note = note;
     }
 
 }

@@ -15,9 +15,9 @@ public class Course {
         Bekanntes Problem seit JDK9+
      */
 
-    public Course(String id, String friendlyNamem, String room, Collection<Student> members) {
+    public Course(String id, String friendlyName, String room, Collection<Student> members) {
         this.id = id;
-        this.friendlyName = friendlyNamem;
+        this.friendlyName = friendlyName;
         this.room = room;
         this.members = members;
     }
