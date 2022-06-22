@@ -37,7 +37,7 @@ public class CourseTableController {
 
         initTableCellFactories();
         initTableCellEdit();
-        TCCView.getItems().setAll(loadCourseList());
+        updateCourseTable();
         TCCView.setEditable(true);
     }
 
@@ -101,5 +101,7 @@ public class CourseTableController {
             return searchFindsOrder(course, searchText);
         };
     }
-
+    public void updateCourseTable(){
+        TCCView.getItems().setAll(loadCourseList());
+    }
 }
