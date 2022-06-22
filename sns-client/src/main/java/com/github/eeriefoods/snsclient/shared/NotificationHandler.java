@@ -13,14 +13,15 @@ public class NotificationHandler {
 
 
     public static void handleExceptionError(StackTraceElement @NotNull [] errorResponse) {
-        for (int i = 1; i < errorResponse.length; i++)
-            System.err.println("\tat " + errorResponse[i]);
-        showErrorNotification("Oh No!", "it seems like the connection to the backend has gone wrong. The Student Manager Software will close now!.", true);
+        Arrays.stream(errorResponse)
+                        .map(er -> "\tat" + er)
+                        .forEach(System.err::println);
+        showErrorNotification("Oh Nein!", "Oh Nein. Irgendetwas ist schief gelaufen!", "Die Software wird beendet!", true);
     }
 
     public static void handleHttpError(HttpResponse<String> errorResponse) {
         System.out.println(errorResponse);
-        showErrorNotification("Oh No!", "it seems like the connection to the backend has gone wrong. The Student Manager Software will close now!", true);
+        showErrorNotification("Oh Nein!", "Oh Nein! Etwas ist bei der Verbindung mit dem Backend schief gelaufen!", false);
     }
 
     //Dialog Window for displaying a user Notification (eg. Student successfully saved)
@@ -106,17 +107,7 @@ public class NotificationHandler {
     //                              false: confirmation HASN'T been given. Abort action!
 
     public boolean askForConfirmation(String title, String text) {
-        boolean confirmation = false;
-        Alert askForConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
-        Stage notificationStage = (Stage) askForConfirmation.getDialogPane().getScene().getWindow();
-        notificationStage.getIcons().add(new Image("file:src/main/resources/com/github/eeriefoods/snsclient/assets/images/DHBWRaute.png"));
-        askForConfirmation.setTitle(title);
-        askForConfirmation.setHeaderText(text);
-        Optional<ButtonType> result = askForConfirmation.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            confirmation = true;
-        }
-        return confirmation;
+        return askForConfirmation(title, text, null);
     }
 
     public boolean askForConfirmation(String title, String text, String content) {

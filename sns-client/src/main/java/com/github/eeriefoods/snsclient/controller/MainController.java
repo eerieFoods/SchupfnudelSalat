@@ -1,5 +1,7 @@
 package com.github.eeriefoods.snsclient.controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Tab;
@@ -27,7 +29,19 @@ public class MainController {
         courseTableController.injectMainController(this);
         courseToolBarController.injectMainController(this);
         courseAddBarController.injectMainController(this);
+
+        tabPane.getSelectionModel().selectedItemProperty().addListener(
+                (ov, t, t1) -> {
+                    System.out.println(tabPane.getSelectionModel().getSelectedItem().getText());
+                    if (tabPane.getSelectionModel().getSelectedItem().getText().equals("Kurse")) {
+                        courseTableController.reloadTable();
+                    }
+
+                }
+        );
     }
+
+
 
     public void switchBar(Tab tab){
         switch (tab.getId()){
@@ -50,7 +64,6 @@ public class MainController {
                 }
                 break;
             default:
-                System.out.println("TabPane error");
                 break;
         }
     }

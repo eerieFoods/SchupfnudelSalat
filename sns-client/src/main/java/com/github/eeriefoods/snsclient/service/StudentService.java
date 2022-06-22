@@ -23,35 +23,29 @@ public class StudentService {
     }
 
     public static List<Student> getAllStudents() {
-
         HttpResponse<String> response = null;
         try {
             response = HttpFactory.sendGetRequest(getServerUri(ENDPOINT));
         } catch (IOException | InterruptedException e) {
             handleExceptionError(e.getStackTrace());
         }
-
         assert response != null;
         return gson.fromJson(response.body(), new TypeToken<ArrayList<Student>>(){}.getType());
     }
 
     public static Student getStudent(String studentId) {
-
         HttpResponse<String> response = null;
         try {
             response = HttpFactory.sendGetRequest(getServerUri("%s/%s".formatted(ENDPOINT, studentId)));
         } catch (IOException | InterruptedException e) {
             handleExceptionError(e.getStackTrace());
         }
-
-
         assert response != null;
         return gson.fromJson(response.body(), Student.class);
     }
 
     public static Student createStudent(Student student) {
         String requestBody = gson.toJson(student);
-
         HttpResponse<String> response = null;
         try {
             response = HttpFactory.sendPostJsonRequest(getServerUri(ENDPOINT), requestBody);
@@ -65,14 +59,12 @@ public class StudentService {
 
     public static Student updateStudent(Student student) {
         String requestBody = gson.toJson(student);
-
         HttpResponse<String> response = null;
         try {
             response = HttpFactory.sendPutJsonRequest(getServerUri(ENDPOINT), requestBody);
         } catch (IOException | InterruptedException e) {
             handleExceptionError(e.getStackTrace());
         }
-
         assert response != null;
         return gson.fromJson(response.body(), Student.class);    }
 

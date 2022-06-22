@@ -7,6 +7,8 @@ import com.github.eeriefoods.snsclient.model.Student;
 import com.github.eeriefoods.snsclient.service.CourseService;
 import com.github.eeriefoods.snsclient.service.StudentService;
 import com.github.eeriefoods.snsclient.shared.NotificationHandler;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,12 +18,15 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
+import static com.github.eeriefoods.snsclient.shared.NotificationHandler.handleExceptionError;
+
 public class StudentAddBarController {
     @FXML
     private Button BTNSave;
     @FXML
     private Button BTNCancel;
-    //@FXML private TextField TFDStudentId;
+    @FXML
+    private TextField TFDStudentId;
     @FXML
     private TextField TFDFirstName;
     @FXML
@@ -51,25 +56,44 @@ public class StudentAddBarController {
     }
 
     private void initButtonFunctions() {
+
+        // force the field to be numeric only
+        TFDStudentId.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                TFDStudentId.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+            if (TFDStudentId.getText().length() > 6) {
+                String s = TFDStudentId.getText().substring(0, 6);
+                TFDStudentId.setText(s);
+            }
+        });
+
         BTNCancel.setOnAction(event -> {
             resetInput();
             mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem());
         });
 
         BTNSave.setOnAction(event -> {
-            if (!TFDFirstName.getText().isEmpty() && !TFDLastName.getText().isEmpty() && !CBXJavaLevel.getSelectionModel().isEmpty() && !CBXCourse.getSelectionModel().isEmpty() && !TFDCompany.getText().isEmpty()) {
+            if ((TFDStudentId.getText().isEmpty() || TFDStudentId.getText().length() == 6) && !TFDFirstName.getText().isEmpty() && !TFDLastName.getText().isEmpty() && !CBXJavaLevel.getSelectionModel().isEmpty() && !CBXCourse.getSelectionModel().isEmpty() && !TFDCompany.getText().isEmpty()) {
                 try {
-                    Student student = new Student(null, TFDFirstName.getText(), TFDLastName.getText(), CBXJavaLevel.getValue(), TFDCompany.getText(), CBXCourse.getValue());
-                    StudentService.createStudent(student);
+
+                    Student student = new Student(TFDStudentId.getText().isEmpty() ? null : Integer.parseInt(TFDStudentId.getText()), TFDFirstName.getText(), TFDLastName.getText(), CBXJavaLevel.getValue(), TFDCompany.getText(), CBXCourse.getValue());
+                    student = StudentService.createStudent(student);
+                    CourseService.addMemberToCourse(CBXCourse.getValue(), student);
                     studentTableView.getItems().setAll(studentTableController.loadStudentList());
                     mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem());
                     NotificationHandler.showUserNotification("Student:in erfolgreich angelegt!", "Der Student/die Studentin " + TFDFirstName.getText() + " " + TFDLastName.getText() + " wurde erfolgreich angelegt.");
                     resetInput();
                     studentToolBarController.updateFilteredList();
                 } catch (IOException | InterruptedException e) {
-                    throw new RuntimeException(e);
+                    handleExceptionError(e.getStackTrace());
                 }
             } else {
+                if (!TFDStudentId.getText().isEmpty() && TFDStudentId.getText().length() != 6) {
+                    TFDStudentId.setStyle(STYLE_RED_BORDER);
+                }
+
+
                 if (TFDFirstName.getText().isEmpty()) {
                     TFDFirstName.setStyle("-fx-border-color: red;");
                 }
@@ -88,7 +112,9 @@ public class StudentAddBarController {
             }
         });
 
-        TFDFirstName.setOnKeyPressed(e -> TFDFirstName.setStyle("-fx-border-width: 0px;"));
+        TFDStudentId.setOnKeyPressed(e -> TFDStudentId.setStyle(STYLE_NO_BORDER));
+
+        TFDFirstName.setOnKeyPressed(e -> TFDFirstName.setStyle(STYLE_NO_BORDER));
 
         TFDLastName.setOnKeyPressed(e -> TFDLastName.setStyle("-fx-border-width: 0px;"));
 
@@ -101,7 +127,7 @@ public class StudentAddBarController {
 
     private void initComboBoxes() {
         CBXJavaLevel.setItems(FXCollections.observableArrayList(JavaLevel.values()));
-        CBXJavaLevel.setButtonCell(new PromptButtonCell<>("Java Level"));
+        CBXJavaLevel.setButtonCell(new PromptButtonCell<>("Java Kenntnisse"));
         CBXCourse.setItems(FXCollections.observableArrayList(CourseService.getCourses().stream().map(Course::getId).toList()));
         CBXCourse.setButtonCell(new PromptButtonCell<>("Kurse"));
     }
@@ -110,7 +136,7 @@ public class StudentAddBarController {
         CBXCourse.getSelectionModel().clearSelection();
         CBXCourse.getEditor().setPromptText("Test");
         CBXJavaLevel.getSelectionModel().select(null);
-
+        TFDStudentId.clear();
         TFDFirstName.clear();
         TFDLastName.clear();
         TFDCompany.clear();

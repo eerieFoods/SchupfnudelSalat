@@ -86,7 +86,7 @@ public class CourseService {
 
     public static Course addMemberToCourse(String courseId, Student student) {
         String requestBody = gson.toJson(student);
-
+        System.out.println("lol");
         HttpResponse<String> response = null;
         try {
             response = HttpFactory.sendPutJsonRequest(getServerUri("%s/%s/add".formatted(ENDPOINT, courseId)), requestBody);
@@ -100,7 +100,6 @@ public class CourseService {
 
     public static void removeMemberFromCourse(String courseId, Student student) {
         String requestBody = gson.toJson(student);
-
         try {
             HttpFactory.sendPutJsonRequest(getServerUri("%s/%s/remove".formatted(ENDPOINT, courseId)), requestBody);
         } catch (IOException | InterruptedException e) {
