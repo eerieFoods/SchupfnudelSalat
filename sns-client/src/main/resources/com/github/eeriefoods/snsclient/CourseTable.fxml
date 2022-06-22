@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.eeriefoods.snsclient.controller.CourseTableController">
    <children>
-       <TableView fx:id="TCK_View" editable="true" layoutY="36.0" prefHeight="364.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0">
+       <TableView fx:id="TCCView" editable="true" layoutY="36.0" prefHeight="364.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0">
            <columns>
-               <TableColumn fx:id="TCK_ID" maxWidth="400.0" minWidth="100.0" prefWidth="100.0" text="ID">
+               <TableColumn fx:id="TCCId" maxWidth="400.0" minWidth="100.0" prefWidth="100.0" text="Kurs Id">
                    <cellValueFactory>
                        <PropertyValueFactory property="id" />
                    </cellValueFactory>
@@ -16,17 +17,17 @@
                        <TextFieldTableCell fx:factory="forTableColumn" />
                    </cellFactory>
                </TableColumn>
-               <TableColumn fx:id="TCK_FriendlyName" maxWidth="400.0" minWidth="100.0" prefWidth="100.0" text="Friendly Name">
+               <TableColumn fx:id="TCCRoom" maxWidth="400.0" minWidth="100.0" prefWidth="100.0" text="Kursraum">
                    <cellValueFactory>
-                       <PropertyValueFactory property="friendlyName" />
+                       <PropertyValueFactory property="room" />
                    </cellValueFactory>
                    <cellFactory>
                        <TextFieldTableCell fx:factory="forTableColumn" />
                    </cellFactory>
                </TableColumn>
-               <TableColumn fx:id="TCK_Room" maxWidth="400.0" minWidth="100.0" prefWidth="100.0" text="Room">
+               <TableColumn fx:id="TCCMemberCount" editable="false" maxWidth="140.0" minWidth="140.0" prefWidth="140.0" resizable="false" text="Anzahl Student:innen">
                    <cellValueFactory>
-                       <PropertyValueFactory property="room" />
+                       <PropertyValueFactory property="friendlyName" />
                    </cellValueFactory>
                    <cellFactory>
                        <TextFieldTableCell fx:factory="forTableColumn" />

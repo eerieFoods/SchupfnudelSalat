@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Course {
 
     private String id;
-    private String friendlyName;
+    private Integer memberCount;
     private String room;
     private Collection<Student> members;
 
@@ -15,18 +15,19 @@ public class Course {
         Bekanntes Problem seit JDK9+
      */
 
-    public Course(String id, String friendlyName, String room, Collection<Student> members) {
+    public Course(String id, Integer memberCount, String room, Collection<Student> members) {
         this.id = id;
-        this.friendlyName = friendlyName;
+        this.memberCount = memberCount;
         this.room = room;
         this.members = members;
     }
 
-    public Course(String id, String friendlyName, String room) {
-        this.id = id;
-        this.friendlyName = friendlyName;
-        this.room = room;
-        this.members = null;
+    public Course(String id, Integer memberCount, String room) {
+        this(id, memberCount, room, null);
+    }
+
+    public Course(String id, String room) {
+    this(id, 0,room);
     }
 
     public String getId() {
@@ -53,12 +54,12 @@ public class Course {
         this.members = members;
     }
 
-    public String getFriendlyName() {
-        return friendlyName;
+    public Integer getMemberCount() {
+        return memberCount;
     }
 
-    public void setFriendlyName(String friendlyName) {
-        this.friendlyName = friendlyName;
+    public void setMemberCount(Integer memberCount) {
+        this.memberCount = memberCount;
     }
 
     @Override
@@ -66,19 +67,19 @@ public class Course {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Course course = (Course) o;
-        return Objects.equals(id, course.id) && Objects.equals(friendlyName, course.friendlyName) && Objects.equals(room, course.room) && Objects.equals(members, course.members);
+        return Objects.equals(id, course.id) && Objects.equals(memberCount, course.memberCount) && Objects.equals(room, course.room) && Objects.equals(members, course.members);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, friendlyName, room, members);
+        return Objects.hash(id, memberCount, room, members);
     }
 
     @Override
     public String toString() {
         return "Course{" +
                 "id='" + id + '\'' +
-                ", friendlyName='" + friendlyName + '\'' +
+                ", memberCount='" + memberCount + '\'' +
                 ", room='" + room + '\'' +
                 ", members=" + members +
                 '}';

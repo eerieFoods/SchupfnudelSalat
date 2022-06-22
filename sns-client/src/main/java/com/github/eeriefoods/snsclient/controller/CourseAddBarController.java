@@ -10,11 +10,14 @@ import javafx.scene.control.TextField;
 import org.jetbrains.annotations.NotNull;
 
 public class CourseAddBarController {
-    @FXML private Button BTNSave;
-    @FXML private Button BTNCancel;
-    @FXML private TextField TFDCourseId;
-    @FXML private TextField TFDFriendlyName;
-    @FXML private TextField TFDRoom;
+    @FXML
+    private Button BTNSave;
+    @FXML
+    private Button BTNCancel;
+    @FXML
+    private TextField TFDCourseId;
+    @FXML
+    private TextField TFDRoom;
     private MainController mainController;
     private CourseTableController courseTableController;
     private TableView<Course> courseTableView;
@@ -22,10 +25,11 @@ public class CourseAddBarController {
     public void injectMainController(@NotNull MainController mainController) {
         this.mainController = mainController;
         this.courseTableController = mainController.courseTableController;
-        this.courseTableView = courseTableController.TCK_View;
+        this.courseTableView = courseTableController.TCCView;
     }
 
-    @FXML public void initialize() {
+    @FXML
+    public void initialize() {
         initTextFieldFunctions();
     }
 
@@ -33,23 +37,17 @@ public class CourseAddBarController {
         BTNCancel.setOnAction(event -> mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem()));
 
         BTNSave.setOnAction(event -> {
-            if (!TFDCourseId.getText().isEmpty() && !TFDFriendlyName.getText().isEmpty() && !TFDRoom.getText().isEmpty())
-            {
-                Course course = new Course(TFDCourseId.getText(), TFDFriendlyName.getText(), TFDRoom.getText());
-                    CourseService.createCourse(course);
-                    courseTableView.getItems().setAll(courseTableController.loadCourseList());
-                    mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem());
-                    TFDCourseId.clear();
-                    TFDFriendlyName.clear();
-                    TFDRoom.clear();
-                NotificationHandler.showUserNotification("Kurs angelegt", "Kurs " + TFDFriendlyName.getText() + " wurde erfolgreich angelegt!");
+            if (!TFDCourseId.getText().isEmpty() && !TFDRoom.getText().isEmpty()) {
+                Course course = new Course(TFDCourseId.getText(), TFDRoom.getText());
+                CourseService.createCourse(course);
+                courseTableView.getItems().setAll(courseTableController.loadCourseList());
+                mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem());
+                NotificationHandler.showUserNotification("Kurs angelegt", "Kurs " + TFDCourseId.getText() + " wurde erfolgreich angelegt!");
+                TFDCourseId.clear();
+                TFDRoom.clear();
             } else {
                 if (TFDCourseId.getText().isEmpty()) {
                     TFDCourseId.setStyle("-fx-border-color: red;");
-                }
-
-                if (TFDFriendlyName.getText().isEmpty()) {
-                    TFDFriendlyName.setStyle("-fx-border-color: red;");
                 }
 
                 if (TFDRoom.getText().isEmpty()) {
@@ -57,9 +55,6 @@ public class CourseAddBarController {
                 }
 
                 TFDCourseId.setOnKeyPressed(e -> TFDCourseId.setStyle("-fx-border-width: 0px;"));
-
-                TFDFriendlyName.setOnKeyPressed(e -> TFDFriendlyName.setStyle("-fx-border-width: 0px;"));
-
                 TFDRoom.setOnKeyPressed(e -> TFDRoom.setStyle("-fx-border-width: 0px;"));
             }
         });

@@ -10,15 +10,18 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.StringConverter;
+import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.function.Predicate;
 
 public class CourseTableController {
-    @FXML public TableView<Course> TCK_View;
-    @FXML private TableColumn<Course, String> TCK_ID;
-    @FXML private TableColumn<Course, String> TCK_FriendlyName, TCK_Room;
+    @FXML public TableView<Course> TCCView;
+    @FXML private TableColumn<Course, String> TCCId, TCCRoom;
+
+    @FXML private TableColumn<Course, Integer> TCCMemberCount;
 
     private StudentToolBarController studentToolBarController;
     private StudentTableController studentTableController;
@@ -34,30 +37,21 @@ public class CourseTableController {
 
         initTableCellFactories();
         initTableCellEdit();
-
-        TCK_View.getItems().setAll(loadCourseList());
-        TCK_View.setEditable(true);
+        TCCView.getItems().setAll(loadCourseList());
+        TCCView.setEditable(true);
     }
 
     private void initTableCellEdit() {
-        TCK_ID.setOnEditCommit(event -> {
+        TCCId.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setId(event.getNewValue());
             try {
                 updateCourse(event.getRowValue());
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
+        });
 
-        });
-        TCK_FriendlyName.setOnEditCommit(event -> {
-            event.getTableView().getItems().get(event.getTablePosition().getRow()).setFriendlyName(event.getNewValue());
-            try {
-                updateCourse(event.getRowValue());
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        TCK_Room.setOnEditCommit(event -> {
+        TCCRoom.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setRoom(event.getNewValue());
             try {
                 updateCourse(event.getRowValue());
@@ -68,12 +62,12 @@ public class CourseTableController {
     }
 
     private void initTableCellFactories() {
-        TCK_ID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        TCK_ID.setCellFactory(TextFieldTableCell.forTableColumn());
-        TCK_FriendlyName.setCellValueFactory(new PropertyValueFactory<>("friendlyName"));
-        TCK_FriendlyName.setCellFactory(TextFieldTableCell.forTableColumn());
-        TCK_Room.setCellValueFactory(new PropertyValueFactory<>("room"));
-        TCK_Room.setCellFactory(TextFieldTableCell.forTableColumn());
+        TCCId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TCCId.setCellFactory(TextFieldTableCell.forTableColumn());
+        TCCRoom.setCellValueFactory(new PropertyValueFactory<>("room"));
+        TCCRoom.setCellFactory(TextFieldTableCell.forTableColumn());
+        TCCMemberCount.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        TCCMemberCount.setCellValueFactory(new PropertyValueFactory<>("memberCount"));
     }
 
     public List<Course> loadCourseList() {
@@ -93,7 +87,7 @@ public class CourseTableController {
 
     private boolean searchFindsOrder(Course course, String searchText){
         return (course.getId().contains(searchText.toLowerCase())) ||
-                (course.getFriendlyName().toLowerCase().contains(searchText.toLowerCase())) ||
+                (course.getMemberCount().toString().contains(searchText.toLowerCase())) ||
                 (course.getRoom().toLowerCase().contains(searchText.toLowerCase()));
     }
 
