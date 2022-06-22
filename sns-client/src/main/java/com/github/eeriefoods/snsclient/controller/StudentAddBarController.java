@@ -38,16 +38,14 @@ public class StudentAddBarController {
         this.studentToolBarController = mainController.studentToolBarController;
     }
 
-    @FXML public void initialize() throws IOException, InterruptedException {
-
+    @FXML public void initialize() {
         initComboBoxes();
         initButtonFunctions();
-
     }
 
     private void initButtonFunctions() {
         BTNCancel.setOnAction(event -> {
-            resetCBX();
+            resetInput();
             mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem());
         });
 
@@ -58,9 +56,9 @@ public class StudentAddBarController {
                     Student student = new Student(null, TFDFirstName.getText(), TFDLastName.getText(), CBXJavaLevel.getValue(), TFDCompany.getText(), CBXCourse.getValue());
                     StudentService.createStudent(student);
                     studentTableView.getItems().setAll(studentTableController.loadStudentList());
-                    resetCBX();
+                    resetInput();
                     mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem());
-                    NotificationHandler.showUserNotification("Student:in erfolgreich angelegt!", "Der Student/die Studentin " + TFDFirstName.getText() + " " + TFDLastName.getText() + "wurde erfolgreich angelegt.");
+                    NotificationHandler.showUserNotification("Student:in erfolgreich angelegt!", "Der Student/die Studentin " + TFDFirstName.getText() + " " + TFDLastName.getText() + " wurde erfolgreich angelegt.");
                     studentToolBarController.updateFilteredList();
                 } catch (IOException | InterruptedException e) {
                     throw new RuntimeException(e);
@@ -95,16 +93,23 @@ public class StudentAddBarController {
         TFDCompany.setOnKeyPressed(e -> TFDCompany.setStyle("-fx-border-width: 0px;"));
     }
 
-    private void initComboBoxes() throws IOException, InterruptedException {
+    private void initComboBoxes() {
         CBXJavaLevel.setItems(FXCollections.observableArrayList(JavaLevel.values()));
         CBXJavaLevel.setButtonCell(new PromptButtonCell<>("Java Level"));
         CBXCourse.setItems(FXCollections.observableArrayList(CourseService.getCourses().stream().map(Course::getId).toList()));
         CBXCourse.setButtonCell(new PromptButtonCell<>("Kurse"));
     }
 
-    private void resetCBX() {
+    private void resetInput() {
         CBXCourse.getSelectionModel().clearSelection();
         CBXCourse.getEditor().setPromptText("Test");
         CBXJavaLevel.getSelectionModel().select(null);
+
+        TFDFirstName.clear();
+        TFDLastName.clear();
+        TFDCompany.clear();
+
+
+
     }
 }

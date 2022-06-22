@@ -39,7 +39,10 @@ public class CourseAddBarController {
                     CourseService.createCourse(course);
                     courseTableView.getItems().setAll(courseTableController.loadCourseList());
                     mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem());
-                NotificationHandler.showUserNotification("successful", "Course " + TFDFriendlyName.getText() + "has been saved successfully!");
+                    TFDCourseId.clear();
+                    TFDFriendlyName.clear();
+                    TFDRoom.clear();
+                NotificationHandler.showUserNotification("Kurs angelegt", "Kurs " + TFDFriendlyName.getText() + " wurde erfolgreich angelegt!");
             } else {
                 if (TFDCourseId.getText().isEmpty()) {
                     TFDCourseId.setStyle("-fx-border-color: red;");
