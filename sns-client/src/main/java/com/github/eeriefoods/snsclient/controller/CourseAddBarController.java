@@ -42,6 +42,8 @@ public class CourseAddBarController {
                 CourseService.createCourse(course);
                 courseTableView.getItems().setAll(courseTableController.loadCourseList());
                 mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem());
+                NotificationHandler.showUserNotification("Kurs angelegt", "Kurs " + TFDCourseId.getText() + " wurde erfolgreich angelegt!");
+                mainController.studentAddBarController.setCBXCourseItems();
                 TFDCourseId.clear();
                 TFDRoom.clear();
             } else {

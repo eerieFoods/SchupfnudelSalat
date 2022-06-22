@@ -43,12 +43,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.eeriefoods</groupId>
-            <artifactId>sns-server</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>RELEASE</version>
@@ -79,29 +73,18 @@
                         </goals>
                     </execution>
                 </executions>
+                <!-- Default configuration for running with: mvn clean javafx:run -->
                 <configuration>
-                    <mainClass>com.github.eeriefoods.snsclient/com.github.eeriefoods.snsclient.HelloApplication</mainClass>
-                    <compress>2</compress>
+                    <mainClass>
+                        com.github.eeriefoods.snsclient/com.github.eeriefoods.snsclient.SnsClientApplication
+                    </mainClass>
+                    <launcher>app</launcher>
+                    <jlinkZipName>app</jlinkZipName>
+                    <jlinkImageName>app</jlinkImageName>
                     <noManPages>true</noManPages>
-                    <noHeaderFiles>true</noHeaderFiles>
                     <stripDebug>true</stripDebug>
-                    <launcher>${project.artifactId}</launcher>
+                    <noHeaderFiles>true</noHeaderFiles>
                 </configuration>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
-                        <id>default-cli</id>
-                        <configuration>
-                            <mainClass>
-                                com.github.eeriefoods.snsclient/com.github.eeriefoods.snsclient.SnsClientApplication
-                            </mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
-                            <noManPages>true</noManPages>
-                            <stripDebug>true</stripDebug>
-                            <noHeaderFiles>true</noHeaderFiles>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

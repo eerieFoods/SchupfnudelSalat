@@ -72,8 +72,11 @@ public class StudentTableController {
             updateStudent(event.getRowValue());
         });
         TCS_Course.setOnEditCommit(event -> {
+            CourseService.removeMemberFromCourse(event.getOldValue(), event.getRowValue());
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setCourse(event.getNewValue());
             updateStudent(event.getRowValue());
+            CourseService.addMemberToCourse(event.getNewValue(), event.getRowValue());
+
         });
         TCS_JavaLevel.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setJavaLevel(event.getNewValue());
@@ -84,7 +87,6 @@ public class StudentTableController {
     private void updateStudent(Student student){
         StudentService.updateStudent(student);
         studentToolBarController.updateFilteredList();
-
     }
 
     public void deleteStudent(Student student) {
