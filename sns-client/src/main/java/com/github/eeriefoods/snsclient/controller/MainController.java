@@ -29,16 +29,13 @@ public class MainController {
 
         tabPane.getSelectionModel().selectedItemProperty().addListener(
                 (ov, t, t1) -> {
+                    deactivateAddBars();
                     if (tabPane.getSelectionModel().getSelectedItem().getText().equals("Kurse")) {
                         courseTableController.updateCourseTable();
                     }
-
                 }
         );
     }
-
-
-
     public void switchBar(Tab tab){
         switch (tab.getId()){
             case "Student:innen":
@@ -63,7 +60,12 @@ public class MainController {
                 break;
         }
     }
-
+    private void deactivateAddBars(){
+        studentAddBar.setVisible(false);
+        courseAddBar.setVisible(false);
+        studentToolBar.setVisible(true);
+        courseToolBar.setVisible(true);
+    }
 
 
 }
