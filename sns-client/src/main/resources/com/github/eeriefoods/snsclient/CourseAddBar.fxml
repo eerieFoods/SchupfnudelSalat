@@ -18,11 +18,6 @@
                         <Cursor fx:constant="CLOSED_HAND" />
                     </cursor>
                 </TextField>
-                <TextField fx:id="TFDFriendlyName" maxWidth="395.0" minWidth="392.5" promptText="Anzeigename" HBox.hgrow="ALWAYS">
-                    <font>
-                        <Font name="Arial Bold" size="12.0" />
-                    </font>
-                </TextField>
                 <TextField fx:id="TFDRoom" maxWidth="395.0" minWidth="392.5" promptText="Raum" HBox.hgrow="ALWAYS">
                     <font>
                         <Font name="Arial Bold" size="12.0" />

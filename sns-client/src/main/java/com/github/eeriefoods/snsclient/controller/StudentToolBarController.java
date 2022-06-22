@@ -2,13 +2,13 @@ package com.github.eeriefoods.snsclient.controller;
 
 import com.github.eeriefoods.snsclient.model.Student;
 import com.github.eeriefoods.snsclient.service.StudentService;
+import com.github.eeriefoods.snsclient.shared.NotificationHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
-import com.github.eeriefoods.snsclient.shared.NotificationHandler;
 
 public class StudentToolBarController extends ToolBar {
     @Override
-    public void initButtonFunctions(){
+    public void initButtonFunctions() {
 
         TFDSearch.setOnKeyTyped(event -> studentSearch());
 
@@ -24,8 +24,9 @@ public class StudentToolBarController extends ToolBar {
             }
         });
     }
+
     @Override
-    public void updateFilteredList(){
+    public void updateFilteredList() {
         filteredStudentData = new FilteredList<>(FXCollections.observableList(StudentService.getAllStudents()));
     }
 }

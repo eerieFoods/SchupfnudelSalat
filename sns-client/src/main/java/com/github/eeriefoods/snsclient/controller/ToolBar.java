@@ -34,7 +34,7 @@ public abstract class ToolBar {
         this.studentTableController = mainController.studentTableController;
         this.studentTableView = studentTableController.TCS_View;
         this.courseTableController = mainController.courseTableController;
-        this.courseTableView = courseTableController.TCK_View;
+        this.courseTableView = courseTableController.TCCView;
     }
     @FXML public void initialize(){
 

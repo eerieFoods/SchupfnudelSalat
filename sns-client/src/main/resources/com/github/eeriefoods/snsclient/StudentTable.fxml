@@ -10,7 +10,7 @@
         <children>
             <TableView fx:id="TCS_View" editable="true" layoutY="36.0" prefHeight="364.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0">
                 <columns>
-                    <TableColumn fx:id="TCS_ID" maxWidth="107.5" minWidth="107.5" prefWidth="107.5" resizable="false" text="Student ID" />
+                    <TableColumn fx:id="TCS_ID" maxWidth="145.0" minWidth="140.0" prefWidth="145.0" resizable="false" text="Student ID" />
                     <TableColumn fx:id="TCS_FirstName" maxWidth="402.5" minWidth="0.0" prefWidth="147.5" text="Vorname(n)">
                         <cellValueFactory>
                             <PropertyValueFactory property="firstName" />
