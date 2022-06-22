@@ -65,5 +65,11 @@
             </column>
         </createTable>
     </changeSet>
+    
+    <changeSet id="1.0.INIT.remove-friendly-name" author="Jan-Luca Wolf">
+        <dropColumn tableName="SNS_COURSE">
+            <column name="FRIENDLY_NAME"/>
+        </dropColumn>
+    </changeSet>
 
 </databaseChangeLog>
