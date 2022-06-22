@@ -2,6 +2,7 @@ package com.github.eeriefoods.snsclient.service;
 
 import com.github.eeriefoods.snsclient.model.Student;
 import com.github.eeriefoods.snsclient.shared.HttpFactory;
+import com.github.eeriefoods.snsclient.shared.NotificationHandler;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -54,6 +55,10 @@ public class StudentService {
         }
 
         assert response != null;
+        if (response.statusCode() == 409) {
+            NotificationHandler
+                    .showWarningNotification("Student:in existiert bereits", "Ein:e Student:in mit der ID %d existiert bereits".formatted(student.getStudentId()));
+        }
         return gson.fromJson(response.body(), Student.class);
     }
 

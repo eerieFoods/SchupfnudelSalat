@@ -17,10 +17,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.util.List;
 
 import static com.github.eeriefoods.snsclient.shared.NotificationHandler.handleExceptionError;
 
 public class StudentAddBarController {
+
     @FXML
     private Button BTNSave;
     @FXML
@@ -41,6 +43,9 @@ public class StudentAddBarController {
     private StudentTableController studentTableController;
     private TableView<Student> studentTableView;
     private StudentToolBarController studentToolBarController;
+
+    private final String STYLE_NO_BORDER = "-fx-border-width: 0px;";
+    private final String STYLE_RED_BORDER = "-fx-border-color: red;";
 
     public void injectMainController(MainController mainController) {
         this.mainController = mainController;
@@ -82,7 +87,8 @@ public class StudentAddBarController {
                     CourseService.addMemberToCourse(CBXCourse.getValue(), student);
                     studentTableView.getItems().setAll(studentTableController.loadStudentList());
                     mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem());
-                    NotificationHandler.showUserNotification("Student:in erfolgreich angelegt!", "Der Student/die Studentin " + TFDFirstName.getText() + " " + TFDLastName.getText() + " wurde erfolgreich angelegt.");
+                    NotificationHandler.showUserNotification("Student:in erfolgreich angelegt!",
+                            "Der Student/die Studentin " + TFDFirstName.getText() + " " + TFDLastName.getText() + " wurde erfolgreich angelegt.");
                     resetInput();
                     studentToolBarController.updateFilteredList();
                 } catch (IOException | InterruptedException e) {
@@ -95,19 +101,19 @@ public class StudentAddBarController {
 
 
                 if (TFDFirstName.getText().isEmpty()) {
-                    TFDFirstName.setStyle("-fx-border-color: red;");
+                    TFDFirstName.setStyle(STYLE_RED_BORDER);
                 }
                 if (TFDLastName.getText().isEmpty()) {
-                    TFDLastName.setStyle("-fx-border-color: red;");
+                    TFDLastName.setStyle(STYLE_RED_BORDER);
                 }
                 if (CBXJavaLevel.getSelectionModel().getSelectedItem() == null) {
-                    CBXJavaLevel.setStyle("-fx-border-color: red;");
+                    CBXJavaLevel.setStyle(STYLE_RED_BORDER);
                 }
                 if (CBXCourse.getSelectionModel().isEmpty()) {
-                    CBXCourse.setStyle("-fx-border-color: red;");
+                    CBXCourse.setStyle(STYLE_RED_BORDER);
                 }
                 if (TFDCompany.getText().isEmpty()) {
-                    TFDCompany.setStyle("-fx-border-color: red;");
+                    TFDCompany.setStyle(STYLE_RED_BORDER);
                 }
             }
         });
@@ -116,13 +122,13 @@ public class StudentAddBarController {
 
         TFDFirstName.setOnKeyPressed(e -> TFDFirstName.setStyle(STYLE_NO_BORDER));
 
-        TFDLastName.setOnKeyPressed(e -> TFDLastName.setStyle("-fx-border-width: 0px;"));
+        TFDLastName.setOnKeyPressed(e -> TFDLastName.setStyle(STYLE_NO_BORDER));
 
-        CBXJavaLevel.setOnAction(event -> CBXJavaLevel.setStyle("-fx-border-width: 0px;"));
+        CBXJavaLevel.setOnAction(event -> CBXJavaLevel.setStyle(STYLE_NO_BORDER));
 
-        CBXCourse.setOnAction(event -> CBXCourse.setStyle("-fx-border-width: 0px;"));
+        CBXCourse.setOnAction(event -> CBXCourse.setStyle(STYLE_NO_BORDER));
 
-        TFDCompany.setOnKeyPressed(e -> TFDCompany.setStyle("-fx-border-width: 0px;"));
+        TFDCompany.setOnKeyPressed(e -> TFDCompany.setStyle(STYLE_NO_BORDER));
     }
 
     private void initComboBoxes() {
@@ -140,7 +146,11 @@ public class StudentAddBarController {
         TFDFirstName.clear();
         TFDLastName.clear();
         TFDCompany.clear();
-
-
+        TFDStudentId.setStyle(STYLE_NO_BORDER);
+        TFDFirstName.setStyle(STYLE_NO_BORDER);
+        TFDLastName.setStyle(STYLE_NO_BORDER);
+        CBXJavaLevel.setStyle(STYLE_NO_BORDER);
+        CBXCourse.setStyle(STYLE_NO_BORDER);
+        TFDCompany.setStyle(STYLE_NO_BORDER);
     }
 }

@@ -3,6 +3,7 @@ package com.github.eeriefoods.snsclient.service;
 import com.github.eeriefoods.snsclient.model.Course;
 import com.github.eeriefoods.snsclient.model.Student;
 import com.github.eeriefoods.snsclient.shared.HttpFactory;
+import com.github.eeriefoods.snsclient.shared.NotificationHandler;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -14,8 +15,6 @@ import static com.github.eeriefoods.snsclient.shared.Constants.getServerUri;
 import static com.github.eeriefoods.snsclient.shared.NotificationHandler.handleExceptionError;
 
 public class CourseService {
-
-    // TODO: ErrorHandling
 
     public static final String ENDPOINT = "course";
     private static final Gson gson;
@@ -47,6 +46,11 @@ public class CourseService {
         }
 
         assert response != null;
+        if (response.statusCode() == 409) {
+            NotificationHandler
+                    .showWarningNotification("Kurs existiert bereits", "Ein Kurs mit der ID %s existiert bereits".formatted(course.getId()));
+        }
+
         return gson.fromJson(response.body(), Course.class);
     }
 

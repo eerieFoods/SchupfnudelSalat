@@ -9,7 +9,6 @@ import javax.validation.constraints.Positive;
 @Data
 public class StudentData {
 
-    @Positive
     private Long studentId;
 
     @NotBlank

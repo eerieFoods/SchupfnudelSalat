@@ -13,9 +13,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.IOException;
-
 public abstract class ToolBar {
+
     @FXML AnchorPane toolBar;
     @FXML Button BTNCreate;
     @FXML Button BTNDelete;
