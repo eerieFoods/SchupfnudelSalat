@@ -19,7 +19,7 @@ public class CourseToolBarController extends ToolBar {
                 NotificationHandler.showWarningNotification("Löschen nicht möglich", "Der Kurs " + courseTableView.getSelectionModel().getSelectedItem().getId() + " kann nicht gelöscht werden, weil er noch Student:innen enthält.", "Lösche bitte zunächst alle Student:innen oder weise Sie anderen Kursen zu!");
             } else {
                 NotificationHandler nh = new NotificationHandler();
-                if (nh.askForConfirmation("Wirklich löschen?", "Im Kurs " + courseTableView.getSelectionModel().getSelectedItem().getId() + " befinden sich noch" + " Student:innen. Soll der Kurs wirklich gelöscht werden?")) {
+                if (nh.askForConfirmation("Wirklich löschen?", "Soll der Kurs " + courseTableView.getSelectionModel().getSelectedItem().getId() + " wirklich gelöscht werden?")) {
                     Course course = courseTableView.getSelectionModel().getSelectedItem();
                     courseTableController.deleteCourse(course);
                     courseTableView.getItems().remove(course);

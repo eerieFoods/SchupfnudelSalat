@@ -7,35 +7,39 @@ import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.http.HttpResponse;
+import java.util.Arrays;
 import java.util.Optional;
 
 public class NotificationHandler {
 
 
     public static void handleExceptionError(StackTraceElement @NotNull [] errorResponse) {
-        for (int i = 1; i < errorResponse.length; i++)
-            System.err.println("\tat " + errorResponse[i]);
-        showErrorNotification("Oh No!", "it seems like the connection to the backend has gone wrong. The Student Manager Software will close now!.", true);
+        Arrays.stream(errorResponse)
+                        .map(er -> "\tat" + er)
+                        .forEach(System.err::println);
+        showErrorNotification("Oh Nein!", "Oh Nein. Irgendetwas ist schief gelaufen!", "Die Software wird beendet!", true);
     }
 
     public static void handleHttpError(HttpResponse<String> errorResponse) {
         System.out.println(errorResponse);
-        showErrorNotification("Oh No!", "it seems like the connection to the backend has gone wrong. The Student Manager Software will close now!", true);
+        showErrorNotification("Oh Nein!", "Oh Nein! Etwas ist bei der Verbindung mit dem Backend schief gelaufen!", false);
     }
 
-    //Dialog Window for displaying a user Notification (eg. Student successfully saved)
-    //Usage: showUserNotification("VERY IMPORTANT TITLE", "VERY IMPORTANT MESSAGE")
-    //Returns: nothing
-
+    /**
+     * Dialog Window for displaying a user Notification (eg. Student successfully saved)
+     * @param title Title tho show
+     * @param header Content to show
+     */
     public static void showUserNotification(String title, String header) {
-        Alert userNotification = new Alert(Alert.AlertType.INFORMATION);
-        Stage notificationStage = (Stage) userNotification.getDialogPane().getScene().getWindow();
-        notificationStage.getIcons().add(new Image("file:src/main/resources/com/github/eeriefoods/snsclient/assets/images/DHBWRaute.png"));
-        userNotification.setTitle(title);
-        userNotification.setHeaderText(header);
-        userNotification.showAndWait();
+        showUserNotification(title, header, null);
     }
 
+    /**
+     * Dialog Window for displaying a user Notification (eg. Student successfully saved)
+     * @param title Title tho show
+     * @param header Upper content to show
+     * @param content Lower content to show
+     */
     public static void showUserNotification(String title, String header, String content) {
         Alert userNotification = new Alert(Alert.AlertType.INFORMATION);
         Stage notificationStage = (Stage) userNotification.getDialogPane().getScene().getWindow();
@@ -46,17 +50,13 @@ public class NotificationHandler {
         userNotification.showAndWait();
     }
 
-    //Dialog Window for displaying a Warning Notification (eg. Student successfully saved)
-    //Usage: showUserNotification("Noot Noot", "The Program might crash. Shit happens.")
-    //Returns: nothing
-
+    /**
+     * Dialog Window for displaying a Warning Notification (eg. Student successfully saved)
+     * @param title Title to show
+     * @param text Content to show
+     */
     public static void showWarningNotification(String title, String text) {
-        Alert warningNotification = new Alert(Alert.AlertType.WARNING);
-        Stage notificationStage = (Stage) warningNotification.getDialogPane().getScene().getWindow();
-        notificationStage.getIcons().add(new Image("file:src/main/resources/com/github/eeriefoods/snsclient/assets/images/DHBWRaute.png"));
-        warningNotification.setTitle(title);
-        warningNotification.setHeaderText(text);
-        warningNotification.showAndWait();
+        showWarningNotification(title, text, null);
     }
 
     public static void showWarningNotification(String title, String text, String content) {
@@ -69,22 +69,23 @@ public class NotificationHandler {
         warningNotification.showAndWait();
     }
 
-    //Dialog Window for displaying an Error user Notification (eg. Program has crashed)
-    //Usage: showErrorNotification("OhNoNoNo", "Program has crashed. Too bad.")
-    //Returns: nothing
-
+    /**
+     * Dialog Window for displaying an Error user Notification (eg. Program has crashed)
+     * @param title The title to show
+     * @param text The content to show
+     * @param endProgram Wheter the program should exit or not afterwards
+     */
     public static void showErrorNotification(String title, String text, boolean endProgram) {
-        Alert errorNotification = new Alert(Alert.AlertType.ERROR);
-        Stage notificationStage = (Stage) errorNotification.getDialogPane().getScene().getWindow();
-        notificationStage.getIcons().add(new Image("file:src/main/resources/com/github/eeriefoods/snsclient/assets/images/DHBWRaute.png"));
-        errorNotification.setTitle(title);
-        errorNotification.setHeaderText(text);
-        errorNotification.showAndWait();
-        if (endProgram) {
-            System.exit(0);
-        }
+        showErrorNotification(title, text, null, endProgram);
     }
 
+    /**
+     * Dialog Window for displaying an Error user Notification (eg. Program has crashed)
+     * @param title The title to show
+     * @param text The upper content to show
+     * @param content The lower content to show
+     * @param endProgram Wheter the program should exit or not afterwards
+     */
     public static void showErrorNotification(String title, String text, String content, boolean endProgram) {
         Alert errorNotification = new Alert(Alert.AlertType.ERROR);
         Stage notificationStage = (Stage) errorNotification.getDialogPane().getScene().getWindow();
@@ -98,27 +99,25 @@ public class NotificationHandler {
         }
     }
 
-
-    //Dialog Window for getting User Confirmation on an Action.
-    //Usage: askForConfirmation("Do you REALLY want to do this???", "ARE YOU REALLY SURE, YOU WANT TO DELETE YOUR HARD DRIVE?")
-    //Returns: response with values true, false
-    //                              true: confirmation has been given. Commence with action.
-    //                              false: confirmation HASN'T been given. Abort action!
-
+    /**
+     * Dialog Window for getting User Confirmation on an Action.
+     * @param title The title to show
+     * @param text The content to show
+     * @return true: confirmation has been given. Commence with action.
+     *         <p>false: confirmation HASN'T been given. Abort action! </p>
+     */
     public boolean askForConfirmation(String title, String text) {
-        boolean confirmation = false;
-        Alert askForConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
-        Stage notificationStage = (Stage) askForConfirmation.getDialogPane().getScene().getWindow();
-        notificationStage.getIcons().add(new Image("file:src/main/resources/com/github/eeriefoods/snsclient/assets/images/DHBWRaute.png"));
-        askForConfirmation.setTitle(title);
-        askForConfirmation.setHeaderText(text);
-        Optional<ButtonType> result = askForConfirmation.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            confirmation = true;
-        }
-        return confirmation;
+        return askForConfirmation(title, text, null);
     }
 
+    /**
+     * Dialog Window for getting User Confirmation on an Action.
+     * @param title The title to show
+     * @param text The upper content to show
+     * @param content The lower content to show
+     * @return true: confirmation has been given. Commence with action.
+     *         <p>false: confirmation HASN'T been given. Abort action! </p>
+     */
     public boolean askForConfirmation(String title, String text, String content) {
         boolean confirmation = false;
         Alert askForConfirmation = new Alert(Alert.AlertType.CONFIRMATION);

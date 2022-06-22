@@ -27,7 +27,7 @@
                </TableColumn>
                <TableColumn fx:id="TCCMemberCount" editable="false" maxWidth="140.0" minWidth="140.0" prefWidth="140.0" resizable="false" text="Anzahl Student:innen">
                    <cellValueFactory>
-                       <PropertyValueFactory property="friendlyName" />
+                       <PropertyValueFactory property="memberCount" />
                    </cellValueFactory>
                    <cellFactory>
                        <TextFieldTableCell fx:factory="forTableColumn" />

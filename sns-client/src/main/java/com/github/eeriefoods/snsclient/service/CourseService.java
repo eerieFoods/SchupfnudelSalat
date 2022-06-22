@@ -3,6 +3,7 @@ package com.github.eeriefoods.snsclient.service;
 import com.github.eeriefoods.snsclient.model.Course;
 import com.github.eeriefoods.snsclient.model.Student;
 import com.github.eeriefoods.snsclient.shared.HttpFactory;
+import com.github.eeriefoods.snsclient.shared.NotificationHandler;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -14,8 +15,6 @@ import static com.github.eeriefoods.snsclient.shared.Constants.getServerUri;
 import static com.github.eeriefoods.snsclient.shared.NotificationHandler.handleExceptionError;
 
 public class CourseService {
-
-    // TODO: ErrorHandling
 
     public static final String ENDPOINT = "course";
     private static final Gson gson;
@@ -47,6 +46,11 @@ public class CourseService {
         }
 
         assert response != null;
+        if (response.statusCode() == 409) {
+            NotificationHandler
+                    .showWarningNotification("Kurs existiert bereits", "Ein Kurs mit der ID %s existiert bereits".formatted(course.getId()));
+        }
+
         return gson.fromJson(response.body(), Course.class);
     }
 
@@ -86,7 +90,7 @@ public class CourseService {
 
     public static Course addMemberToCourse(String courseId, Student student) {
         String requestBody = gson.toJson(student);
-
+        System.out.println("lol");
         HttpResponse<String> response = null;
         try {
             response = HttpFactory.sendPutJsonRequest(getServerUri("%s/%s/add".formatted(ENDPOINT, courseId)), requestBody);
@@ -100,7 +104,6 @@ public class CourseService {
 
     public static void removeMemberFromCourse(String courseId, Student student) {
         String requestBody = gson.toJson(student);
-
         try {
             HttpFactory.sendPutJsonRequest(getServerUri("%s/%s/remove".formatted(ENDPOINT, courseId)), requestBody);
         } catch (IOException | InterruptedException e) {

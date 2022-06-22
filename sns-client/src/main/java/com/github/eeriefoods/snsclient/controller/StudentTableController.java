@@ -82,14 +82,16 @@ public class StudentTableController {
     }
 
     private void updateStudent(Student student){
-            StudentService.updateStudent(student); //TODO Friendly Name machen
-            studentToolBarController.updateFilteredList();
+        StudentService.updateStudent(student);
+        studentToolBarController.updateFilteredList();
 
     }
 
     public void deleteStudent(Student student) {
-            StudentService.deleteStudent(student.getStudentId().toString());
-            TCS_View.getItems().remove(student);
+        CourseService.removeMemberFromCourse(student.getCourseId(), student);
+        StudentService.deleteStudent(student.getStudentId().toString());
+
+        TCS_View.getItems().remove(student);
 
     }
 
