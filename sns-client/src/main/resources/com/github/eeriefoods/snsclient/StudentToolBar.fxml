@@ -47,7 +47,7 @@
                </tooltip>
             </Button>
                <Pane visible="false" HBox.hgrow="ALWAYS" />
-               <TextField fx:id="TFDSearch" prefHeight="25.0" prefWidth="210.0" promptText="Suche...">
+               <TextField fx:id="TFDSearch" prefHeight="25.0" prefWidth="210.0" promptText="Suche">
                    <cursor>
                        <Cursor fx:constant="TEXT" />
                    </cursor>
