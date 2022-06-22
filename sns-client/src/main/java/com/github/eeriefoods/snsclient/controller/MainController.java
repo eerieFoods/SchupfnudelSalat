@@ -23,6 +23,7 @@ public class MainController {
     @FXML private void initialize(){
         studentToolBarController.injectMainController(this);
         studentAddBarController.injectMainController(this);
+        studentTableController.injectMainController(this);
         courseTableController.injectMainController(this);
         courseToolBarController.injectMainController(this);
         courseAddBarController.injectMainController(this);

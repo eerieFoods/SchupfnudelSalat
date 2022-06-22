@@ -1,10 +1,13 @@
 package com.github.eeriefoods.snsclient.controller;
 
 import com.github.eeriefoods.snsclient.model.Course;
+import com.github.eeriefoods.snsclient.model.JavaLevel;
+import com.github.eeriefoods.snsclient.model.Student;
 import com.github.eeriefoods.snsclient.service.CourseService;
 import com.github.eeriefoods.snsclient.shared.NotificationHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
@@ -19,23 +22,27 @@ public class CourseAddBarController {
     private MainController mainController;
     private CourseTableController courseTableController;
     private TableView<Course> courseTableView;
+    private CourseToolBarController courseToolBarController;
 
     public void injectMainController(MainController mainController) {
         this.mainController = mainController;
         this.courseTableController = mainController.courseTableController;
         this.courseTableView = courseTableController.TCK_View;
+        this.courseToolBarController = mainController.courseToolBarController;
     }
 
-    @FXML
-    public void initialize() throws IOException, InterruptedException {
+    @FXML public void initialize() {
 
+        initTextFieldFunctions();
+    }
+
+    private void initTextFieldFunctions() {
         BTNCancel.setOnAction(event -> mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem()));
 
         BTNSave.setOnAction(event -> {
-
             if (!TFDCourseId.getText().isEmpty() && !TFDFriendlyName.getText().isEmpty() && !TFDRoom.getText().isEmpty())
             {
-                Course course = new Course("123", "123", "123gb");
+                Course course = new Course(TFDCourseId.getText(), TFDFriendlyName.getText(), TFDRoom.getText());
                 try {
                     CourseService.createCourse(course);
                     courseTableView.getItems().setAll(courseTableController.loadCourseList());
@@ -56,21 +63,19 @@ public class CourseAddBarController {
                 if (TFDRoom.getText().isEmpty()) {
                     TFDRoom.setStyle("-fx-border-color: red;");
                 }
+
+                TFDCourseId.setOnKeyPressed(e -> {
+                    TFDCourseId.setStyle("-fx-border-width: 0px;");
+                });
+
+                TFDFriendlyName.setOnKeyPressed(e -> {
+                    TFDFriendlyName.setStyle("-fx-border-width: 0px;");
+                });
+
+                TFDRoom.setOnKeyPressed(e -> {
+                    TFDRoom.setStyle("-fx-border-width: 0px;");
+                });
             }
-
-            TFDCourseId.setOnKeyPressed(e -> {
-                TFDCourseId.setStyle("-fx-border-width: 0px;");
-            });
-
-            TFDFriendlyName.setOnKeyPressed(e -> {
-                TFDFriendlyName.setStyle("-fx-border-width: 0px;");
-            });
-
-            TFDRoom.setOnKeyPressed(e -> {
-                TFDRoom.setStyle("-fx-border-width: 0px;");
-            });
-
-
         });
     }
 }

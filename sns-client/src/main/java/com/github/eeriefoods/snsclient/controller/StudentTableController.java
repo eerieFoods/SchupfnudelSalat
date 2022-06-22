@@ -22,8 +22,12 @@ public class StudentTableController {
     @FXML private TableColumn<Student, Integer> TCS_ID;
     @FXML private TableColumn<Student, String> TCS_FirstName, TCS_LastName, TCS_Company, TCS_Course;
     @FXML private TableColumn<Student, JavaLevel> TCS_JavaLevel;
-    @FXML public MainController mainController;
-
+    private MainController mainController;
+    private StudentToolBarController studentToolBarController;
+    public void injectMainController(MainController mainController){
+        this.mainController=mainController;
+        this.studentToolBarController = mainController.studentToolBarController;
+    }
     @FXML private void initialize() throws IOException, InterruptedException {
 
         initTableCellFactorys();
@@ -34,9 +38,7 @@ public class StudentTableController {
 
     }
 
-    public void injectMainController(MainController mainController){
-        this.mainController=mainController;
-    }
+
 
     private void initTableCellFactorys() throws IOException, InterruptedException {
         TCS_ID.setCellValueFactory(new PropertyValueFactory<>("studentId"));
@@ -52,7 +54,7 @@ public class StudentTableController {
         String[] courses = CourseService
                 .getCourses()
                 .stream()
-                .map(Course::getFriendlyName)
+                .map(Course::getId)
                 .toArray(String[]::new);
 
         TCS_Course.setCellFactory(ComboBoxTableCell.forTableColumn(courses));
@@ -83,7 +85,8 @@ public class StudentTableController {
 
     private void updateStudent(Student student){
         try {
-            StudentService.updateStudent(student);
+            StudentService.updateStudent(student); //TODO Friendly Name machen
+            studentToolBarController.updateFilteredList();
         } catch (IOException | InterruptedException ex) {
             throw new RuntimeException(ex);
         }

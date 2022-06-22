@@ -1,6 +1,11 @@
 package com.github.eeriefoods.snsclient.controller;
 
 import com.github.eeriefoods.snsclient.model.Student;
+import com.github.eeriefoods.snsclient.service.StudentService;
+import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
+
+import java.io.IOException;
 import com.github.eeriefoods.snsclient.shared.NotificationHandler;
 
 public class StudentToolBarController extends ToolBar {
@@ -19,8 +24,14 @@ public class StudentToolBarController extends ToolBar {
                 studentTableController.deleteStudent(student);
                 studentTableView.getItems().remove(student);
             }
-
         });
-
+    }
+    @Override
+    public void updateFilteredList(){
+        try {
+            filteredStudentData = new FilteredList<>(FXCollections.observableList(StudentService.getAllStudents()));
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

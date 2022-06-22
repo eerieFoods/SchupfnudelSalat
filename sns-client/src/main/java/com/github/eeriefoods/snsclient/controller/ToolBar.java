@@ -26,6 +26,8 @@ public abstract class ToolBar {
     TableView<Course> courseTableView;
     StudentTableController studentTableController;
     TableView<Student> studentTableView;
+    FilteredList<Student> filteredStudentData;
+    FilteredList<Course> filteredCourseData;
 
     public void injectMainController(MainController mainController){
         this.mainController = mainController;
@@ -37,6 +39,12 @@ public abstract class ToolBar {
     @FXML public void initialize(){
 
         initButtonFunctions();
+        try {
+            filteredStudentData = new FilteredList<>(FXCollections.observableList(StudentService.getAllStudents()));
+            filteredCourseData = new FilteredList<>(FXCollections.observableList(CourseService.getCourses()));
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void initButtonFunctions(){
@@ -44,22 +52,13 @@ public abstract class ToolBar {
     }
 
     void studentSearch() {
-        try {
-            FilteredList<Student> filteredData = new FilteredList<>(FXCollections.observableList(StudentService.getAllStudents()));
-            studentTableView.setItems(filteredData);
-            filteredData.setPredicate(studentTableController.createPredicate(TFDSearch.getText()));
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        studentTableView.setItems(filteredStudentData);
+        filteredStudentData.setPredicate(studentTableController.createPredicate(TFDSearch.getText()));
     }
     void courseSearch() {
-        try {
-            FilteredList<Course> filteredData = new FilteredList<>(FXCollections.observableList(CourseService.getCourses()));
-            courseTableView.setItems(filteredData);
-            filteredData.setPredicate(courseTableController.createPredicate(TFDSearch.getText()));
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        courseTableView.setItems(filteredCourseData);
+        filteredCourseData.setPredicate(courseTableController.createPredicate(TFDSearch.getText()));
     }
-
+    public void updateFilteredList(){
+    }
 }

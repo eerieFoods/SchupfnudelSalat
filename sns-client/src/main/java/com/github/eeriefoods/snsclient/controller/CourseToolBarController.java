@@ -1,7 +1,13 @@
 package com.github.eeriefoods.snsclient.controller;
 
 import com.github.eeriefoods.snsclient.model.Course;
+import com.github.eeriefoods.snsclient.service.CourseService;
+import com.github.eeriefoods.snsclient.service.StudentService;
 import com.github.eeriefoods.snsclient.shared.NotificationHandler;
+import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
+
+import java.io.IOException;
 
 public class CourseToolBarController extends ToolBar{
     @Override
@@ -20,5 +26,12 @@ public class CourseToolBarController extends ToolBar{
         }});
 
     }
-
+    @Override
+    public void updateFilteredList(){
+        try {
+            filteredCourseData = new FilteredList<>(FXCollections.observableList(CourseService.getCourses()));
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

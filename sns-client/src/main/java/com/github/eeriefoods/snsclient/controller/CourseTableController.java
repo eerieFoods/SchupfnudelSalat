@@ -21,9 +21,15 @@ public class CourseTableController {
     @FXML private TableColumn<Course, String> TCK_FriendlyName, TCK_Room;
 
     private MainController mainController;
+    private StudentToolBarController studentToolBarController;
+    private StudentTableController studentTableController;
+    private TableView<Student> studentTableView;
 
     public void injectMainController(MainController mainController){
         this.mainController = mainController;
+        this.studentTableController = mainController.studentTableController;
+        this.studentTableView = mainController.studentTableController.TCS_View;
+        this.studentToolBarController = mainController.studentToolBarController;
     }
 
     @FXML private void initialize() {
@@ -71,6 +77,8 @@ public class CourseTableController {
     private void updateCourse(Course course){
         try {
             CourseService.updateCourse(course);
+            studentTableView.getItems().setAll(studentTableController.loadStudentList());
+            studentToolBarController.updateFilteredList();
         } catch (IOException | InterruptedException ex) {
             throw new RuntimeException(ex);
         }

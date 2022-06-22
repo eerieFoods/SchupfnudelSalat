@@ -1,5 +1,8 @@
 package com.github.eeriefoods.snsclient.model;
 
+import com.github.eeriefoods.snsclient.service.CourseService;
+
+import java.io.IOException;
 import java.util.Objects;
 
 public class Student {
@@ -10,6 +13,7 @@ public class Student {
     private JavaLevel javaLevel;
     private String company;
     private String courseId;
+    private String friendlyName;
 
     /*
         Boilerplate Code, weil Lombok nicht i.V.m JavaFX & GSON funktioniert.
@@ -71,6 +75,13 @@ public class Student {
 
     public void setCourse(String courseId) {
         this.courseId = courseId;
+    }
+    public String getFriendlyName(){
+        try {
+            return CourseService.getCourse(courseId).getFriendlyName();
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
