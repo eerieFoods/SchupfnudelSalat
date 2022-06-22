@@ -41,10 +41,6 @@ public class CourseTableController {
         TCCView.setEditable(true);
     }
 
-    public void reloadTable() {
-        TCCView.getItems().setAll(loadCourseList());
-    }
-
     private void initTableCellEdit() {
         TCCId.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setId(event.getNewValue());
@@ -102,6 +98,7 @@ public class CourseTableController {
         };
     }
     public void updateCourseTable(){
+        TCCView.getItems().clear();
         TCCView.getItems().setAll(loadCourseList());
     }
 }

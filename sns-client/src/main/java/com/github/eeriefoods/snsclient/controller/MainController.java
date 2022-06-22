@@ -1,9 +1,6 @@
 package com.github.eeriefoods.snsclient.controller;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
@@ -32,9 +29,8 @@ public class MainController {
 
         tabPane.getSelectionModel().selectedItemProperty().addListener(
                 (ov, t, t1) -> {
-                    System.out.println(tabPane.getSelectionModel().getSelectedItem().getText());
                     if (tabPane.getSelectionModel().getSelectedItem().getText().equals("Kurse")) {
-                        courseTableController.reloadTable();
+                        courseTableController.updateCourseTable();
                     }
 
                 }
