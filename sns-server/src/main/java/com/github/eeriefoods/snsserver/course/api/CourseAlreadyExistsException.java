@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class CourseAlreadyExistsException extends IllegalArgumentException {
 
     public CourseAlreadyExistsException(String kursId) {
-        super("Kurs mit ID %s nicht gefunden!".formatted(kursId));
+        super("Kurs mit ID %s existiert bereits!".formatted(kursId));
     }
 
 }
