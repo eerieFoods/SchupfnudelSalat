@@ -1,11 +1,14 @@
 package com.github.eeriefoods.snsserver.student.service;
 
+import com.github.eeriefoods.snsserver.shared.api.StudentIdGenerator;
+import com.github.eeriefoods.snsserver.student.api.StudentAlreadyExistsException;
 import com.github.eeriefoods.snsserver.student.api.StudentNotFoundException;
 import com.github.eeriefoods.snsserver.student.domain.Student;
 import com.github.eeriefoods.snsserver.student.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class StudentService implements IStudentService {
@@ -24,6 +27,13 @@ public class StudentService implements IStudentService {
 
     @Override
     public Student createStudent(Student student) {
+        if (Objects.isNull(student.getStudentId())) {
+            student.setStudentId(StudentIdGenerator.generateStudentId());
+        } else {
+            if (studentRepository.existsById(student.getStudentId())) {
+                throw new StudentAlreadyExistsException(student.getStudentId());
+            }
+        }
         return studentRepository.save(student);
     }
 

@@ -1,5 +1,6 @@
 package com.github.eeriefoods.snsserver.course.service;
 
+import com.github.eeriefoods.snsserver.course.api.CourseAlreadyExistsException;
 import com.github.eeriefoods.snsserver.course.api.CourseNotFoundException;
 import com.github.eeriefoods.snsserver.course.api.StudentNotMemberOfCourseException;
 import com.github.eeriefoods.snsserver.course.domain.Course;
@@ -31,6 +32,9 @@ public class CourseService implements ICourseService {
 
     @Override
     public Course createCourse(Course course) {
+        if (courseRepository.existsById(course.getId())) {
+            throw new CourseAlreadyExistsException(course.getId());
+        }
         return courseRepository.save(course);
     }
 
