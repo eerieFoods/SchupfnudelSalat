@@ -48,7 +48,7 @@ public class CourseService {
         assert response != null;
         if (response.statusCode() == 409) {
             NotificationHandler
-                    .showWarningNotification("Kurs existiert bereits", "Ein Kurs mit der ID %s existiert bereits".formatted(course.getId()));
+                    .showWarningNotification("Kurs kann nicht erstellt werden.", "Der Kurs " + course.getId() + " kann nicht erstellt werden, da bereits ein Kurs mit dieser Id existiert", "Bitte wähle eine andere Kurs Id oder lösche den vorhandenen Kurs!" );
         }
 
         return gson.fromJson(response.body(), Course.class);
@@ -90,7 +90,6 @@ public class CourseService {
 
     public static Course addMemberToCourse(String courseId, Student student) {
         String requestBody = gson.toJson(student);
-        System.out.println("lol");
         HttpResponse<String> response = null;
         try {
             response = HttpFactory.sendPutJsonRequest(getServerUri("%s/%s/add".formatted(ENDPOINT, courseId)), requestBody);

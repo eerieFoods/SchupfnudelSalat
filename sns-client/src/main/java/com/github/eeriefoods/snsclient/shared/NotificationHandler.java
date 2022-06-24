@@ -12,7 +12,28 @@ import java.util.Optional;
 
 public class NotificationHandler {
 
+    /**
+     * Logs errors but shows no Dialog Window
+     * @param errorResponse StackTraceElement @NotNull []
+     */
+    public static void logNoNotification(StackTraceElement @NotNull [] errorResponse) {
+        Arrays.stream(errorResponse)
+                .map(er -> "\tat" + er)
+                .forEach(System.err::println);
+    }
 
+    /**
+     * Logs errors but shows no Dialog Window
+     * @param errorResponse String
+     */
+    public static void logNoNotification(String errorResponse) {
+        System.err.println(errorResponse);
+    }
+
+    /**
+     * Logs Exception errors AND shows a Dialog Window
+     * @param errorResponse StackTraceElement @NotNull []
+     */
     public static void handleExceptionError(StackTraceElement @NotNull [] errorResponse) {
         Arrays.stream(errorResponse)
                         .map(er -> "\tat" + er)
@@ -20,6 +41,10 @@ public class NotificationHandler {
         showErrorNotification("Oh Nein!", "Oh Nein. Irgendetwas ist schief gelaufen!", "Die Software wird beendet!", true);
     }
 
+    /**
+     * Logs HTTP errors AND shows a Dialog Window
+     * @param errorResponse StackTraceElement @NotNull []
+     */
     public static void handleHttpError(HttpResponse<String> errorResponse) {
         System.out.println(errorResponse);
         showErrorNotification("Oh Nein!", "Oh Nein! Etwas ist bei der Verbindung mit dem Backend schief gelaufen!", false);
