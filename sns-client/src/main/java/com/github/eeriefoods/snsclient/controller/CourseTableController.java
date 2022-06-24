@@ -4,6 +4,7 @@ import com.github.eeriefoods.snsclient.model.Course;
 import com.github.eeriefoods.snsclient.model.Student;
 import com.github.eeriefoods.snsclient.service.CourseService;
 
+import com.github.eeriefoods.snsclient.shared.NotificationHandler;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.TableColumn;
@@ -44,20 +45,14 @@ public class CourseTableController {
     private void initTableCellEdit() {
         TCCId.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setId(event.getNewValue());
-            try {
                 updateCourse(event.getRowValue());
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
+
         });
 
         TCCRoom.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setRoom(event.getNewValue());
-            try {
                 updateCourse(event.getRowValue());
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
+
         });
     }
 
@@ -74,7 +69,7 @@ public class CourseTableController {
             return CourseService.getCourses();
     }
 
-    private void updateCourse(Course course) throws IOException, InterruptedException { //REMOVE EXCEPTIONS HERE!
+    private void updateCourse(Course course){ //REMOVE EXCEPTIONS HERE!
             CourseService.updateCourse(course);
             studentTableView.getItems().setAll(studentTableController.loadStudentList());
             studentToolBarController.updateFilteredList();
@@ -102,7 +97,7 @@ public class CourseTableController {
         try {
             TCCView.getItems().setAll(loadCourseList());
         } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
+            NotificationHandler.handleExceptionError(e);
         }
     }
 }
