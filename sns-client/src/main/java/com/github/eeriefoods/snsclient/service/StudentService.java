@@ -2,6 +2,7 @@ package com.github.eeriefoods.snsclient.service;
 
 import com.github.eeriefoods.snsclient.model.Student;
 import com.github.eeriefoods.snsclient.shared.HttpFactory;
+import com.github.eeriefoods.snsclient.shared.NotificationHandler;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.github.eeriefoods.snsclient.shared.Constants.getServerUri;
+import static com.github.eeriefoods.snsclient.shared.NotificationHandler.handleExceptionError;
 
 public class StudentService {
 
@@ -21,35 +23,62 @@ public class StudentService {
         gson = new Gson();
     }
 
-    public static List<Student> getAllStudents() throws IOException, InterruptedException {
-        HttpResponse<String> response = HttpFactory.sendGetRequest(getServerUri(ENDPOINT));
-
+    public static List<Student> getAllStudents() {
+        HttpResponse<String> response = null;
+        try {
+            response = HttpFactory.sendGetRequest(getServerUri(ENDPOINT));
+        } catch (IOException | InterruptedException e) {
+            handleExceptionError(e);
+        }
+        assert response != null;
         return gson.fromJson(response.body(), new TypeToken<ArrayList<Student>>(){}.getType());
     }
 
-    public static Student getStudent(String studentId) throws IOException, InterruptedException {
-        HttpResponse<String> response = HttpFactory.sendGetRequest(getServerUri("%s/%s".formatted(ENDPOINT, studentId)));
-
+    public static Student getStudent(String studentId) {
+        HttpResponse<String> response = null;
+        try {
+            response = HttpFactory.sendGetRequest(getServerUri("%s/%s".formatted(ENDPOINT, studentId)));
+        } catch (IOException | InterruptedException e) {
+            handleExceptionError(e);
+        }
+        assert response != null;
         return gson.fromJson(response.body(), Student.class);
     }
 
-    public static Student createStudent(Student student) throws IOException, InterruptedException {
+    public static Student createStudent(Student student) {
         String requestBody = gson.toJson(student);
+        HttpResponse<String> response = null;
+        try {
+            response = HttpFactory.sendPostJsonRequest(getServerUri(ENDPOINT), requestBody);
+        } catch (IOException | InterruptedException e) {
+            handleExceptionError(e);
+        }
 
-        HttpResponse<String> response = HttpFactory.sendPostJsonRequest(getServerUri(ENDPOINT), requestBody);
-
+        assert response != null;
+        if (response.statusCode() == 409) {
+            NotificationHandler
+                    .showWarningNotification("Student:in existiert bereits", "Ein:e Student:in mit der ID %d existiert bereits".formatted(student.getStudentId()));
+        }
         return gson.fromJson(response.body(), Student.class);
     }
 
-    public static Student updateStudent(Student student) throws IOException, InterruptedException {
+    public static Student updateStudent(Student student) {
         String requestBody = gson.toJson(student);
-
-        HttpResponse<String> response = HttpFactory.sendPutJsonRequest(getServerUri(ENDPOINT), requestBody);
-
+        HttpResponse<String> response = null;
+        try {
+            response = HttpFactory.sendPutJsonRequest(getServerUri(ENDPOINT), requestBody);
+        } catch (IOException | InterruptedException e) {
+            handleExceptionError(e);
+        }
+        assert response != null;
         return gson.fromJson(response.body(), Student.class);    }
 
-    public static void deleteStudent(String studentId) throws IOException, InterruptedException {
-        HttpFactory.sendDeleteRequest(getServerUri("%s/%s".formatted(ENDPOINT, studentId)));
+    public static void deleteStudent(String studentId) {
+        try {
+            HttpFactory.sendDeleteRequest(getServerUri("%s/%s".formatted(ENDPOINT, studentId)));
+        } catch (IOException | InterruptedException e) {
+            handleExceptionError(e);
+        }
     }
 
 }

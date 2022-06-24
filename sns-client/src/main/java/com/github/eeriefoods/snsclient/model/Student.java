@@ -3,7 +3,6 @@ package com.github.eeriefoods.snsclient.model;
 import java.util.Objects;
 
 public class Student {
-
     private Integer studentId;
     private String firstName;
     private String lastName;
@@ -72,6 +71,7 @@ public class Student {
     public void setCourse(String courseId) {
         this.courseId = courseId;
     }
+
 
     @Override
     public boolean equals(Object o) {

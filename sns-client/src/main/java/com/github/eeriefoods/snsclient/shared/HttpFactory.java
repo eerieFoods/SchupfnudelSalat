@@ -1,29 +1,26 @@
 package com.github.eeriefoods.snsclient.shared;
 
-import com.google.gson.Gson;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 
 public final class HttpFactory {
 
-    private static Gson gson;
-    private static HttpClient httpClient;
+    private static final HttpClient httpClient;
 
     private static final String[] JSON_HEADER = {"Content-Type", "application/json"};
 
     static {
-        gson = new Gson();
         httpClient = HttpClient.newHttpClient();
     }
     private HttpFactory() {}
 
     /**
      * Sends a {@link HttpRequest} to {@code uri} with JSON Header, body and POST-Method.
-     * Automatically calls {@code handleError} from {@link ErrorHandler} when statusCode is not 200
+     * Automatically calls {@code handleError} from {@link NotificationHandler} when statusCode is not 200
      * @param uri Server-URI
      * @param jsonBody Body in JSON-Format
      * @return {@link HttpResponse} of type {@code String}
@@ -39,8 +36,11 @@ public final class HttpFactory {
 
         HttpResponse<String> response =  httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        if (response.statusCode() != 200) {
-            ErrorHandler.handleError(response);
+        if (response.statusCode() == 409) {
+            NotificationHandler.logNoNotification(String.valueOf(response));
+        }
+        if (response.statusCode() != 200 && response.statusCode() != 409) {
+            NotificationHandler.handleHttpError(response);
             return response;
         }
 
@@ -49,7 +49,7 @@ public final class HttpFactory {
 
     /**
      * Sends a {@link HttpRequest} to {@code uri} with GET-Method.
-     * Automatically calls {@code handleError} from {@link ErrorHandler} when statusCode is not 200
+     * Automatically calls {@code handleError} from {@link NotificationHandler} when statusCode is not 200
      * @param uri Server-URI
      * @return {@link HttpResponse} of type {@code String}
      * @throws IOException from {@link HttpClient}'s {@code send}
@@ -63,7 +63,7 @@ public final class HttpFactory {
         HttpResponse<String> response =  httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() != 200) {
-            ErrorHandler.handleError(response);
+            NotificationHandler.handleHttpError(response);
             return response;
         }
 
@@ -72,7 +72,7 @@ public final class HttpFactory {
 
     /**
      * Sends a {@link HttpRequest} to {@code uri} with JSON Header, body and PUT-Method.
-     * Automatically calls {@code handleError} from {@link ErrorHandler} when statusCode is not 200
+     * Automatically calls {@code handleError} from {@link NotificationHandler} when statusCode is not 200
      * @param uri Server-URI
      * @param jsonBody Body in JSON-Format
      * @return {@link HttpResponse} of type {@code String}
@@ -88,9 +88,15 @@ public final class HttpFactory {
 
         HttpResponse<String> response =  httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        if (response.statusCode() != 200) {
-            ErrorHandler.handleError(response);
+        if (response.statusCode() == 400) {
+            NotificationHandler.logNoNotification(String.valueOf(response));
+        }
+
+        if (response.statusCode() != 200  && response.statusCode() != 400) {
+
+            NotificationHandler.handleHttpError(response);
             return response;
+
         }
 
         return response;
@@ -98,7 +104,7 @@ public final class HttpFactory {
 
     /**
      * Sends a {@link HttpRequest} to {@code uri} with DELETE-Method.
-     * Automatically calls {@code handleError} from {@link ErrorHandler} when statusCode is not 200
+     * Automatically calls {@code handleError} from {@link NotificationHandler} when statusCode is not 200
      * @param uri Server-URI
      * @return {@link HttpResponse} of type {@code String}
      * @throws IOException from {@link HttpClient}'s {@code send}
@@ -114,7 +120,7 @@ public final class HttpFactory {
         HttpResponse<String> response =  httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() != 200) {
-            ErrorHandler.handleError(response);
+            NotificationHandler.handleHttpError(response);
             return response;
         }
 

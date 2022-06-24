@@ -1,20 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.github.eeriefoods.snsclient.controller.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.eeriefoods.snsclient.controller.MainController">
     <center>
-        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-            <Tab text="Student:innen">
-                <fx:include source="StudentTable.fxml"/>
-            </Tab>
-            <Tab text="Kurs">
-                <fx:include source="CourseTable.fxml"/>
-            </Tab>
+        <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+           <tabs>
+               <Tab id="Student:innen" text="Student:innen">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                         <fx:include fx:id="studentTable" source="StudentTable.fxml" AnchorPane.topAnchor="37" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
+                         <fx:include fx:id="studentAddBar" source="StudentAddBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                         <fx:include fx:id="studentToolBar" source="StudentToolBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+               </Tab>
+               <Tab id="Kurse" text="Kurse">
+                  <content>
+                      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                          <children>
+                              <fx:include fx:id="courseTable" source="CourseTable.fxml" AnchorPane.topAnchor="37" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <fx:include fx:id="courseAddBar" source="CourseAddBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <fx:include fx:id="courseToolBar" source="CourseToolBar.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                          </children>
+                      </AnchorPane>
+                  </content>
+               </Tab>
+           </tabs>
+            <cursor>
+            <Cursor fx:constant="DEFAULT" />
+        </cursor>
         </TabPane>
     </center>
+   <top>
+      <FlowPane prefHeight="79.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/images/DHBWLogo.png" />
+               </image>
+               <FlowPane.margin>
+                  <Insets bottom="5.0" left="5.0" top="5.0" />
+               </FlowPane.margin>
+            </ImageView>
+            <Separator prefHeight="0.0" prefWidth="19.0" visible="false" />
+            <Text fill="#464646" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Management Tool" wrappingWidth="386.13671875">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </Text>
+         </children>
+      </FlowPane>
+   </top>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
 </BorderPane>

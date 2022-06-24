@@ -5,26 +5,40 @@ import com.github.eeriefoods.snsclient.model.JavaLevel;
 import com.github.eeriefoods.snsclient.model.Student;
 import com.github.eeriefoods.snsclient.service.CourseService;
 import com.github.eeriefoods.snsclient.service.StudentService;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.function.Predicate;
 
-public class StudentController {
-    @FXML
-    private TableView<Student> TCS_View;
+
+public class StudentTableController {
+    @FXML public TableView<Student> TCS_View;
     @FXML private TableColumn<Student, Integer> TCS_ID;
-    @FXML private TableColumn<Student, String> TCS_FirstName, TCS_LastName, TCS_Company;
+    @FXML private TableColumn<Student, String> TCS_FirstName, TCS_LastName, TCS_Company, TCS_Course;
     @FXML private TableColumn<Student, JavaLevel> TCS_JavaLevel;
-    @FXML private TableColumn<Student, String> TCS_Course;
+    private StudentToolBarController studentToolBarController;
+    public void injectMainController(MainController mainController){
+        this.studentToolBarController = mainController.studentToolBarController;
+    }
+    @FXML private void initialize(){
 
-    @FXML private void initialize() {
+        initTableCellFactories();
+        initTableCellEdits();
 
+        TCS_View.getItems().setAll(loadStudentList());
+        TCS_View.setEditable(true);
+
+    }
+
+
+
+    private void initTableCellFactories() {
         TCS_ID.setCellValueFactory(new PropertyValueFactory<>("studentId"));
         TCS_FirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         TCS_FirstName.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -35,18 +49,16 @@ public class StudentController {
         TCS_Company.setCellValueFactory(new PropertyValueFactory<>("company"));
         TCS_Company.setCellFactory(TextFieldTableCell.forTableColumn());
         TCS_Course.setCellValueFactory(new PropertyValueFactory<>("courseId"));
-        try { // TODO Error Handling
-            String[] courses = CourseService
-                    .getCourses()
-                    .stream()
-                    .map(Course::getFriendlyName)
-                    .toArray(String[]::new);
+        String[] courses = CourseService
+                .getCourses()
+                .stream()
+                .map(Course::getId)
+                .toArray(String[]::new);
 
-            TCS_Course.setCellFactory(ComboBoxTableCell.forTableColumn(courses));
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        TCS_View.getItems().setAll(loadStudentList());
+        TCS_Course.setCellFactory(ComboBoxTableCell.forTableColumn(courses));
+    }
+
+    private void initTableCellEdits() {
         TCS_FirstName.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setFirstName(event.getNewValue());
             updateStudent(event.getRowValue());
@@ -60,29 +72,51 @@ public class StudentController {
             updateStudent(event.getRowValue());
         });
         TCS_Course.setOnEditCommit(event -> {
+            CourseService.removeMemberFromCourse(event.getOldValue(), event.getRowValue());
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setCourse(event.getNewValue());
             updateStudent(event.getRowValue());
+            CourseService.addMemberToCourse(event.getNewValue(), event.getRowValue());
+
         });
         TCS_JavaLevel.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setJavaLevel(event.getNewValue());
             updateStudent(event.getRowValue());
         });
+    }
 
-        TCS_View.setEditable(true);
-    }
-    private List<Student> loadStudentList() {
-        try {
-            return StudentService.getAllStudents();
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
     private void updateStudent(Student student){
-        try {
-            StudentService.updateStudent(student);
-        } catch (IOException | InterruptedException ex) {
-            throw new RuntimeException(ex);
-        }
+        StudentService.updateStudent(student);
+        studentToolBarController.updateFilteredList();
     }
 
+    public void deleteStudent(Student student) {
+        CourseService.removeMemberFromCourse(student.getCourseId(), student);
+        StudentService.deleteStudent(student.getStudentId().toString());
+        TCS_View.getItems().remove(student);
+    }
+
+    public List<Student> loadStudentList(){
+            return StudentService.getAllStudents();
+    }
+
+    private boolean searchFindsOrder(Student student, String searchText){
+        return (student.getStudentId().toString().contains(searchText.toLowerCase())) ||
+                (student.getFirstName().toLowerCase().contains(searchText.toLowerCase())) ||
+                (student.getLastName().toLowerCase().contains(searchText.toLowerCase())) ||
+                (student.getJavaLevel().toString().toLowerCase().contains(searchText.toLowerCase())) ||
+                (student.getCourseId().toLowerCase().contains(searchText.toLowerCase())) ||
+                (student.getCompany().toLowerCase().contains(searchText.toLowerCase()));
+    }
+
+    public Predicate<Student> createPredicate(String searchText) {
+        return student -> {
+            if (searchText == null || searchText.isEmpty()) return true;
+            return searchFindsOrder(student, searchText);
+        };
+    }
+
+    public void updateStudentTable(){
+        TCS_View.getItems().clear();
+        TCS_View.getItems().setAll(loadStudentList());
+    }
 }
