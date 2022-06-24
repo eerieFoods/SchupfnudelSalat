@@ -29,7 +29,7 @@ public class MainController {
 
         tabPane.getSelectionModel().selectedItemProperty().addListener(
                 (ov, t, t1) -> {
-                    deactivateAddBars();
+//                    deactivateAddBars();
                     if (tabPane.getSelectionModel().getSelectedItem().getText().equals("Kurse")) {
                         courseTableController.updateCourseTable();
                     }

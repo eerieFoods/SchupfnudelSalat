@@ -92,9 +92,7 @@ public class StudentTableController {
     public void deleteStudent(Student student) {
         CourseService.removeMemberFromCourse(student.getCourseId(), student);
         StudentService.deleteStudent(student.getStudentId().toString());
-
         TCS_View.getItems().remove(student);
-
     }
 
     public List<Student> loadStudentList() throws IOException, InterruptedException {
