@@ -80,7 +80,6 @@ public class StudentAddBarController {
 
         BTNSave.setOnAction(event -> {
             if ((TFDStudentId.getText().isEmpty() || TFDStudentId.getText().length() == 6) && !TFDFirstName.getText().isEmpty() && !TFDLastName.getText().isEmpty() && !CBXJavaLevel.getSelectionModel().isEmpty() && !CBXCourse.getSelectionModel().isEmpty() && !TFDCompany.getText().isEmpty()) {
-                try {
                     Student student = new Student(TFDStudentId.getText().isEmpty() ? null : Integer.parseInt(TFDStudentId.getText()), TFDFirstName.getText(), TFDLastName.getText(), CBXJavaLevel.getValue(), TFDCompany.getText(), CBXCourse.getValue());
                     student = StudentService.createStudent(student);
                     CourseService.addMemberToCourse(CBXCourse.getValue(), student);
@@ -88,9 +87,7 @@ public class StudentAddBarController {
                     mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem());
                     resetInput();
                     studentToolBarController.updateFilteredList();
-                } catch (IOException | InterruptedException e) {
-                    handleExceptionError(e.getStackTrace());
-                }
+
             } else {
                 if (!TFDStudentId.getText().isEmpty() && TFDStudentId.getText().length() != 6) {
                     TFDStudentId.setStyle(STYLE_RED_BORDER);

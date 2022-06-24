@@ -1,5 +1,6 @@
 package com.github.eeriefoods.snsclient.shared;
 
+import com.github.eeriefoods.snsclient.SnsClientApplication;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
@@ -8,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.net.http.HttpResponse;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Optional;
 
 public class NotificationHandler {
@@ -51,8 +53,8 @@ public class NotificationHandler {
     }
 
     /**
-     * Dialog Window for displaying a user Notification (eg. Student successfully saved)
-     * @param title Title tho show
+     * Dialog Window for displaying a user Notification (e.g. Student successfully saved)
+     * @param title Title to show
      * @param header Content to show
      */
     public static void showUserNotification(String title, String header) {
@@ -60,7 +62,7 @@ public class NotificationHandler {
     }
 
     /**
-     * Dialog Window for displaying a user Notification (eg. Student successfully saved)
+     * Dialog Window for displaying a user Notification (e.g. Student successfully saved)
      * @param title Title tho show
      * @param header Upper content to show
      * @param content Lower content to show
@@ -68,7 +70,7 @@ public class NotificationHandler {
     public static void showUserNotification(String title, String header, String content) {
         Alert userNotification = new Alert(Alert.AlertType.INFORMATION);
         Stage notificationStage = (Stage) userNotification.getDialogPane().getScene().getWindow();
-        notificationStage.getIcons().add(new Image("file:src/main/resources/com/github/eeriefoods/snsclient/assets/images/DHBWRaute.png"));
+        notificationStage.getIcons().add(getDHBWRaute());
         userNotification.setTitle(title);
         userNotification.setHeaderText(header);
         userNotification.setContentText(content);
@@ -76,7 +78,7 @@ public class NotificationHandler {
     }
 
     /**
-     * Dialog Window for displaying a Warning Notification (eg. Student successfully saved)
+     * Dialog Window for displaying a Warning Notification (e.g. Student successfully saved)
      * @param title Title to show
      * @param text Content to show
      */
@@ -87,7 +89,7 @@ public class NotificationHandler {
     public static void showWarningNotification(String title, String text, String content) {
         Alert warningNotification = new Alert(Alert.AlertType.WARNING);
         Stage notificationStage = (Stage) warningNotification.getDialogPane().getScene().getWindow();
-        notificationStage.getIcons().add(new Image("file:src/main/resources/com/github/eeriefoods/snsclient/assets/images/DHBWRaute.png"));
+        notificationStage.getIcons().add(getDHBWRaute());
         warningNotification.setTitle(title);
         warningNotification.setHeaderText(text);
         warningNotification.setContentText(content);
@@ -95,26 +97,26 @@ public class NotificationHandler {
     }
 
     /**
-     * Dialog Window for displaying an Error user Notification (eg. Program has crashed)
+     * Dialog Window for displaying an Error user Notification (e.g. Program has crashed)
      * @param title The title to show
      * @param text The content to show
-     * @param endProgram Wheter the program should exit or not afterwards
+     * @param endProgram Whether the program should exit or not afterwards
      */
     public static void showErrorNotification(String title, String text, boolean endProgram) {
         showErrorNotification(title, text, null, endProgram);
     }
 
     /**
-     * Dialog Window for displaying an Error user Notification (eg. Program has crashed)
+     * Dialog Window for displaying an Error user Notification (e.g. Program has crashed)
      * @param title The title to show
      * @param text The upper content to show
      * @param content The lower content to show
-     * @param endProgram Wheter the program should exit or not afterwards
+     * @param endProgram Whether the program should exit or not afterwards
      */
     public static void showErrorNotification(String title, String text, String content, boolean endProgram) {
         Alert errorNotification = new Alert(Alert.AlertType.ERROR);
         Stage notificationStage = (Stage) errorNotification.getDialogPane().getScene().getWindow();
-        notificationStage.getIcons().add(new Image("file:src/main/resources/com/github/eeriefoods/snsclient/assets/images/DHBWRaute.png"));
+        notificationStage.getIcons().add(getDHBWRaute());
         errorNotification.setTitle(title);
         errorNotification.setHeaderText(text);
         errorNotification.setContentText(content);
@@ -147,7 +149,7 @@ public class NotificationHandler {
         boolean confirmation = false;
         Alert askForConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
         Stage notificationStage = (Stage) askForConfirmation.getDialogPane().getScene().getWindow();
-        notificationStage.getIcons().add(new Image("file:src/main/resources/com/github/eeriefoods/snsclient/assets/images/DHBWRaute.png"));
+        notificationStage.getIcons().add(getDHBWRaute());
         askForConfirmation.setTitle(title);
         askForConfirmation.setHeaderText(text);
         askForConfirmation.setContentText(content);
@@ -156,5 +158,10 @@ public class NotificationHandler {
             confirmation = true;
         }
         return confirmation;
+    }
+
+    private static Image getDHBWRaute() {
+        return new Image(Objects.requireNonNull(SnsClientApplication.class.getResourceAsStream("assets/images/DHBWRaute.png")));
+
     }
 }

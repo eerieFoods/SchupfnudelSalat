@@ -26,7 +26,7 @@ public class StudentTableController {
     public void injectMainController(MainController mainController){
         this.studentToolBarController = mainController.studentToolBarController;
     }
-    @FXML private void initialize() throws IOException, InterruptedException {
+    @FXML private void initialize(){
 
         initTableCellFactories();
         initTableCellEdits();
@@ -95,7 +95,7 @@ public class StudentTableController {
         TCS_View.getItems().remove(student);
     }
 
-    public List<Student> loadStudentList() throws IOException, InterruptedException {
+    public List<Student> loadStudentList(){
             return StudentService.getAllStudents();
     }
 
@@ -113,5 +113,10 @@ public class StudentTableController {
             if (searchText == null || searchText.isEmpty()) return true;
             return searchFindsOrder(student, searchText);
         };
+    }
+
+    public void updateStudentTable(){
+        TCS_View.getItems().clear();
+        TCS_View.getItems().setAll(loadStudentList());
     }
 }

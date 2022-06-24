@@ -15,13 +15,16 @@
                         <Font name="Arial Bold" size="12.0" />
                     </font>
                     <cursor>
-                        <Cursor fx:constant="CLOSED_HAND" />
+                        <Cursor fx:constant="TEXT" />
                     </cursor>
                 </TextField>
                 <TextField fx:id="TFDRoom" maxWidth="395.0" minWidth="392.5" promptText="Raum" HBox.hgrow="ALWAYS">
                     <font>
                         <Font name="Arial Bold" size="12.0" />
                     </font>
+                    <cursor>
+                        <Cursor fx:constant="TEXT" />
+                    </cursor>
                 </TextField>
                 <Button fx:id="BTNSave" alignment="CENTER_RIGHT" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Button">
                     <cursor>
@@ -38,7 +41,7 @@
                         </ImageView>
                     </graphic>
                     <tooltip>
-                        <Tooltip text="Go Go Suche!" />
+                        <Tooltip text="Kurs speichern" />
                     </tooltip>
                 </Button>
                 <Button fx:id="BTNCancel" alignment="CENTER_RIGHT" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Button">
@@ -56,7 +59,7 @@
                         </ImageView>
                     </graphic>
                     <tooltip>
-                        <Tooltip text="Go Go Suche!" />
+                        <Tooltip text="Abbrechen"/>
                     </tooltip>
                 </Button>
             </items>

@@ -13,12 +13,20 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
+
 public abstract class ToolBar {
 
-    @FXML AnchorPane toolBar;
-    @FXML Button BTNCreate;
-    @FXML Button BTNDelete;
-    @FXML TextField TFDSearch;
+    @FXML
+    AnchorPane toolBar;
+    @FXML
+    Button BTNCreate;
+    @FXML
+    Button BTNDelete;
+    @FXML
+    Button BTNSync;
+    @FXML
+    TextField TFDSearch;
 
     MainController mainController;
     CourseTableController courseTableController;
@@ -28,33 +36,41 @@ public abstract class ToolBar {
     FilteredList<Student> filteredStudentData;
     FilteredList<Course> filteredCourseData;
 
-    public void injectMainController(MainController mainController){
+    public void injectMainController(MainController mainController) {
         this.mainController = mainController;
         this.studentTableController = mainController.studentTableController;
         this.studentTableView = studentTableController.TCS_View;
         this.courseTableController = mainController.courseTableController;
         this.courseTableView = courseTableController.TCCView;
     }
-    @FXML public void initialize(){
 
+    @FXML
+    public void initialize() {
         initButtonFunctions();
     }
+    void initButtonFunctions() {}
 
-    public void initButtonFunctions(){
-
-    }
+    void updateFilteredList() {}
 
     void studentSearch() {
         filteredStudentData = new FilteredList<>(FXCollections.observableList(StudentService.getAllStudents()));
         studentTableView.setItems(filteredStudentData);
         filteredStudentData.setPredicate(studentTableController.createPredicate(TFDSearch.getText()));
     }
+
     void courseSearch() {
         filteredCourseData = new FilteredList<>(FXCollections.observableList(CourseService.getCourses()));
         courseTableView.setItems(filteredCourseData);
         filteredCourseData.setPredicate(courseTableController.createPredicate(TFDSearch.getText()));
+        FilteredList<Course> filteredData = new FilteredList<>(FXCollections.observableList(CourseService.getCourses()));
+        courseTableView.setItems(filteredData);
+        filteredData.setPredicate(courseTableController.createPredicate(TFDSearch.getText()));
     }
 
-    public void updateFilteredList(){
+    void reloadStudentTable() {studentTableController.updateStudentTable();
     }
+
+    void reloadCourseTable() {courseTableController.updateCourseTable();}
+
+
 }

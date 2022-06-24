@@ -27,6 +27,8 @@ public class MainController {
         courseToolBarController.injectMainController(this);
         courseAddBarController.injectMainController(this);
 
+
+
         tabPane.getSelectionModel().selectedItemProperty().addListener(
                 (ov, t, t1) -> {
 //                    deactivateAddBars();

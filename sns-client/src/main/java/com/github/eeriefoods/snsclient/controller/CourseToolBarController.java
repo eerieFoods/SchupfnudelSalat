@@ -24,7 +24,10 @@ public class CourseToolBarController extends ToolBar {
                     courseTableController.deleteCourse(course);
                     courseTableView.getItems().remove(course);
                 }
-            }});
+            }
+        });
+
+        BTNSync.setOnAction(event -> {reloadCourseTable();});
 
 
     }
@@ -33,4 +36,6 @@ public class CourseToolBarController extends ToolBar {
     public void updateFilteredList() {
         filteredCourseData = new FilteredList<>(FXCollections.observableList(CourseService.getCourses()));
     }
+
+
 }

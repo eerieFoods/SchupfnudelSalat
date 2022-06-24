@@ -23,6 +23,8 @@ public class StudentToolBarController extends ToolBar {
                 studentTableView.getItems().remove(student);
             }
         });
+
+        BTNSync.setOnAction(event -> {reloadStudentTable();});
     }
 
     @Override

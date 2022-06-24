@@ -79,8 +79,8 @@
                         com.github.eeriefoods.snsclient/com.github.eeriefoods.snsclient.SnsClientApplication
                     </mainClass>
                     <launcher>app</launcher>
-                    <jlinkZipName>app</jlinkZipName>
-                    <jlinkImageName>app</jlinkImageName>
+                    <jlinkZipName>DHBWStudentManager</jlinkZipName>
+                    <jlinkImageName>DHBWStudentManager</jlinkImageName>
                     <noManPages>true</noManPages>
                     <stripDebug>true</stripDebug>
                     <noHeaderFiles>true</noHeaderFiles>
@@ -106,37 +106,52 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--package image as an exe-->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
-                </executions>
+            <!--<plugin>
+                &lt;!&ndash; Build an executable JAR &ndash;&gt;
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.2</version>
                 <configuration>
-                    <!-- obtain warp-packer.exe from: "https://github.com/dgiagio/warp/releases/download/v0.3.0/windows-x64.warp-packer.exe" -->
-                    <executable>${project.basedir}\tools\warp-packer.exe</executable>
-                    <arguments>
-                        <argument>--arch</argument>
-                        <argument>windows-x64</argument>
-
-                        <argument>--input_dir</argument>
-                        <argument>${project.build.directory}\image</argument>
-
-                        <argument>--exec</argument>
-                        <argument>bin\${project.artifactId}.bat</argument>
-
-                        <argument>--output</argument>
-                        <argument>${project.build.directory}\${project.artifactId}.exe</argument>
-                    </arguments>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>com.github.eeriefoods.snsclient.SnsClientApplication</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
-            </plugin>
+            </plugin>-->
+            <!--package image as an exe-->
+            <!-- <plugin>
+                 <groupId>org.codehaus.mojo</groupId>
+                 <artifactId>exec-maven-plugin</artifactId>
+                 <version>3.0.0</version>
+                 <executions>
+                     <execution>
+                         <phase>package</phase>
+                         <goals>
+                             <goal>exec</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+                &lt;!&ndash; <configuration>
+                     &lt;!&ndash; obtain warp-packer.exe from: "https://github.com/dgiagio/warp/releases/download/v0.3.0/windows-x64.warp-packer.exe" &ndash;&gt;
+                     <executable>${project.basedir}\tools\warp-packer.exe</executable>
+                     <arguments>
+                         <argument>&#45;&#45;arch</argument>
+                         <argument>windows-x64</argument>
+
+                         <argument>&#45;&#45;input_dir</argument>
+                         <argument>${project.build.directory}\image</argument>
+
+                         <argument>&#45;&#45;exec</argument>
+                         <argument>bin\${project.artifactId}.bat</argument>
+
+                         <argument>&#45;&#45;output</argument>
+                         <argument>${project.build.directory}\${project.artifactId}.exe</argument>
+                     </arguments>
+                 </configuration>&ndash;&gt;
+             </plugin>-->
         </plugins>
     </build>
 </project>

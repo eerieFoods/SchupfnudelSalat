@@ -97,6 +97,7 @@ public class CourseTableController {
             return searchFindsOrder(course, searchText);
         };
     }
+
     public void updateCourseTable(){
         try {
             TCCView.getItems().setAll(loadCourseList());

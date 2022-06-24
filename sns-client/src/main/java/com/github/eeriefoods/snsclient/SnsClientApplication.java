@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class SnsClientApplication extends Application {
     @Override
@@ -14,7 +15,7 @@ public class SnsClientApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(SnsClientApplication.class.getResource("Main.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1300, 820);
         stage.setTitle("DHBW Student Management Tool");
-        stage.getIcons().add(new Image("file:src/main/resources/com/github/eeriefoods/snsclient/assets/images/DHBWRaute.png"));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/images/DHBWRaute.png"))));
         stage.setMinWidth(1300);
         stage.setMinHeight(820);
         stage.setMaximized(true);
