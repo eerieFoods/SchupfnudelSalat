@@ -34,15 +34,12 @@ public class NotificationHandler {
 
     /**
      * Logs Exception errors AND shows a Dialog Window
-     * @param errorResponse StackTraceElement @NotNull []
+     * @param exception The Exception to handle
      */
-    public static void handleExceptionError(StackTraceElement @NotNull [] errorResponse) {
-        Arrays.stream(errorResponse)
-                        .map(er -> "\tat" + er)
-                        .forEach(System.err::println);
+    public static void handleExceptionError(Exception exception) {
+        exception.printStackTrace();
         showErrorNotification("Oh Nein!", "Oh Nein. Irgendetwas ist schief gelaufen!", "Die Software wird beendet!", true);
     }
-
     /**
      * Logs HTTP errors AND shows a Dialog Window
      * @param errorResponse StackTraceElement @NotNull []

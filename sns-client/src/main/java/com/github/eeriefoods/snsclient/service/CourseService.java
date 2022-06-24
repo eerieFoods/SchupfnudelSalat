@@ -28,7 +28,7 @@ public class CourseService {
         try {
             response = HttpFactory.sendGetRequest(getServerUri(ENDPOINT));
         } catch (IOException | InterruptedException e) {
-            handleExceptionError(e.getStackTrace());
+            handleExceptionError(e);
         }
 
         assert response != null;
@@ -42,7 +42,7 @@ public class CourseService {
         try {
             response = HttpFactory.sendPostJsonRequest(getServerUri(ENDPOINT), requestBody);
         } catch (IOException | InterruptedException e) {
-            handleExceptionError(e.getStackTrace());
+            handleExceptionError(e);
         }
 
         assert response != null;
@@ -61,7 +61,7 @@ public class CourseService {
         try {
             response = HttpFactory.sendPutJsonRequest(getServerUri(ENDPOINT), requestBody);
         } catch (IOException | InterruptedException e) {
-            handleExceptionError(e.getStackTrace());
+            handleExceptionError(e);
         }
 
         assert response != null;
@@ -72,7 +72,7 @@ public class CourseService {
         try {
             HttpFactory.sendDeleteRequest(getServerUri("%s/%s".formatted(ENDPOINT, courseId)));
         } catch (IOException | InterruptedException e) {
-            handleExceptionError(e.getStackTrace());
+            handleExceptionError(e);
         }
     }
 
@@ -81,7 +81,7 @@ public class CourseService {
         try {
             response = HttpFactory.sendGetRequest(getServerUri("%s/%s".formatted(ENDPOINT, courseId)));
         } catch (IOException | InterruptedException e) {
-            handleExceptionError(e.getStackTrace());
+            handleExceptionError(e);
         }
 
         assert response != null;
@@ -94,7 +94,7 @@ public class CourseService {
         try {
             response = HttpFactory.sendPutJsonRequest(getServerUri("%s/%s/add".formatted(ENDPOINT, courseId)), requestBody);
         } catch (IOException | InterruptedException e) {
-            handleExceptionError(e.getStackTrace());
+            handleExceptionError(e);
         }
 
         assert response != null;
@@ -106,7 +106,7 @@ public class CourseService {
         try {
             HttpFactory.sendPutJsonRequest(getServerUri("%s/%s/remove".formatted(ENDPOINT, courseId)), requestBody);
         } catch (IOException | InterruptedException e) {
-            handleExceptionError(e.getStackTrace());
+            handleExceptionError(e);
         }
     }
 

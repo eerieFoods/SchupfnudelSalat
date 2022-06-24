@@ -28,7 +28,7 @@ public class StudentService {
         try {
             response = HttpFactory.sendGetRequest(getServerUri(ENDPOINT));
         } catch (IOException | InterruptedException e) {
-            handleExceptionError(e.getStackTrace());
+            handleExceptionError(e);
         }
         assert response != null;
         return gson.fromJson(response.body(), new TypeToken<ArrayList<Student>>(){}.getType());
@@ -39,7 +39,7 @@ public class StudentService {
         try {
             response = HttpFactory.sendGetRequest(getServerUri("%s/%s".formatted(ENDPOINT, studentId)));
         } catch (IOException | InterruptedException e) {
-            handleExceptionError(e.getStackTrace());
+            handleExceptionError(e);
         }
         assert response != null;
         return gson.fromJson(response.body(), Student.class);
@@ -51,7 +51,7 @@ public class StudentService {
         try {
             response = HttpFactory.sendPostJsonRequest(getServerUri(ENDPOINT), requestBody);
         } catch (IOException | InterruptedException e) {
-            handleExceptionError(e.getStackTrace());
+            handleExceptionError(e);
         }
 
         assert response != null;
@@ -68,7 +68,7 @@ public class StudentService {
         try {
             response = HttpFactory.sendPutJsonRequest(getServerUri(ENDPOINT), requestBody);
         } catch (IOException | InterruptedException e) {
-            handleExceptionError(e.getStackTrace());
+            handleExceptionError(e);
         }
         assert response != null;
         return gson.fromJson(response.body(), Student.class);    }
@@ -77,7 +77,7 @@ public class StudentService {
         try {
             HttpFactory.sendDeleteRequest(getServerUri("%s/%s".formatted(ENDPOINT, studentId)));
         } catch (IOException | InterruptedException e) {
-            handleExceptionError(e.getStackTrace());
+            handleExceptionError(e);
         }
     }
 
