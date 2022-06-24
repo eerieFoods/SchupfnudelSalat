@@ -38,8 +38,6 @@ public abstract class ToolBar {
     @FXML public void initialize(){
 
         initButtonFunctions();
-        filteredStudentData = new FilteredList<>(FXCollections.observableList(StudentService.getAllStudents()));
-        filteredCourseData = new FilteredList<>(FXCollections.observableList(CourseService.getCourses()));
     }
 
     public void initButtonFunctions(){
@@ -47,10 +45,12 @@ public abstract class ToolBar {
     }
 
     void studentSearch() {
+        filteredStudentData = new FilteredList<>(FXCollections.observableList(StudentService.getAllStudents()));
         studentTableView.setItems(filteredStudentData);
         filteredStudentData.setPredicate(studentTableController.createPredicate(TFDSearch.getText()));
     }
     void courseSearch() {
+        filteredCourseData = new FilteredList<>(FXCollections.observableList(CourseService.getCourses()));
         courseTableView.setItems(filteredCourseData);
         filteredCourseData.setPredicate(courseTableController.createPredicate(TFDSearch.getText()));
     }

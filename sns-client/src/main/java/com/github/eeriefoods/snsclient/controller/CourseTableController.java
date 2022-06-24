@@ -70,7 +70,7 @@ public class CourseTableController {
         TCCMemberCount.setCellValueFactory(new PropertyValueFactory<>("memberCount"));
     }
 
-    public List<Course> loadCourseList() {
+    public List<Course> loadCourseList() throws IOException, InterruptedException{
             return CourseService.getCourses();
     }
 
@@ -86,7 +86,7 @@ public class CourseTableController {
     }
 
     private boolean searchFindsOrder(Course course, String searchText){
-        return (course.getId().contains(searchText.toLowerCase())) ||
+        return (course.getId().toLowerCase().contains(searchText.toLowerCase())) ||
                 (course.getMemberCount().toString().contains(searchText.toLowerCase())) ||
                 (course.getRoom().toLowerCase().contains(searchText.toLowerCase()));
     }
@@ -98,7 +98,10 @@ public class CourseTableController {
         };
     }
     public void updateCourseTable(){
-        TCCView.getItems().clear();
-        TCCView.getItems().setAll(loadCourseList());
+        try {
+            TCCView.getItems().setAll(loadCourseList());
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

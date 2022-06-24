@@ -20,12 +20,9 @@ public class CourseAddBarController {
     private TextField TFDRoom;
     private MainController mainController;
     private CourseTableController courseTableController;
-    private TableView<Course> courseTableView;
-
     public void injectMainController(@NotNull MainController mainController) {
         this.mainController = mainController;
         this.courseTableController = mainController.courseTableController;
-        this.courseTableView = courseTableController.TCCView;
     }
 
     @FXML
@@ -40,10 +37,10 @@ public class CourseAddBarController {
             if (!TFDCourseId.getText().isEmpty() && !TFDRoom.getText().isEmpty()) {
                 Course course = new Course(TFDCourseId.getText(), TFDRoom.getText());
                 CourseService.createCourse(course);
-                courseTableView.getItems().setAll(courseTableController.loadCourseList());
                 mainController.switchBar(mainController.tabPane.getSelectionModel().getSelectedItem());
                 NotificationHandler.showUserNotification("Kurs angelegt", "Kurs " + TFDCourseId.getText() + " wurde erfolgreich angelegt!");
                 mainController.studentAddBarController.setCBXCourseItems();
+                courseTableController.updateCourseTable();
                 TFDCourseId.clear();
                 TFDRoom.clear();
             } else {
